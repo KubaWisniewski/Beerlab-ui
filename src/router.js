@@ -1,26 +1,48 @@
 import Vue from "vue";
-import Router from "vue-router";
-import Home from "./views/Home.vue";
+import VueRouter from "vue-router";
+import LoginPage from "./login/LoginPage.vue";
+import HomePage from "./login/HomePage.vue";
+import RegisterPage from "./login/RegisterPage";
+import AdminPage from "./login/AdminPage";
+import BeerPage from "./beer/BeerPage";
 
-Vue.use(Router);
+Vue.use(VueRouter);
 
-export default new Router({
+export const router = new VueRouter({
   mode: "history",
-  base: process.env.BASE_URL,
   routes: [
+    { path: "/", component: HomePage },
+    { path: "/register", component: RegisterPage },
+    { path: "/login", component: LoginPage },
     {
-      path: "/",
-      name: "home",
-      component: Home
+      path: "/beers",
+      component: BeerPage,
+      meta: { authorize: ["ROLE_USER"] }
     },
     {
-      path: "/about",
-      name: "about",
-      // route level code-splitting
-      // this generates a separate chunk (about.[hash].js) for this route
-      // which is lazy-loaded when the route is visited.
-      component: () =>
-        import(/* webpackChunkName: "about" */ "./views/About.vue")
-    }
+      path: "/admin",
+      component: AdminPage,
+      meta: { authorize: ["ROLE_ADMIN"] }
+    },
+    { path: "*", redirect: "/" }
   ]
+});
+router.beforeEach((to, from, next) => {
+  const { authorize } = to.meta;
+  const user = this.$store.getters("loggedIn")
+  if (authorize) {
+    if (!user) {
+      return next({ path: "/login" });
+    }
+    if (
+      authorize.length &&
+      !authorize.some(x => user["roles"].map(x => x["roleName"]).includes(x))
+    ) {
+      return next({ path: "/" });
+    }
+  }
+  if (to.path === "/login" && user) {
+    return next({ path: "/" });
+  }
+  next();
 });
