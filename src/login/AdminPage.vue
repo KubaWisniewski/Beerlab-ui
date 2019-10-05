@@ -1,10 +1,14 @@
 <template>
-  <p>Hello Admin</p>
+  <BeerEditComponent></BeerEditComponent>
 </template>
 
 <script>
+import BeerEditComponent from "../admin-panel/beer-edit-comonent";
 export default {
-  name: "AdminPage"
+  name: "AdminPage",
+  components: {
+    BeerEditComponent
+  }
 };
 </script>
 

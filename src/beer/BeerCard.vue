@@ -3,11 +3,12 @@
     <v-card-title>{{ beer.name }}</v-card-title>
 
     <v-card-text>
-      <v-row
-        ><v-col cols="10"> {{ beer.description }} </v-col
-        ><v-col cols="2">
+      <v-row>
+        <v-col cols="10">{{ beer.description }}</v-col>
+        <v-col cols="2">
           <v-img class="white--text" height="300px" :src="beer.imgUrl" />
         </v-col>
+        <v-col cols="10">{{ beer.price }}</v-col>
       </v-row>
     </v-card-text>
 

@@ -8,7 +8,7 @@
 
 <script>
 import BeerCard from "./BeerCard";
-
+const axios = require("axios");
 export default {
   components: {
     BeerCard
@@ -34,6 +34,22 @@ export default {
         }
       ]
     };
+  },
+  methods: {
+    getData() {
+      axios
+        .get("http://localhost:8081/api/beer")
+        .then(response => {
+          //this.beers = response.data;
+          console.log(response);
+        })
+        .catch(error => {
+          console.error(error);
+        });
+    }
+  },
+  mounted: function() {
+    this.getData();
   }
 };
 </script>

@@ -20,7 +20,7 @@
         </v-list-item>
       </v-list>
     </v-navigation-drawer>
-
+    <notifications group="auth" position="bottom right" />
     <v-app-bar app clipped-left>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-spacer></v-spacer>
@@ -39,7 +39,9 @@
           <v-icon @click="logout">mdi-logout</v-icon>
         </v-btn>
         <v-btn icon v-else>
-          <router-link to="/login"><v-icon>mdi-login</v-icon></router-link>
+          <router-link to="/login">
+            <v-icon>mdi-login</v-icon>
+          </router-link>
         </v-btn>
       </template>
     </v-app-bar>

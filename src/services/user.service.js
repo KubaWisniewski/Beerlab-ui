@@ -1,3 +1,4 @@
+import Vue from "vue";
 /* eslint-disable no-console */
 const axios = require("axios");
 
@@ -10,12 +11,25 @@ export const userService = {
 function login(email, password) {
   return axios
     .post(
-      "http://localhost:8080/api/auth/signin",
-      JSON.stringify({ email, password }),
-      { headers: { "Content-Type": "application/json" } }
+      "http://localhost:8081/api/auth/signin",
+      JSON.stringify({
+        email,
+        password
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
     )
     .then(
       response => {
+        Vue.notify({
+          group: "auth",
+          type: "success",
+          title: "OK",
+          text: "Zalogowano pomyslnie"
+        });
         if (response.data["accessToken"]) {
           localStorage.setItem(
             "token",
@@ -25,7 +39,13 @@ function login(email, password) {
         return response;
       },
       error => {
-        console.log(error);
+        Vue.notify({
+          group: "auth",
+          type: "error",
+          title: "Bład",
+          text:
+            "Nie udało sie zalogować upewnij się, że podałeś prawidłowe dane."
+        });
       }
     );
 }
@@ -33,9 +53,17 @@ function login(email, password) {
 function register(username, email, password) {
   return axios
     .post(
-      "http://localhost:8080/api/auth/signup",
-      JSON.stringify({ username, email, password }),
-      { headers: { "Content-Type": "application/json" } }
+      "http://localhost:8081/api/auth/signup",
+      JSON.stringify({
+        username,
+        email,
+        password
+      }),
+      {
+        headers: {
+          "Content-Type": "application/json"
+        }
+      }
     )
     .then(
       response => {
@@ -49,8 +77,10 @@ function register(username, email, password) {
 
 function logout() {
   return axios
-    .post("http://localhost:8080/logout", {
-      headers: { "Content-Type": "application/json" }
+    .post("http://localhost:8081/logout", {
+      headers: {
+        "Content-Type": "application/json"
+      }
     })
     .then(
       response => {
