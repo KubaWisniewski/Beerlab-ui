@@ -44,12 +44,13 @@ export const router = new VueRouter({
     }
   ]
 });
-/*
+
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
-  const user = authentication.getters;
   if (authorize) {
-    if (!user.user) {
+    const user = this.$store.getters("loggedIn");
+
+    if (!user) {
       return next({
         path: "/login"
       });
@@ -63,11 +64,6 @@ router.beforeEach((to, from, next) => {
       });
     }
   }
-  if (to.path === "/login" && user) {
-    return next({
-      path: "/"
-    });
-  }
+
   next();
 });
-*/
