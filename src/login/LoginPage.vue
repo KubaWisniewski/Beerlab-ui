@@ -29,6 +29,9 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
+          <router-link to="/register">
+          <v-btn text small color="primary">Don't have an account yet? Create now!</v-btn>
+          </router-link>
             <div class="flex-grow-1"></div>
             <v-btn color="primary" @click="login">Login</v-btn>
           </v-card-actions>
