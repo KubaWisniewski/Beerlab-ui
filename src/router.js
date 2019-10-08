@@ -11,6 +11,7 @@ import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
 import AdminPage from "./login/AdminPage.vue";
 import BeerPage from "./beer/BeerPage";
+import TestPage from "./user-pages/TestPage";
 import { authentication } from "./store/authentication.module.js";
 
 Vue.use(VueRouter);
@@ -55,18 +56,22 @@ export const router = new VueRouter({
       component: CurrencyPage
     },
     {
+      path: "/test",
+      component: TestPage
+    },
+    {
       path: "/beers",
-      component: BeerPage,
-      meta: {
-        authorize: ["ROLE_USER"]
-      }
+      component: BeerPage //,
+      //meta: {
+      //  authorize: ["ROLE_USER"]
+      //}
     },
     {
       path: "/admin",
-      component: AdminPage,
-      meta: {
-        authorize: ["ROLE_ADMIN"]
-      }
+      component: AdminPage //,
+      //meta: {
+      //  authorize: ["ROLE_ADMIN"]
+      //}
     },
     {
       path: "*",

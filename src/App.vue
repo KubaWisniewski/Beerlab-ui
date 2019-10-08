@@ -2,76 +2,84 @@
   <v-app id="inspire">
     <v-navigation-drawer v-model="drawer" app clipped icon v-if="loggedIn">
       <v-list dense>
+        <router-link to="/profile">
+          <v-list-item @click="alert(123)">
+              <v-list-item-action>
+                <v-icon>mdi mdi-account-box</v-icon>
+              </v-list-item-action>
+              <v-list-item-content>
+                <v-list-item-title >
+                  <span class="white--text">Profile</span>
+                </v-list-item-title>
+              </v-list-item-content>
+          </v-list-item>
+        </router-link>
+        <router-link to="/menu">
         <v-list-item @click="alert(123)">
-          <router-link to="/profile">          
-            <v-list-item-action>
-              <v-icon>mdi mdi-account-box</v-icon>
-            </v-list-item-action>
-          </router-link>
-          <router-link to="/profile">
-            <v-list-item-content>
-              <v-list-item-title >
-                <span class="white--text">Profile</span>
-              </v-list-item-title>
-            </v-list-item-content>
-          </router-link>
-        </v-list-item>
-        <v-list-item @click="alert(123)">
-          <router-link to="/menu">
             <v-list-item-action>
               <v-icon>mdi-beer</v-icon>
             </v-list-item-action>
-          </router-link>
-          <router-link to="/menu">
             <v-list-item-content>
               <v-list-item-title>
                 <span class="white--text">Beers</span>
               </v-list-item-title>
             </v-list-item-content>
-          </router-link>
         </v-list-item>
+        </router-link>
+        <router-link to="/games">
         <v-list-item @click="alert(123)">
-          <router-link to="/games">
             <v-list-item-action>
               <v-icon>mdi-gamepad-variant</v-icon>
             </v-list-item-action>
-          </router-link>
-          <router-link to="/games">
             <v-list-item-content>
               <v-list-item-title>
                 <span class="white--text">Games</span>
               </v-list-item-title>
             </v-list-item-content>
-          </router-link>
         </v-list-item>
+        </router-link>
+        <router-link to="/ranking">
         <v-list-item @click="alert(123)">
-          <router-link to="/ranking">
             <v-list-item-action>
               <v-icon>mdi-chart-line</v-icon>
             </v-list-item-action>
-          </router-link>
-          <router-link to="/ranking">
             <v-list-item-content>
               <v-list-item-title>
                 <span class="white--text">Ranking</span>
               </v-list-item-title>
             </v-list-item-content>
-          </router-link>
         </v-list-item>
+        </router-link>
+        <router-link to="/currency">
         <v-list-item @click="alert(123)">
-          <router-link to="/currency">
             <v-list-item-action>
               <v-icon>mdi-cash-multiple</v-icon>
             </v-list-item-action>
-          </router-link>
-          <router-link to="/currency">
             <v-list-item-content>
               <v-list-item-title>
                 <span class="white--text">Currency</span>
               </v-list-item-title>
             </v-list-item-content>
-          </router-link>
         </v-list-item>
+        </router-link>
+        <router-link to="/admin">
+        <v-list-item @click="alert(123)">
+            <v-list-item-content>
+              <v-list-item-title>
+                <span class="white--text">Add beers</span>
+              </v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+        </router-link>
+        <router-link to="/test">
+        <v-list-item @click="alert(123)">
+            <v-list-item-content>
+              <v-list-item-title>
+                <span class="white--text">Test</span>
+              </v-list-item-title>
+            </v-list-item-content>
+        </v-list-item>
+        </router-link>
       </v-list>
     </v-navigation-drawer>
     <notifications group="auth" position="bottom right" />
@@ -104,7 +112,10 @@
     </v-content>
 
     <v-footer app>
-      <span>&copy; 2019</span>
+    <v-row
+        justify="center">
+      <span>&copy; Wiśniewski Jakub, Jarmakowski Wojciech, Kozyra Aleksander, Belter Daniel, Babło Jędrzej</span>
+      </v-row>
     </v-footer>
   </v-app>
 </template>

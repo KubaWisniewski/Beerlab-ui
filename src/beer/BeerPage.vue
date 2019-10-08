@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import BeerCard from "./BeerCard";
+import BeerCard from "./BeerPage";
 const axios = require("axios");
 export default {
   components: {
