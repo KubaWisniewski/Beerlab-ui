@@ -1,12 +1,6 @@
 <template>
   <v-container style="max-width:1000px;">
-    <v-data-table
-      :headers="headers"
-      :items="beers"
-      :item-key="id"
-      :items-per-page="5"
-      class="elevation-1"
-    >
+    <v-data-table :headers="headers" :items="beers" :items-per-page="5" class="elevation-1">
       <template v-slot:item.id="{item}">
         <div class="my-1">
           <p>{{item.id}}</p>
@@ -58,17 +52,17 @@ export default {
       });
     },
     addNewBeer() {
-      axios
-        .post("http://localhost:8081/api/beer", this.beer)
-        .then(this.fetchData());
+      axios.post("http://localhost:8081/api/beer", this.beer).then(() => {
+        this.fetchData();
+      });
     },
     deleteBeer(id) {
-      axios
-        .delete("http://localhost:8081/api/beer/" + id)
-        .then(this.fetchData());
+      axios.delete("http://localhost:8081/api/beer/" + id).then(() => {
+        this.fetchData();
+      });
     }
   },
-  mounted() {
+  created() {
     this.fetchData();
   }
 };
