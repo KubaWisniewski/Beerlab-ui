@@ -54,6 +54,13 @@ export default {
     addNewBeer() {
       axios.post("http://localhost:8081/api/beer", this.beer).then(() => {
         this.fetchData();
+        this.beer = "";
+        this.$notify({
+          group: "auth",
+          type: "success",
+          title: "OK",
+          text: "Dodano pomyslnie"
+        });
       });
     },
     deleteBeer(id) {
