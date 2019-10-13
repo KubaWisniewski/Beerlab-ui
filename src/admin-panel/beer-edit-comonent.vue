@@ -54,7 +54,13 @@ export default {
     addNewBeer() {
       axios.post("http://localhost:8081/api/beer", this.beer).then(() => {
         this.fetchData();
-        this.beer = "";
+        this.beer = {
+          description: "",
+          brand: "",
+          price: "",
+          quantity: "",
+          imgUrl: ""
+        };
         this.$notify({
           group: "auth",
           type: "success",
