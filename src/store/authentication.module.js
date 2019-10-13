@@ -1,7 +1,6 @@
 /* eslint-disable no-unused-vars */
 import { userService } from "../services/user.service.js";
 import { router } from "../router.js";
-
 const initialState = { status: { loggedIn: false }, token: null, user: null };
 
 export const authentication = {
@@ -45,6 +44,7 @@ export const authentication = {
       );
     },
     logout({ commit }) {
+      localStorage.removeItem("accessToken");
       userService.logout().then(
         () => {
           commit("logoutSuccess");
@@ -67,6 +67,8 @@ export const authentication = {
       state.status = { loggedIn: false };
       state.token = null;
       state.user = null;
-    }
+    },
   }
+
+
 };
