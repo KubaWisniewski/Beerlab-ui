@@ -21,8 +21,11 @@ export const authentication = {
     login({ commit }, { email, password }) {
       userService.login(email, password).then(
         response => {
-          let token = response.data["accessToken"];
-          let user = response.data["user"];
+          // eslint-disable-next-line no-console
+          console.log(response.headers);
+          let token = response.headers["x-auth-token"];
+          localStorage.setItem("user", JSON.stringify(response.data["rolesDto"]));
+          let user = response.data["username"];
           commit("loginSuccess", { token, user });
           router.push("/");
         },
@@ -44,7 +47,7 @@ export const authentication = {
       );
     },
     logout({ commit }) {
-      localStorage.removeItem("accessToken");
+      localStorage.removeItem("x-auth-token");
       userService.logout().then(
         () => {
           commit("logoutSuccess");

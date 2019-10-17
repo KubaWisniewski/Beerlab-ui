@@ -82,12 +82,18 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
-  if(to.fullPath !== "/login"){
-    if(!authentication.token){
+  if(to.fullPath !== "/login" && to.fullPath !== "/register"){
+    if(authentication.getters.token==null){
       next("/login");
     }
   }
-  else next();
+  if(authorize && authorize.length){
+    const user = JSON.parse(localStorage.getItem("user"));
+   if( !authorize.some(x => user.map(x => x["roleName"]).includes(x))){
+      next("/");
+    }
+  }
+  next();
 });
 
 export default router;
