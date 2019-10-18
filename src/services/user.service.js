@@ -30,10 +30,10 @@ function login(email, password) {
           title: "OK",
           text: "Zalogowano pomyslnie"
         });
-        if (response.data["accessToken"]) {
+        if (response.headers["x-auth-token"]) {
           localStorage.setItem(
             "token",
-            JSON.stringify(response.data["accessToken"])
+            JSON.stringify(response.headers["x-auth-token"])
           );
         }
         return response;

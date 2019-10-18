@@ -12,7 +12,7 @@ import CurrencyPage from "./user-pages/CurrencyPage";
 import AdminPage from "./login/AdminPage.vue";
 import BeerPage from "./beer/BeerPage";
 import TestPage from "./user-pages/TestPage";
-import { authentication } from "./store/authentication.module.js";
+import {authentication} from "./store/authentication.module";
 
 Vue.use(VueRouter);
 
@@ -61,17 +61,17 @@ export const router = new VueRouter({
     },
     {
       path: "/beers",
-      component: BeerPage //,
-      //meta: {
-      //  authorize: ["ROLE_USER"]
-      //}
+      component: BeerPage,
+       meta: {
+         authorize: ["ROLE_USER"]
+       }
     },
     {
       path: "/admin",
-      component: AdminPage //,
-      //meta: {
-      //  authorize: ["ROLE_ADMIN"]
-      //}
+      component: AdminPage,
+       meta: {
+         authorize: ["ROLE_ADMIN"]
+       }
     },
     {
       path: "*",
@@ -82,23 +82,18 @@ export const router = new VueRouter({
 
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
-  if (authorize) {
-    const user = this.$store.getters("loggedIn");
-
-    if (!user) {
-      return next({
-        path: "/login"
-      });
-    }
-    if (
-      authorize.length &&
-      !authorize.some(x => user["roles"].map(x => x["roleName"]).includes(x))
-    ) {
-      return next({
-        path: "/"
-      });
+  if(to.fullPath !== "/login" && to.fullPath !== "/register"){
+    if(authentication.getters.token==null){
+      next("/login");
     }
   }
-
+  if(authorize && authorize.length){
+    const user = JSON.parse(localStorage.getItem("user"));
+   if( !authorize.some(x => user.map(x => x["roleName"]).includes(x))){
+      next("/");
+    }
+  }
   next();
 });
+
+export default router;
