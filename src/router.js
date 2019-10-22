@@ -83,7 +83,7 @@ export const router = new VueRouter({
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
   if(to.fullPath !== "/login" && to.fullPath !== "/register"){
-    if(authentication.getters.token==null){
+    if(authentication.token==null){
       next("/login");
     }
   }
