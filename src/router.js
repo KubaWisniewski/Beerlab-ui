@@ -10,16 +10,16 @@ import GamesPage from "./user-pages/GamesPage";
 import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
 import AdminPage from "./login/AdminPage.vue";
-import BeerPage from "./beer/BeerPage";
 import TestPage from "./user-pages/TestPage";
-import { authentication } from "./store/authentication.module";
+import {
+  authentication
+} from "./store/authentication.module";
 
 Vue.use(VueRouter);
 
 export const router = new VueRouter({
   mode: "history",
-  routes: [
-    {
+  routes: [{
       path: "/",
       component: HomePage
     },
@@ -59,13 +59,7 @@ export const router = new VueRouter({
       path: "/test",
       component: TestPage
     },
-    {
-      path: "/beers",
-      component: BeerPage,
-      meta: {
-        authorize: ["ROLE_USER"]
-      }
-    },
+
     {
       path: "/admin",
       component: AdminPage,
