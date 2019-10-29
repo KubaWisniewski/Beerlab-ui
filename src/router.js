@@ -12,7 +12,7 @@ import CurrencyPage from "./user-pages/CurrencyPage";
 import AdminPage from "./login/AdminPage.vue";
 import BeerPage from "./beer/BeerPage";
 import TestPage from "./user-pages/TestPage";
-import {authentication} from "./store/authentication.module";
+import { authentication } from "./store/authentication.module";
 
 Vue.use(VueRouter);
 
@@ -62,16 +62,16 @@ export const router = new VueRouter({
     {
       path: "/beers",
       component: BeerPage,
-       meta: {
-         authorize: ["ROLE_USER"]
-       }
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/admin",
       component: AdminPage,
-       meta: {
-         authorize: ["ROLE_ADMIN"]
-       }
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
     },
     {
       path: "*",
@@ -79,7 +79,7 @@ export const router = new VueRouter({
     }
   ]
 });
-
+/*
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
   if(to.fullPath !== "/login" && to.fullPath !== "/register"){
@@ -95,5 +95,6 @@ router.beforeEach((to, from, next) => {
   }
   next();
 });
+*/
 
 export default router;
