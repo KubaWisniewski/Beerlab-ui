@@ -9,6 +9,8 @@ import MenuPage from "./user-pages/MenuPage";
 import GamesPage from "./user-pages/GamesPage";
 import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
+import AdminPage from "./login/AdminPage.vue";
+import BeerPage from "./beer/BeerPage";
 import AdminPage from "./admin-panel/Main-view-admin.vue";
 import TestPage from "./user-pages/TestPage";
 import OrderView from "./admin-panel/Order-view-admin.vue";
@@ -34,39 +36,66 @@ export const router = new VueRouter({
     },
     {
       path: "/profile",
-      component: UserProfilePage
+      component: UserProfilePage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/cart",
-      component: CartPage
+      component: CartPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/menu",
-      component: MenuPage
+      component: MenuPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/games",
-      component: GamesPage
+      component: GamesPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/ranking",
-      component: RankingPage
+      component: RankingPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/currency",
-      component: CurrencyPage
+      component: CurrencyPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
-      path: "/test",
-      component: TestPage
+      path: "/beers",
+      component: BeerPage,
+          meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
     },
-    {
-      path: "/admin/orders",
-      component: OrderView
+    path: "/admin/orders",
+      component: OrderView,
+          meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
     },
     {
       path: "/admin/menu",
-      component: BeerEditComponent
+      component: BeerEditComponent,
+          meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+
     },
     {
       path: "/admin",
@@ -81,21 +110,19 @@ export const router = new VueRouter({
     }
   ]
 });
-/*
+
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
-  if (to.fullPath !== "/login" && to.fullPath !== "/register") {
-    if (authentication.token == null) {
-      next("/login");
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (authorize) {
+    if (!user) {
+      return next({ path: "/login" });
     }
-  }
-  if (authorize && authorize.length) {
-    const user = JSON.parse(localStorage.getItem("user"));
     if (!authorize.some(x => user.map(x => x["roleName"]).includes(x))) {
-      next("/");
+      return next("/");
     }
   }
   next();
 });
-*/
+
 export default router;
