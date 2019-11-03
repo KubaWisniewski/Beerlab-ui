@@ -11,8 +11,6 @@ import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
 import AdminPage from "./login/AdminPage.vue";
 import BeerPage from "./beer/BeerPage";
-import TestPage from "./user-pages/TestPage";
-import {authentication} from "./store/authentication.module";
 
 Vue.use(VueRouter);
 
@@ -33,64 +31,69 @@ export const router = new VueRouter({
     },
     {
       path: "/profile",
-      component: UserProfilePage
+      component: UserProfilePage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/cart",
-      component: CartPage
+      component: CartPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/menu",
-      component: MenuPage
+      component: MenuPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/games",
-      component: GamesPage
+      component: GamesPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/ranking",
-      component: RankingPage
+      component: RankingPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/currency",
-      component: CurrencyPage
-    },
-    {
-      path: "/test",
-      component: TestPage
+      component: CurrencyPage,
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
     },
     {
       path: "/beers",
-      component: BeerPage,
-       meta: {
-         authorize: ["ROLE_USER"]
-       }
+      component: BeerPage
     },
     {
       path: "/admin",
       component: AdminPage,
-       meta: {
-         authorize: ["ROLE_ADMIN"]
-       }
-    },
-    {
-      path: "*",
-      redirect: "/"
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
     }
   ]
 });
 
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
-  if(to.fullPath !== "/login" && to.fullPath !== "/register"){
-    if(authentication.token==null){
-      next("/login");
+  const user = JSON.parse(localStorage.getItem("user"));
+  if (authorize) {
+    if (!user) {
+      return next({ path: "/login" });
     }
-  }
-  if(authorize && authorize.length){
-    const user = JSON.parse(localStorage.getItem("user"));
-   if( !authorize.some(x => user.map(x => x["roleName"]).includes(x))){
-      next("/");
+    if (!authorize.some(x => user.map(x => x["roleName"]).includes(x))) {
+      return next("/");
     }
   }
   next();
