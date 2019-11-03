@@ -1,9 +1,15 @@
 <template>
   <v-container class="fill-height text-center justify-center">
     <div align-center>
-      <p style="font-size: 20px">
-        Menu
-      </p>
+      <BeerPage></BeerPage>
     </div>
   </v-container>
 </template>
+<script>
+import BeerPage from "./beer/BeerPage";
+export default {
+  components: {
+    BeerPage
+  }
+};
+</script>

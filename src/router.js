@@ -11,6 +11,11 @@ import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
 import AdminPage from "./login/AdminPage.vue";
 import BeerPage from "./beer/BeerPage";
+import AdminPage from "./admin-panel/Main-view-admin.vue";
+import TestPage from "./user-pages/TestPage";
+import OrderView from "./admin-panel/Order-view-admin.vue";
+import BeerEditComponent from "./admin-panel/beer-edit-comonent.vue";
+import { authentication } from "./store/authentication.module";
 
 Vue.use(VueRouter);
 
@@ -73,7 +78,24 @@ export const router = new VueRouter({
     },
     {
       path: "/beers",
-      component: BeerPage
+      component: BeerPage,
+          meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    path: "/admin/orders",
+      component: OrderView,
+          meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
+      path: "/admin/menu",
+      component: BeerEditComponent,
+          meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+
     },
     {
       path: "/admin",
@@ -81,6 +103,10 @@ export const router = new VueRouter({
       meta: {
         authorize: ["ROLE_ADMIN"]
       }
+    },
+    {
+      path: "*",
+      redirect: "/"
     }
   ]
 });
