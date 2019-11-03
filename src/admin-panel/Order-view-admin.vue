@@ -31,6 +31,7 @@ export default {
     this.$root.$on("changedStatus", () => {
       this.fetchOrders();
     });
+    this.fetchOrders();
     this.interval = setInterval(() => this.fetchOrders(), 5000);
   }
 };
