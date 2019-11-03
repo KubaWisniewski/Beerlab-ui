@@ -9,10 +9,11 @@ import MenuPage from "./user-pages/MenuPage";
 import GamesPage from "./user-pages/GamesPage";
 import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
-import AdminPage from "./login/AdminPage.vue";
-import BeerPage from "./beer/BeerPage";
+import AdminPage from "./admin-panel/Main-view-admin.vue";
 import TestPage from "./user-pages/TestPage";
-import {authentication} from "./store/authentication.module";
+import OrderView from "./admin-panel/Order-view-admin.vue";
+import BeerEditComponent from "./admin-panel/beer-edit-comonent.vue";
+import { authentication } from "./store/authentication.module";
 
 Vue.use(VueRouter);
 
@@ -60,18 +61,19 @@ export const router = new VueRouter({
       component: TestPage
     },
     {
-      path: "/beers",
-      component: BeerPage,
-       meta: {
-         authorize: ["ROLE_USER"]
-       }
+      path: "/admin/orders",
+      component: OrderView
+    },
+    {
+      path: "/admin/menu",
+      component: BeerEditComponent
     },
     {
       path: "/admin",
       component: AdminPage,
-       meta: {
-         authorize: ["ROLE_ADMIN"]
-       }
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
     },
     {
       path: "*",
@@ -79,21 +81,21 @@ export const router = new VueRouter({
     }
   ]
 });
-
+/*
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
-  if(to.fullPath !== "/login" && to.fullPath !== "/register"){
-    if(authentication.token==null){
+  if (to.fullPath !== "/login" && to.fullPath !== "/register") {
+    if (authentication.token == null) {
       next("/login");
     }
   }
-  if(authorize && authorize.length){
+  if (authorize && authorize.length) {
     const user = JSON.parse(localStorage.getItem("user"));
-   if( !authorize.some(x => user.map(x => x["roleName"]).includes(x))){
+    if (!authorize.some(x => user.map(x => x["roleName"]).includes(x))) {
       next("/");
     }
   }
   next();
 });
-
+*/
 export default router;

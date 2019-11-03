@@ -1,18 +1,9 @@
 <template>
-  <v-data-table
-    :headers="headers"
-    :items="desserts"
-    sort-by="name"
-    class="elevation-1"
-  >
+  <v-data-table :headers="headers" :items="beers" sort-by="name" class="elevation-1">
     <template v-slot:top>
       <v-toolbar flat color="black">
         <v-toolbar-title>BEERS</v-toolbar-title>
-        <v-divider
-          class="mx-4"
-          inset
-          vertical
-        ></v-divider>
+        <v-divider class="mx-4" inset vertical></v-divider>
         <div class="flex-grow-1"></div>
         <v-dialog v-model="dialog" max-width="500px">
           <template v-slot:activator="{ on }">
@@ -55,19 +46,8 @@
       </v-toolbar>
     </template>
     <template v-slot:item.action="{ item }">
-      <v-icon
-        small
-        class="mr-2"
-        @click="editItem(item)"
-      >
-        edit
-      </v-icon>
-      <v-icon
-        small
-        @click="deleteItem(item)"
-      >
-        delete
-      </v-icon>
+      <v-icon small class="mr-2" @click="editItem(item)">edit</v-icon>
+      <v-icon small @click="deleteItem(item)">delete</v-icon>
     </template>
     <!--<template v-slot:no-data>
       <v-btn color="primary" @click="initialize">Reset</v-btn>
@@ -76,81 +56,95 @@
 </template>
 
 <script>
-  export default {
-    data: () => ({
-      dialog: false,
-      headers: [
-        {
-          text: 'Beer name',
-          align: 'left',
-          sortable: true,
-          value: 'name',
-        },
-        { text: 'Description', value: 'description' },
-        { text: 'Brand', value: 'brand' },
-        { text: 'Price', value: 'price' },
-        { text: 'Quantity', value: 'quantity' },
-        { text: 'Actions', value: 'action', sortable: false },
-      ],
-      desserts: [],
-      editedIndex: -1,
-      editedItem: {
-        name: '',
-        description: '',
-        brand: '',
-        price: 0,
-        quantity: 0,
+const axios = require("axios");
+export default {
+  data: () => ({
+    dialog: false,
+    headers: [
+      {
+        text: "Beer name",
+        align: "left",
+        sortable: true,
+        value: "name"
       },
-      defaultItem: {
-        name: '',
-        description: '',
-        brand: '',
-        price: 0,
-        quantity: 0,
-      },
-    }),
-    computed: {
-      formTitle () {
-        return this.editedIndex === -1 ? 'New beer' : 'Edit beer'
-      },
+      { text: "Description", value: "description" },
+      { text: "Brand", value: "brand" },
+      { text: "Price", value: "price" },
+      { text: "Quantity", value: "quantity" },
+      { text: "Actions", value: "action", sortable: false }
+    ],
+    desserts: [],
+    editedIndex: -1,
+    editedItem: {
+      name: "",
+      description: "",
+      brand: "",
+      price: 0,
+      quantity: 0
     },
-    watch: {
-      dialog (val) {
-        val || this.close()
-      },
+    defaultItem: {
+      name: "",
+      description: "",
+      brand: "",
+      price: 0,
+      quantity: 0
     },
-    created () {
-      this.initialize()
+    beers: [],
+    beer: {
+      description: "",
+      brand: "",
+      price: "",
+      quantity: "",
+      imgUrl: ""
+    }
+  }),
+  computed: {
+    formTitle() {
+      return this.editedIndex === -1 ? "New beer" : "Edit beer";
+    }
+  },
+  watch: {
+    dialog(val) {
+      val || this.close();
+    }
+  },
+  created() {
+    this.fetchData();
+  },
+  methods: {
+    fetchData() {
+      axios.get("http://localhost:8081/api/beer").then(response => {
+        this.beers = response.data;
+      });
     },
-    methods: {
-      initialize () {
-        this.desserts = [
-        ]
-      },
-      editItem (item) {
-        this.editedIndex = this.desserts.indexOf(item)
-        this.editedItem = Object.assign({}, item)
-        this.dialog = true
-      },
-      deleteItem (item) {
-        const index = this.desserts.indexOf(item)
-        confirm('Are you sure you want to delete this item?') && this.desserts.splice(index, 1)
-      },
-      close () {
-        this.dialog = false
-        setTimeout(() => {
-          this.editedItem = Object.assign({}, this.defaultItem)
-          this.editedIndex = -1
-        }, 300)
-      },
-      save () {
-        if (this.editedIndex > -1) {
-          Object.assign(this.desserts[this.editedIndex], this.editedItem)
-        } else {
-          this.desserts.push(this.editedItem)
-        }
-        this.close()
-      },
+    initialize() {
+      this.desserts = [];
     },
+    editItem(item) {
+      this.editedIndex = this.desserts.indexOf(item);
+      this.editedItem = Object.assign({}, item);
+      this.dialog = true;
+    },
+    deleteItem(item) {
+      const index = this.desserts.indexOf(item);
+      confirm("Are you sure you want to delete this item?") &&
+        this.desserts.splice(index, 1);
+    },
+    close() {
+      this.dialog = false;
+      setTimeout(() => {
+        this.editedItem = Object.assign({}, this.defaultItem);
+        this.editedIndex = -1;
+      }, 300);
+    },
+    save() {
+      if (this.editedIndex > -1) {
+        Object.assign(this.desserts[this.editedIndex], this.editedItem);
+      } else {
+        this.desserts.push(this.editedItem);
+      }
+      this.close();
+    }
   }
+};
 </script>
