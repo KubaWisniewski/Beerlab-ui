@@ -84,7 +84,7 @@ function logout() {
     })
     .then(
       response => {
-        localStorage.removeItem("token");
+        localStorage.removeItem("user");
         console.log(response);
       },
       error => {

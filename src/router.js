@@ -9,10 +9,7 @@ import MenuPage from "./user-pages/MenuPage";
 import GamesPage from "./user-pages/GamesPage";
 import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
-import AdminPage from "./login/AdminPage.vue";
-import BeerPage from "./beer/BeerPage";
 import AdminPage from "./admin-panel/Main-view-admin.vue";
-import TestPage from "./user-pages/TestPage";
 import OrderView from "./admin-panel/Order-view-admin.vue";
 import BeerEditComponent from "./admin-panel/beer-edit-comonent.vue";
 import { authentication } from "./store/authentication.module";
@@ -77,25 +74,18 @@ export const router = new VueRouter({
       }
     },
     {
-      path: "/beers",
-      component: BeerPage,
-          meta: {
-        authorize: ["ROLE_ADMIN"]
-      }
-    },
-    path: "/admin/orders",
+      path: "/admin/orders",
       component: OrderView,
-          meta: {
+      meta: {
         authorize: ["ROLE_ADMIN"]
       }
     },
     {
       path: "/admin/menu",
       component: BeerEditComponent,
-          meta: {
+      meta: {
         authorize: ["ROLE_ADMIN"]
       }
-
     },
     {
       path: "/admin",
@@ -116,7 +106,9 @@ router.beforeEach((to, from, next) => {
   const user = JSON.parse(localStorage.getItem("user"));
   if (authorize) {
     if (!user) {
-      return next({ path: "/login" });
+      return next({
+        path: "/login"
+      });
     }
     if (!authorize.some(x => user.map(x => x["roleName"]).includes(x))) {
       return next("/");
