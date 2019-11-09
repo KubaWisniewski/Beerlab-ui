@@ -74,12 +74,8 @@
 </template>
 <script>
 const axios = require("axios");
-import BeerAddDialog from "./Add-beer-dialog";
 export default {
   name: "BeerEditComponent",
-  components: {
-    BeerAddDialog
-  },
   data() {
     return {
       headers: [
