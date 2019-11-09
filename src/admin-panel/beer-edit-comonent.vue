@@ -16,7 +16,6 @@
       <v-text-field v-model="beer.brand" label="Marka" required></v-text-field>
       <v-text-field v-model="beer.price" label="Cena" required></v-text-field>
       <v-text-field v-model="beer.quantity" label="Ilosc" required></v-text-field>
-
       <v-btn class="mr-4" v-on:click.prevent="addNewBeer">Dodaj</v-btn>
     </form>
   </v-container>
