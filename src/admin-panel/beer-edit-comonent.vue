@@ -38,9 +38,9 @@
                 </v-col>
                 <v-col cols="12">
                   <v-file-input
-                    v-model="imgUrl"
+                    v-model="file"
+                    type="file"
                     label="Wybierz zdjęcie..."
-                    accept="image/*"
                     @change="onFileChange"
                   ></v-file-input>
                 </v-col>
@@ -88,6 +88,8 @@ export default {
       ],
       dialog: false,
       beers: [],
+      file: null,
+      dialogImgUrl: null,
       beer: {
         description: "",
         brand: "",
@@ -101,7 +103,7 @@ export default {
     onFileChange() {
       let reader = new FileReader();
       reader.onload = () => {
-        this.imageUrl = reader.result;
+        this.dialogImgUrl = reader.result;
       };
       reader.readAsDataURL(this.file);
     },
@@ -111,7 +113,10 @@ export default {
       });
     },
     addNewBeer() {
-      axios.post("http://localhost:8081/api/beer", this.beer).then(() => {
+      let formData = new FormData();
+      formData.append("file", this.file);
+      formData.append("beerDto", JSON.stringify(this.beer));
+      axios.post("http://localhost:8081/api/beer", formData).then(() => {
         this.fetchData();
         this.beer = {
           description: "",
