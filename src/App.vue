@@ -63,10 +63,10 @@
           </v-list-item>
         </router-link>
         <router-link to="/admin">
-          <v-list-item @click="alert(123)">
+          <v-list-item>
             <v-list-item-content>
               <v-list-item-title>
-                <span class="white--text">Add beers</span>
+                <span class="white--text">Admin menu</span>
               </v-list-item-title>
             </v-list-item-content>
           </v-list-item>

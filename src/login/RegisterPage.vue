@@ -12,6 +12,7 @@
               <v-text-field
                 v-model="username"
                 label="Username"
+                :rules="usernameRules"
                 name="username"
                 prepend-icon="mdi-account"
                 type="text"
@@ -29,10 +30,41 @@
                 v-model="password"
                 id="password"
                 label="Password"
+                :rules="passwordRules"
                 name="password"
                 prepend-icon="mdi-lock"
                 type="password"
               ></v-text-field>
+              <v-text-field
+                v-model="passwordConfirmation"
+                id="passwordConfirmation"
+                label="Password confirmation"
+                name="passwordConfirmation"
+                prepend-icon="mdi-lock"
+                type="password"
+              ></v-text-field>
+              <v-select
+                :items="genders"
+                v-model="setGender"
+                no-data-text="Brak danych"
+                label="Wybierz plec"
+              ></v-select>
+              <v-dialog
+                ref="dialog"
+                v-model="modal"
+                :return-value.sync="date"
+                persistent
+                width="290px"
+              >
+                <template v-slot:activator="{ on }">
+                  <v-text-field v-model="date" label="Wybierz date urodzenia" readonly v-on="on"></v-text-field>
+                </template>
+                <v-date-picker v-model="date" scrollable>
+                  <v-spacer></v-spacer>
+                  <v-btn text color="primary" @click="modal = false">Anuluj</v-btn>
+                  <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                </v-date-picker>
+              </v-dialog>
             </v-form>
           </v-card-text>
           <v-card-actions>
@@ -47,21 +79,38 @@
 
 <script>
 export default {
-  data() {
-    return {
-      username: "",
-      email: "",
-      password: ""
-    };
-  },
+  data: () => ({
+    date: new Date().toISOString(),
+    menu: false,
+    modal: false,
+    genders: ["Mezczyzna", "Kobieta", "Inna"],
+    username: "",
+    email: "",
+    setGender: "",
+    password: "",
+    passwordConfirmation: "",
+    usernameRules: [
+      v => !!v || "Login jest wymagany",
+      v => v.length >= 3 || "Minimum 3 znaki",
+      v => /^\S+$/.test(v) || "Login nie może zawierać spacji"
+    ],
+    passwordRules: [
+      v => !!v || "Hasło jest wymagane",
+      v => v.length >= 4 || "Minimum 4 znaki",
+      v => /^\S+$/.test(v) || "Hasło nie może zawierać spacji"
+    ],
+    birthDayRules: [v => v > 2020 || "Musisz mieć ukończone 18 lat"]
+  }),
   methods: {
     register() {
-      const { username, email, password } = this;
-      if (username && email && password) {
+      const { username, email, password, setGender, date } = this;
+      if (username && email && setGender && password && date) {
         this.$store.dispatch("authentication/register", {
           username,
           email,
-          password
+          password,
+          setGender,
+          date
         });
       }
     }

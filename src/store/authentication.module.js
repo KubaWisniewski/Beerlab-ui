@@ -1,7 +1,13 @@
 /* eslint-disable no-unused-vars */
 import { userService } from "../services/user.service.js";
 import { router } from "../router.js";
-const initialState = { status: { loggedIn: false }, token: null, user: null };
+const initialState = {
+  status: {
+    loggedIn: false
+  },
+  token: null,
+  user: null
+};
 
 export const authentication = {
   namespaced: true,
@@ -24,9 +30,15 @@ export const authentication = {
           // eslint-disable-next-line no-console
           console.log(response.headers);
           let token = response.headers["x-auth-token"];
-          localStorage.setItem("user", JSON.stringify(response.data["rolesDto"]));
+          localStorage.setItem(
+            "user",
+            JSON.stringify(response.data["rolesDto"])
+          );
           let user = response.data["username"];
-          commit("loginSuccess", { token, user });
+          commit("loginSuccess", {
+            token,
+            user
+          });
           router.push("/");
         },
         error => {
@@ -35,8 +47,8 @@ export const authentication = {
         }
       );
     },
-    register({ commit }, { username, email, password }) {
-      userService.register(username, email, password).then(
+    register({ commit }, { username, email, password, setGender, date }) {
+      userService.register(username, email, password, setGender, date).then(
         () => {
           router.push("/login");
         },
@@ -62,16 +74,18 @@ export const authentication = {
   },
   mutations: {
     loginSuccess(state, { token, user }) {
-      state.status = { loggedIn: true };
+      state.status = {
+        loggedIn: true
+      };
       state.token = token;
       state.user = user;
     },
     logoutSuccess(state) {
-      state.status = { loggedIn: false };
+      state.status = {
+        loggedIn: false
+      };
       state.token = null;
       state.user = null;
-    },
+    }
   }
-
-
 };
