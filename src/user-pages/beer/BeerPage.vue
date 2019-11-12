@@ -1,8 +1,10 @@
 <template>
-  <v-container style="max-width:1000px;">
-    <v-row :key="index" v-for="(beer, index) in beers">
-      <BeerCard :beer="beer"></BeerCard>
-    </v-row>
+  <v-container class="fill-height text-center justify-center">
+    <div align-center>
+      <v-row :key="index" v-for="(beer, index) in beers">
+        <BeerCard :beer="beer"></BeerCard>
+      </v-row>
+    </div>
   </v-container>
 </template>
 

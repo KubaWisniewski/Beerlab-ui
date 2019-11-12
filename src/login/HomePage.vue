@@ -1,17 +1,84 @@
 <template>
-  <v-container class="fill-height text-center justify-center">
-    <div align-center>
-      <p style="font-size: 20px">
-        Welcom in Beerlab <span v-if="loggedIn">{{ user["username"] }}</span>
-      </p>
-      <v-img
-        class="white--text"
-        max-height="300px"
-        max-width="300px"
-        src="@/assets/BeerLogo.png"
-      />
-    </div>
-  </v-container>
+<div>
+  <v-card
+    class="mx-auto background-color = grey lighten-1"
+    max-width="1200"
+    elevation = 0
+  >
+    <v-container fluid>
+      <v-row dense>
+          <v-card>
+            <v-img
+              class="white--text align-end"
+              max-height="300px"
+              src="@/assets/logo2.jpeg"
+            >
+            </v-img>
+          </v-card>
+      </v-row>
+    </v-container>
+  </v-card>
+  <v-card
+    class="mx-auto background-color = grey lighten-1"
+    max-width="800"
+    elevation = 0
+  >
+    <v-container fluid>
+      <v-row dense>
+          <v-card>
+          <router-link to="/menu">
+            <v-img
+              class="white--text align-end"
+              max-height="300px"
+              src="@/assets/menu.png"
+            >
+            </v-img>
+            </router-link>
+          </v-card>
+      </v-row>
+    </v-container>
+  </v-card>
+  <v-card
+    class="mx-auto background-color = grey lighten-1"
+    max-width="800"
+    elevation = 0
+  >
+    <v-container fluid>
+      <v-row dense>
+          <v-card>
+          <router-link to="/">
+            <v-img
+              class="white--text align-end"
+              max-height="300px"
+              src="@/assets/onas.jpeg"
+            >
+            </v-img>
+            </router-link>
+          </v-card>
+      </v-row>
+    </v-container>
+  </v-card>
+  <v-card
+    class="mx-auto background-color = grey lighten-1"
+    max-width="800"
+    elevation = 0
+  >
+    <v-container fluid>
+      <v-row dense>
+          <v-card>
+          <router-link to="/">
+            <v-img
+              class="white--text align-end"
+              max-height="300px"
+              src="@/assets/kontakt.png"
+            >
+            </v-img>
+            </router-link>
+          </v-card>
+      </v-row>
+    </v-container>
+  </v-card>
+  </div>
 </template>
 
 <script>
@@ -27,4 +94,5 @@ export default {
 };
 </script>
 
-<style scoped></style>
+<style scoped>
+</style>

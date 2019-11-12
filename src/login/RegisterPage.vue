@@ -3,15 +3,15 @@
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
-          <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Register</v-toolbar-title>
+          <v-toolbar color="grey darken-1" dark flat>
+            <v-toolbar-title>Rejestracja</v-toolbar-title>
             <div class="flex-grow-1"></div>
           </v-toolbar>
           <v-card-text>
             <v-form>
               <v-text-field
                 v-model="username"
-                label="Username"
+                label="Nick"
                 name="username"
                 prepend-icon="mdi-account"
                 type="text"
@@ -28,7 +28,7 @@
               <v-text-field
                 v-model="password"
                 id="password"
-                label="Password"
+                label="Hasło"
                 name="password"
                 prepend-icon="mdi-lock"
                 type="password"
@@ -37,7 +37,7 @@
           </v-card-text>
           <v-card-actions>
             <div class="flex-grow-1"></div>
-            <v-btn color="primary" @click="register">Register</v-btn>
+            <v-btn color="grey darken-1" @click="register">Załóż konto</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

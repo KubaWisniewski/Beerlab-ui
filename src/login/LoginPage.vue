@@ -3,8 +3,8 @@
     <v-row align="center" justify="center">
       <v-col cols="12" sm="8" md="4">
         <v-card class="elevation-12">
-          <v-toolbar color="primary" dark flat>
-            <v-toolbar-title>Login</v-toolbar-title>
+          <v-toolbar color="grey darken-1" dark flat>
+            <v-toolbar-title>Logowanie</v-toolbar-title>
             <div class="flex-grow-1"></div>
           </v-toolbar>
           <v-card-text>
@@ -21,7 +21,7 @@
               <v-text-field
                 v-model="password"
                 id="password"
-                label="Password"
+                label="Hasło"
                 name="password"
                 prepend-icon="mdi-lock"
                 type="password"
@@ -30,10 +30,10 @@
           </v-card-text>
           <v-card-actions>
           <router-link to="/register">
-          <v-btn text small color="primary">Don't have an account yet? Create now!</v-btn>
+          <v-btn text small color="primary">Nie posiadasz konta? Załóż teraz!</v-btn>
           </router-link>
             <div class="flex-grow-1"></div>
-            <v-btn color="primary" @click="login">Login</v-btn>
+            <v-btn color="grey darken-1" @click="login">Zaloguj</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
