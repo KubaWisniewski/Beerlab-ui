@@ -50,14 +50,16 @@ function login(email, password) {
     );
 }
 
-function register(username, email, password) {
+function register(username, email, password, gender, dateOfBirth) {
   return axios
     .post(
       "http://localhost:8081/api/auth/signup",
       JSON.stringify({
         username,
         email,
-        password
+        password,
+        gender,
+        dateOfBirth
       }),
       {
         headers: {
@@ -84,7 +86,7 @@ function logout() {
     })
     .then(
       response => {
-        localStorage.removeItem("token");
+        localStorage.removeItem("user");
         console.log(response);
       },
       error => {
