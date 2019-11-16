@@ -8,36 +8,114 @@
         </v-avatar>
         <v-card-text class="text-xs-center">
           <h4 class="card-title font-weight-light">{{user.username}}</h4>
-          <p
-            class="card-description font-weight-light"
-          >Don't be scared of the truth because we need to restart the human foundation in truth And I love you like Kanye loves Kanye I love Rick Owens’ bed design but the back is...</p>
         </v-card-text>
+        Stan konta : {{user.balance}} Kufli.
+        <v-card class="mx-auto" max-width="344" outlined>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="overline mb-4">Pakiet</div>
+              <v-list-item-title class="headline mb-1">10 kufli</v-list-item-title>
+              <v-list-item-subtitle>5 $</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-card-actions class="justify-center">
+            <PayPal
+              amount="5.00"
+              currency="USD"
+              :client="credentials"
+              env="sandbox"
+              @payment-completed="payment_completed_cb"
+            ></PayPal>
+          </v-card-actions>
+        </v-card>
+
+        <v-card class="mx-auto" max-width="344" outlined>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="overline mb-4">Pakiet</div>
+              <v-list-item-title class="headline mb-1">20 kufli</v-list-item-title>
+              <v-list-item-subtitle>10 $</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-card-actions class="justify-center">
+            <PayPal
+              amount="10.00"
+              currency="USD"
+              :client="credentials"
+              env="sandbox"
+              @payment-completed="payment_completed_cb"
+            ></PayPal>
+          </v-card-actions>
+        </v-card>
+
+        <v-card class="mx-auto" max-width="344" outlined>
+          <v-list-item three-line>
+            <v-list-item-content>
+              <div class="overline mb-4">Pakiet</div>
+              <v-list-item-title class="headline mb-1">90 kufli</v-list-item-title>
+              <v-list-item-subtitle>45 $</v-list-item-subtitle>
+            </v-list-item-content>
+          </v-list-item>
+          <v-card-actions class="justify-center">
+            <PayPal
+              amount="45.00"
+              currency="USD"
+              :client="credentials"
+              env="sandbox"
+              @payment-completed="payment_completed_cb"
+            ></PayPal>
+          </v-card-actions>
+        </v-card>
       </div>
     </div>
   </v-container>
 </template>
 <script>
 const axios = require("axios");
+import PayPal from "vue-paypal-checkout";
 export default {
+  components: {
+    PayPal
+  },
   data() {
     return {
-      user: {}
+      credentials: {
+        sandbox:
+          "Ad-TjNjR-HEt4TQ9IwnYGjJuWjZaSC89KwTIjvVHfS0A9s5aLIiRQfOwErxOn5vNAhWkfRUIEuGkcqYh"
+      },
+      user: Object,
+      paidFor: false,
+      payment_completed: {
+        payment_completed_cb() {}
+      }
     };
   },
   methods: {
+    async payment_completed_cb(res) {
+      const order = await res;
+      await this.sendPaymentInformation(order);
+    },
+
     fetchUserInfo() {
-      var token = JSON.parse(localStorage.getItem("user"));
-      axios({
-        headers: { "X-Auth-Token": token }
-      })
-        .get("localhost:8081/api/user/me")
-        .then(response => {
-          this.user = response.data;
+      axios.get("http://localhost:8081/api/user/me").then(response => {
+        this.user = response.data;
+      });
+    },
+
+    sendPaymentInformation(order) {
+      axios.post("http://localhost:8081/api/user/addMoney", order).then(() => {
+        this.$notify({
+          group: "auth",
+          type: "success",
+          title: "OK",
+          text: "Pomyślnie dodano środki do konta."
         });
+        this.fetchUserInfo();
+      });
     }
   },
   created() {
-    this.fetchUserInfo;
+    this.fetchUserInfo();
   }
 };
 </script>

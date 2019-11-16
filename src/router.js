@@ -47,10 +47,7 @@ export const router = new VueRouter({
     },
     {
       path: "/menu",
-      component: MenuPage,
-      meta: {
-        authorize: ["ROLE_USER"]
-      }
+      component: MenuPage
     },
     {
       path: "/games",
