@@ -5,7 +5,7 @@ import HomePage from "./login/HomePage.vue";
 import RegisterPage from "./login/RegisterPage";
 import UserProfilePage from "./user-pages/UserProfilePage";
 import CartPage from "./user-pages/CartPage";
-import MenuPage from "./user-pages/MenuPage";
+import BeerPage from "./user-pages/beer/BeerPage.vue";
 import GamesPage from "./user-pages/GamesPage";
 import RankingPage from "./user-pages/RankingPage";
 import CurrencyPage from "./user-pages/CurrencyPage";
@@ -47,7 +47,7 @@ export const router = new VueRouter({
     },
     {
       path: "/menu",
-      component: MenuPage
+      component: BeerPage
     },
     {
       path: "/games",
