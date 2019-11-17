@@ -1,0 +1,36 @@
+First Name:
+test
+Last Name:
+buyer
+Email ID:
+daniel8b05-buyer@gmail.com
+Password:
+Change password
+Phone Number:
+2293100399
+Account Type:
+Personal
+Account ID:
+VLAEY85AJNJHN
+Status:
+Verified
+Country:
+PL
+
+
+
+Bank Account
+Account Number:
+4468572668390306
+Routing Number:
+7413
+Credit Card
+Credit Card Number:
+4063339268957659
+Credit Card Type:
+VISA
+Expiration Date:
+12/2023
+PayPal
+Balance:
+9999.00 PLN
