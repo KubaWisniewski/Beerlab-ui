@@ -80,7 +80,6 @@
 <script>
 export default {
   data: () => ({
-    // date: new Date().toISOString(),
     date: null,
     menu: false,
     modal: false,
