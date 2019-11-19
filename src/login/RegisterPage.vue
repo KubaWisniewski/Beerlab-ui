@@ -56,10 +56,6 @@
                 persistent
                 width="290px"
               >
-<!--                <v-menu>-->
-<!--                  <v-text-field slot="activator" label="Data urodzenia" prepend-icon="date_range"></v-text-field>-->
-<!--                  <v-date-picker v-model="date"></v-date-picker>-->
-<!--                </v-menu>-->
                 <template v-slot:activator="{ on }">
                   <v-text-field v-model="date" label="Wybierz date urodzenia" readonly v-on="on"></v-text-field>
                 </template>
