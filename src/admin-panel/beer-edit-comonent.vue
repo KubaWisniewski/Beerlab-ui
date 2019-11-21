@@ -4,7 +4,8 @@
       <template v-slot:item.id="{item}">
         <div class="my-1">
           <p>{{item.id}}</p>
-          <v-btn small color="error" v-on:click.prevent="deleteBeer(item.id)">Delete</v-btn>
+          <v-btn small color="error" v-on:click.prevent="deleteBeer(item.id)">Usuń</v-btn>
+          <v-btn small color="warning" v-on:click.prevent="editBeer(item.id)">Edytuj</v-btn>
         </div>
       </template>
       <template v-slot:item.imgUrl="{ item }">
@@ -12,11 +13,6 @@
       </template>
     </v-data-table>
     <form>
-      <v-text-field v-model="beer.description" label="Opis" required></v-text-field>
-      <v-text-field v-model="beer.brand" label="Marka" required></v-text-field>
-      <v-text-field v-model="beer.price" label="Cena" required></v-text-field>
-      <v-text-field v-model="beer.quantity" label="Ilosc" required></v-text-field>
-      <v-btn class="mr-4" v-on:click.prevent="addNewBeer">Dodaj</v-btn>
       <!--  -->
       <v-dialog v-model="dialog" persistent max-width="600px">
         <template v-slot:activator="{ on }">
@@ -62,8 +58,8 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="dialog = false">Close</v-btn>
-            <v-btn color="blue darken-1" text @click="addNewBeer">Save</v-btn>
+            <v-btn color="blue darken-1" text @click="dialog = false">Zamknij</v-btn>
+            <v-btn color="blue darken-1" text @click="addNewBeer">Zapisz</v-btn>
           </v-card-actions>
         </v-card>
       </v-dialog>
@@ -116,12 +112,15 @@ export default {
       formData.append("beerDto", JSON.stringify(this.beer));
       axios.post("http://localhost:8081/api/beer", formData).then(() => {
         this.fetchData();
+        this.file = null;
+        this.dialogImgUrl = null;
         this.beer = {
           description: "",
           brand: "",
           price: "",
           quantity: ""
         };
+        this.dialog = false;
         this.$notify({
           group: "auth",
           type: "success",
@@ -133,6 +132,13 @@ export default {
     deleteBeer(id) {
       axios.delete("http://localhost:8081/api/beer/" + id).then(() => {
         this.fetchData();
+      });
+    },
+    editBeer(id) {
+      axios.get("http://localhost:8081/api/beer/" + id).then(response => {
+        this.fetchData();
+        this.beer = response.data;
+        this.dialog = true;
       });
     }
   },
