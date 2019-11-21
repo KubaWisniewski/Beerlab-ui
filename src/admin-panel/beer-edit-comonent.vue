@@ -93,8 +93,7 @@ export default {
         description: "",
         brand: "",
         price: "",
-        quantity: "",
-        imgUrl: ""
+        quantity: ""
       }
     };
   },
@@ -121,10 +120,8 @@ export default {
           description: "",
           brand: "",
           price: "",
-          quantity: "",
-          imgUrl: ""
+          quantity: ""
         };
-        dialog = false;
         this.$notify({
           group: "auth",
           type: "success",
