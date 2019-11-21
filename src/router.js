@@ -12,6 +12,7 @@ import CurrencyPage from "./user-pages/CurrencyPage";
 import AdminPage from "./admin-panel/Main-view-admin.vue";
 import OrderView from "./admin-panel/Order-view-admin.vue";
 import BeerEditComponent from "./admin-panel/beer-edit-comonent.vue";
+import OrderInQueue from "./admin-panel/OrderInQueue-view-admin.vue";
 import { authentication } from "./store/authentication.module";
 
 Vue.use(VueRouter);
@@ -73,6 +74,13 @@ export const router = new VueRouter({
     {
       path: "/admin/orders",
       component: OrderView,
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
+      path: "/admin/orders/current",
+      component: OrderInQueue,
       meta: {
         authorize: ["ROLE_ADMIN"]
       }
