@@ -1,9 +1,43 @@
 <template>
   <v-container class="fill-height text-center justify-center">
     <div align-center>
-      <p style="font-size: 20px">
-        Cart
-      </p>
+      <v-row :key="index" v-for="(beer, index) in beers">
+        <BeerCard :beer="beer"></BeerCard>
+      </v-row>
     </div>
   </v-container>
 </template>
+
+<script>
+import BeerCard from "./beer/BeerCard";
+const axios = require("axios");
+export default {
+  components: {
+    BeerCard
+  },
+  name: "CartPage",
+    data() {
+      return {
+        beer: {},
+        beers: []
+    };
+  },
+methods: {
+  fetchData() {
+    axios.get("http://localhost:8081/api/user/order").then(response => {
+    this.beers = response.data;
+   });
+  }
+},
+  created() {
+    this.fetchData();
+    }
+};
+
+</script>
+
+<style scoped>
+div {
+  margin-bottom: 10px;
+}
+</style>

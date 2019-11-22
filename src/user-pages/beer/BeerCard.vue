@@ -7,9 +7,9 @@
     </v-card-text>
 
     <v-card-actions class="justify-end">
-      <router-link to="/cart">
-        <v-btn rounded color = "black" dark>Zamów</v-btn>
-      </router-link>
+<!--      <router-link to="/cart">-->
+        <v-btn @click="addToCart" rounded color = "black" dark>Zamów</v-btn>
+<!--      </router-link>-->
     </v-card-actions>
 
     <v-card-text class="headline text-right font-weight-bold large">Cena: {{ beer.price }} <v-icon large>mdi-beer</v-icon> </v-card-text>
@@ -20,13 +20,25 @@
 
 
 <script>
+    const axios = require("axios");
 export default {
   name: "BeerCard",
+    data: ()=> ({
+      beer: {},
+    }),
   props: {
     beer: {
       type: Object
     }
-  }
+  },
+    methods: {
+        addToCart(){
+            axios.post("http://localhost:8081/api/order", {
+                    beerId: this.beer.id,
+                    quantity: 1
+                })
+        }
+    }
 };
 </script>
 
