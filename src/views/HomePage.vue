@@ -1,9 +1,12 @@
 <template>
   <v-container fluid class="pa-0">
     <v-row>
-      <v-card>
+      <v-card >
+        <router-link to="/">
+
         <v-img class="white--text" max-height="500px" src="@/assets/logo2.jpeg">
         </v-img>
+        </router-link>
       </v-card>
     </v-row>
     <v-row class="fade">
@@ -15,14 +18,14 @@
     </v-row>
     <v-row class="fade">
       <v-card ripple>
-        <router-link to="/">
+        <router-link to="/about">
           <v-img max-height="500px" src="@/assets/onas.jpeg"> </v-img>
         </router-link>
       </v-card>
     </v-row>
     <v-row class="fade">
       <v-card ripple>
-        <router-link to="/">
+        <router-link to="/contact">
           <v-img max-height="500px" src="@/assets/kontakt.png"> </v-img>
         </router-link>
       </v-card>

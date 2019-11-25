@@ -1,5 +1,9 @@
 <template>
-  <v-container>
+  <v-container fluid class="pa-0">
+    <v-row justify="center" align="center" class="mb-4 elevation-4">
+      <v-img width="100%" max-height="300px" src="@/assets/menu.png">
+      </v-img>
+    </v-row>
     <v-row
       justify="center"
       :key="index"
