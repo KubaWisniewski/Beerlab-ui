@@ -1,7 +1,7 @@
 <template>
   <v-container class="fill-height text-center justify-center">
     <div align-center>
-      <v-row :key="index" v-for="( orderItem , index) in orderItemsDto">
+      <v-row :key="index" v-for="( orderItem , index) in order.orderItemsDto">
         <BeerCard :beer="orderItem.beerDto"></BeerCard>
       </v-row>
     </div>
@@ -18,26 +18,25 @@ export default {
   name: "CartPage",
     data() {
       return {
-        orderItem: {},
-        orderItemsDto: []
+         order: {},
+         beer: {},
+         orderItemsDto: []
     };
   },
 methods: {
+
   fetchData() {
     axios.get("http://localhost:8081/api/user/order", {
       headers: {
-        // "Content-Type": "application/json",
         "X-Auth-Token": localStorage.getItem("token").replace(/"/g, "")
       }
     }).then(response => {
-    this.orderItemsDto = response.data;
-      console.log(this.orderItemsDto);
+      this.order = response.data;
    });
   }
 },
   created() {
     this.fetchData();
-    console.log(this.fetchData())
     }
 };
 
