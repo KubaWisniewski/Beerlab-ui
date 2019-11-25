@@ -1,27 +1,23 @@
-
 <template>
   <v-card>
     <v-card-title>Numer zamowienia: {{ order.id }}</v-card-title>
-
     <v-card-text>
       <v-row>
         <v-col cols="5">Piwa: {{ order }}</v-col>
         <v-col cols="5">
           Status:
-          <span
-            class="orange black--text"
-            v-if="order.status == 'INPROGRESS'"
-          >ZAMOWIENIE W TRAKCIE REALIZACJI</span>
-
-          <span
-            class="green black--text"
-            v-if="order.status == 'COMPLETED'"
-          >ZAMOWIENIE ZAKOŃCZONE I OCZEKUJE NA KLIENTA</span>
-          <span
-            class="black white--text"
-            v-if="order.status == 'CLOSED'"
-          >REALIZACJA ZAMOWIENIA ZAMKNIETA</span>
-          <span class="white black--text" v-if="order.status == 'QUEUED'">ZAMOWIENIE W KOLEJCE</span>
+          <span class="orange black--text" v-if="order.status === 'INPROGRESS'"
+            >ZAMOWIENIE W TRAKCIE REALIZACJI</span
+          >
+          <span class="green black--text" v-if="order.status === 'COMPLETED'"
+            >ZAMOWIENIE ZAKOŃCZONE I OCZEKUJE NA KLIENTA</span
+          >
+          <span class="black white--text" v-if="order.status === 'CLOSED'"
+            >REALIZACJA ZAMOWIENIA ZAMKNIETA</span
+          >
+          <span class="white black--text" v-if="order.status === 'QUEUED'"
+            >ZAMOWIENIE W KOLEJCE</span
+          >
         </v-col>
       </v-row>
       <v-btn v-on:click="close">ZAKONCZ</v-btn>
@@ -33,7 +29,7 @@
 </template>
 
 <script>
-const axios = require("axios");
+import axios from "../services/axiosConfig";
 export default {
   props: {
     order: {}
@@ -41,7 +37,7 @@ export default {
   methods: {
     close() {
       axios
-        .post("http://localhost:8081/api/order/" + this.order.id, {
+        .post("/api/order/" + this.order.id, {
           OrderStatus: "CLOSED"
         })
         .then(() => {
@@ -56,7 +52,7 @@ export default {
     },
     addQueue() {
       axios
-        .post("http://localhost:8081/api/order/" + this.order.id, {
+        .post("/api/order/" + this.order.id, {
           OrderStatus: "QUEUED"
         })
         .then(() => {
@@ -71,7 +67,7 @@ export default {
     },
     complete() {
       axios
-        .post("http://localhost:8081/api/order/" + this.order.id, {
+        .post("/api/order/" + this.order.id, {
           OrderStatus: "COMPLETED"
         })
         .then(() => {
@@ -86,7 +82,7 @@ export default {
     },
     inprogress() {
       axios
-        .post("http://localhost:8081/api/order/" + this.order.id, {
+        .post("/api/order/" + this.order.id, {
           OrderStatus: "INPROGRESS"
         })
         .then(() => {
@@ -102,6 +98,3 @@ export default {
   }
 };
 </script>
-
-<style>
-</style>

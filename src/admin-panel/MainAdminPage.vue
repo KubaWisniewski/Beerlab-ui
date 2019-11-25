@@ -12,16 +12,19 @@
                 <span class="white--text">Edytuj statusy zamowien</span>
               </v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-avatar tile size="80" color="blue"></v-list-item-avatar>
+            <v-list-item-avatar
+              tile
+              size="80"
+              color="blue"
+            ></v-list-item-avatar>
           </v-list-item>
           <v-card-actions>
-            <router-link to="admin/orders">
+            <router-link to="/admin/orders">
               <v-btn text color="green">PRZJEDZ</v-btn>
             </router-link>
           </v-card-actions>
         </v-card>
       </v-card>
-      <!-- EDYTUJ MENU -->
       <v-card outlined tile>
         <v-card class="mx-auto pt-1" max-width="600" outlined>
           <v-list-item three-line>
@@ -33,7 +36,11 @@
                 <span class="white--text">Dodawaj oraz usuwaj pozycje</span>
               </v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-avatar tile size="80" color="blue"></v-list-item-avatar>
+            <v-list-item-avatar
+              tile
+              size="80"
+              color="blue"
+            ></v-list-item-avatar>
           </v-list-item>
           <v-card-actions>
             <router-link to="admin/menu">
@@ -42,8 +49,6 @@
           </v-card-actions>
         </v-card>
       </v-card>
-      <!-- ------------- -->
-      <!-- RAPORT -->
       <v-card outlined tile>
         <v-card class="mx-auto pt-1" max-width="600" outlined>
           <v-list-item three-line>
@@ -55,7 +60,11 @@
                 <span class="white--text">Sprawdź wygenerowany bilans</span>
               </v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-avatar tile size="80" color="blue"></v-list-item-avatar>
+            <v-list-item-avatar
+              tile
+              size="80"
+              color="blue"
+            ></v-list-item-avatar>
           </v-list-item>
           <v-card-actions>
             <router-link to="/">
@@ -64,8 +73,6 @@
           </v-card-actions>
         </v-card>
       </v-card>
-      <!-- ------------- -->
-      <!-- ZARZADZANIE UZYTKOWNIKAMI -->
       <v-card outlined tile>
         <v-card class="mx-auto pt-1" max-width="600" outlined>
           <v-list-item three-line>
@@ -77,7 +84,11 @@
                 <span class="white--text">Sprawdz użytkowników</span>
               </v-list-item-subtitle>
             </v-list-item-content>
-            <v-list-item-avatar tile size="80" color="blue"></v-list-item-avatar>
+            <v-list-item-avatar
+              tile
+              size="80"
+              color="blue"
+            ></v-list-item-avatar>
           </v-list-item>
           <v-card-actions>
             <router-link to="/">
@@ -86,7 +97,6 @@
           </v-card-actions>
         </v-card>
       </v-card>
-      <!-- ------------- -->
     </v-row>
   </v-col>
 </template>
@@ -96,6 +106,3 @@ export default {
   name: "AdminView"
 };
 </script>
-
-<style>
-</style>

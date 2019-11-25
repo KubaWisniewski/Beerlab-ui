@@ -7,8 +7,8 @@
 </template>
 
 <script>
-const axios = require("axios");
 import OrderCard from "./OrderCard";
+import { mapActions } from "vuex";
 export default {
   name: "OrderViewAdmin",
   components: {
@@ -21,21 +21,14 @@ export default {
     };
   },
   methods: {
-    fetchOrders() {
-      axios.get("http://localhost:8081/api/order").then(response => {
-        this.orders = response.data;
-      });
-    }
+    ...mapActions(["fetchOrders"])
   },
   created() {
     this.$root.$on("changedStatus", () => {
-      this.fetchOrders();
+      this.orders = this.fetchOrders();
     });
-    this.fetchOrders();
-    this.interval = setInterval(() => this.fetchOrders(), 5000);
+    this.orders = this.fetchOrders();
+    this.interval = setInterval(() => (this.orders = this.fetchOrders()), 5000);
   }
 };
 </script>
-
-<style>
-</style>

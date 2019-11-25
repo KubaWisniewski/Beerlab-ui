@@ -1,13 +1,10 @@
 <template>
-  <v-footer class = "background-color = black darken-3" app>
-    <v-row justify="center">
-     <div class="text-center">
-        <v-icon>mdi-copyright</v-icon>
-        <router-link to="/">
-        <v-btn text color="white">Strona główna</v-btn>
-        </router-link>
-        <v-btn text  color="white">Kontakt</v-btn>
-      </div>
+  <v-footer color="orange lighten-1" class="elevation-4">
+    <v-row justify="center" align="center">
+      <div class="ma-1">{{ new Date().getFullYear() }}</div>
+      <v-icon>mdi-copyright</v-icon>
+      <v-btn text ripple to="/" class="pa-2 ma-2">Strona główna</v-btn>
+      <v-btn text ripple class="pa-2 ma-2">Kontakt</v-btn>
     </v-row>
   </v-footer>
 </template>
@@ -17,6 +14,3 @@ export default {
   name: "Footer"
 };
 </script>
-
-<style>
-</style>

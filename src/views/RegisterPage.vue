@@ -1,17 +1,18 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
-        <v-card class="elevation-12">
-          <v-toolbar color="grey darken-1" dark flat>
+  <v-container fluid class="fill-height">
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <v-card class="elevation-12 orange lighten-5">
+          <v-toolbar class="orange lighten-2">
+            <v-spacer></v-spacer>
             <v-toolbar-title>Rejestracja</v-toolbar-title>
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
             <v-form>
               <v-text-field
                 v-model="username"
-                label="Nick"
+                label="Nazwa użytkownika"
                 :rules="usernameRules"
                 name="username"
                 prepend-icon="mdi-account"
@@ -20,15 +21,13 @@
               ></v-text-field>
               <v-text-field
                 v-model="email"
-                label="Email"
+                label="E-mail"
                 name="email"
                 prepend-icon="mdi-account"
-                type="text"
+                type="email"
               ></v-text-field>
-
               <v-text-field
                 v-model="password"
-                id="password"
                 label="Hasło"
                 :rules="passwordRules"
                 name="password"
@@ -37,8 +36,7 @@
               ></v-text-field>
               <v-text-field
                 v-model="passwordConfirmation"
-                id="passwordConfirmation"
-                label="Password confirmation"
+                label="Powtórz hasło"
                 name="passwordConfirmation"
                 prepend-icon="mdi-lock"
                 type="password"
@@ -57,19 +55,28 @@
                 width="290px"
               >
                 <template v-slot:activator="{ on }">
-                  <v-text-field v-model="date" label="Wybierz date urodzenia" readonly v-on="on"></v-text-field>
+                  <v-text-field
+                    v-model="date"
+                    label="Wybierz date urodzenia"
+                    readonly
+                    v-on="on"
+                  ></v-text-field>
                 </template>
                 <v-date-picker v-model="date" scrollable>
                   <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="modal = false">Anuluj</v-btn>
-                  <v-btn text color="primary" @click="$refs.dialog.save(date)">OK</v-btn>
+                  <v-btn text color="primary" @click="modal = false"
+                    >Anuluj</v-btn
+                  >
+                  <v-btn text color="primary" @click="$refs.dialog.save(date)"
+                    >OK</v-btn
+                  >
                 </v-date-picker>
               </v-dialog>
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <div class="flex-grow-1"></div>
-            <v-btn color="grey darken-1" @click="register">Załóż konto</v-btn>
+            <v-spacer></v-spacer>
+            <v-btn @click="register">Załóż konto</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -80,7 +87,7 @@
 <script>
 export default {
   data: () => ({
-    date: new Date().toISOString(),
+    date: null,
     menu: false,
     modal: false,
     genders: ["Mezczyzna", "Kobieta", "Inna"],
@@ -90,9 +97,9 @@ export default {
     password: "",
     passwordConfirmation: "",
     usernameRules: [
-      v => !!v || "Login jest wymagany",
+      v => !!v || "Nazwa użytkownika jest wymagana",
       v => v.length >= 3 || "Minimum 3 znaki",
-      v => /^\S+$/.test(v) || "Login nie może zawierać spacji"
+      v => /^\S+$/.test(v) || "Nazwa użytkownika nie może zawierać spacji"
     ],
     passwordRules: [
       v => !!v || "Hasło jest wymagane",
@@ -105,7 +112,7 @@ export default {
     register() {
       const { username, email, password, setGender, date } = this;
       if (username && email && setGender && password && date) {
-        this.$store.dispatch("authentication/register", {
+        this.$store.dispatch("register", {
           username,
           email,
           password,

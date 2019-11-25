@@ -1,116 +1,109 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
-import LoginPage from "./login/LoginPage.vue";
-import HomePage from "./login/HomePage.vue";
-import RegisterPage from "./login/RegisterPage";
-import UserProfilePage from "./user-pages/UserProfilePage";
-import CartPage from "./user-pages/CartPage";
-import BeerPage from "./user-pages/beer/BeerPage.vue";
-import GamesPage from "./user-pages/GamesPage";
-import RankingPage from "./user-pages/RankingPage";
-import CurrencyPage from "./user-pages/CurrencyPage";
-import AdminPage from "./admin-panel/Main-view-admin.vue";
-import OrderView from "./admin-panel/Order-view-admin.vue";
-import BeerEditComponent from "./admin-panel/beer-edit-comonent.vue";
-import { authentication } from "./store/authentication.module";
+import store from "./store";
 
 Vue.use(VueRouter);
-
-export const router = new VueRouter({
+const router = new VueRouter({
   mode: "history",
+  base: process.env.BASE_URL,
   routes: [
     {
       path: "/",
-      component: HomePage
+      component: () => import("./views/HomePage.vue")
     },
     {
       path: "/register",
-      component: RegisterPage
+      component: () => import("./views/RegisterPage")
     },
     {
       path: "/login",
-      component: LoginPage
+      component: () => import("./views/LoginPage.vue")
+    },
+    {
+      path: "/menu",
+      component: () => import("./views/BeerPage.vue")
     },
     {
       path: "/profile",
-      component: UserProfilePage,
+      component: () => import("./views/UserProfilePage"),
       meta: {
         authorize: ["ROLE_USER"]
       }
     },
     {
       path: "/cart",
-      component: CartPage,
+      component: () => import("./views/CartPage"),
       meta: {
         authorize: ["ROLE_USER"]
       }
     },
     {
-      path: "/menu",
-      component: BeerPage
-    },
-    {
       path: "/games",
-      component: GamesPage,
+      component: () => import("./views/GamesPage"),
       meta: {
         authorize: ["ROLE_USER"]
       }
     },
     {
       path: "/ranking",
-      component: RankingPage,
+      component: () => import("./views/RankingPage"),
       meta: {
         authorize: ["ROLE_USER"]
       }
     },
     {
       path: "/currency",
-      component: CurrencyPage,
+      component: () => import("./views/CurrencyPage"),
       meta: {
         authorize: ["ROLE_USER"]
       }
     },
     {
       path: "/admin/orders",
-      component: OrderView,
+      component: () => import("./admin-panel/OrderPage.vue"),
       meta: {
         authorize: ["ROLE_ADMIN"]
       }
     },
     {
       path: "/admin/menu",
-      component: BeerEditComponent,
+      component: ()   => import("./admin-panel/BeerEditPage.vue"),
       meta: {
         authorize: ["ROLE_ADMIN"]
       }
     },
     {
       path: "/admin",
-      component: AdminPage,
+      component: () => import("./admin-panel/MainAdminPage.vue"),
       meta: {
         authorize: ["ROLE_ADMIN"]
       }
     },
     {
       path: "*",
-      redirect: "/"
+      redirect: "/login"
     }
   ]
 });
 
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
-  const user = JSON.parse(localStorage.getItem("user"));
   if (authorize) {
+    let user = store.getters.user;
     if (!user) {
-      return next({
-        path: "/login"
+      next({
+        path: "/login",
+        query: {
+          redirect: to.fullPath
+        }
       });
-    }
-    if (!authorize.some(x => user.map(x => x["roleName"]).includes(x))) {
-      return next("/");
+    } else if (
+      !authorize.some(x => user.rolesDto.map(y => y["roleName"]).includes(x))
+    ) {
+      next("/");
     }
   }
+  if (to.path === "/login" && store.getters.loggedIn === true) next("/");
   next();
 });
 

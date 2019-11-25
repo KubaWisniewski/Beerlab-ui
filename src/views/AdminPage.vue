@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import BeerEditComponent from "../admin-panel/beer-edit-comonent";
+import BeerEditComponent from "../admin-panel/BeerEditPage";
 export default {
   name: "AdminPage",
   components: {
@@ -11,5 +11,3 @@ export default {
   }
 };
 </script>
-
-<style scoped></style>
