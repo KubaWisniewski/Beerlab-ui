@@ -3,6 +3,7 @@
     <v-card-title>{{ beer.brand }}</v-card-title>
     <v-card-text>
         Opis: {{ beer.description }}
+        Ilosc: {{ beer.quantity }}
           <v-img class="white--text" height="200px" width="600" :src="beer.imgUrl" />
     </v-card-text>
 
@@ -21,6 +22,7 @@
 
 <script>
     const axios = require("axios");
+
 export default {
   name: "BeerCard",
     data: ()=> ({
@@ -36,7 +38,13 @@ export default {
             axios.post("http://localhost:8081/api/order", {
                     beerId: this.beer.id,
                     quantity: 1
-                })
+                },
+                {
+                    headers: {
+                      // "Content-Type": "application/json",
+                       "X-Auth-Token": localStorage.getItem("token").replace(/"/g, "")
+                    }
+                });
         }
     }
 };
