@@ -2,7 +2,7 @@
   <v-container>
     <v-row
       :key="index"
-      v-for="(order, index) in orders"
+      v-for="(order, index) in currentOrders"
       justify="center"
       class="mb-4"
     >
@@ -15,22 +15,22 @@
 import OrderCard from "./OrderCard";
 import { mapActions, mapGetters } from "vuex";
 export default {
-  name: "OrderViewAdmin",
+  name: "OrderInQueue",
+  components: {
+    OrderCard
+  },
   data() {
     return {};
   },
-  methods: {
-    ...mapActions(["fetchAllOrders"])
-  },
   computed: {
-    ...mapGetters(["orders"])
+    ...mapGetters(["currentOrders"])
+  },
+  methods: {
+    ...mapActions(["fetchCurrentOrders"])
   },
   created() {
-    this.fetchAllOrders();
-    this.interval = setInterval(() => this.fetchAllOrders(), 5000);
-  },
-  components: {
-    OrderCard
+    this.fetchCurrentOrders();
+    this.interval = setInterval(() => this.fetchCurrentOrders(), 5000);
   }
 };
 </script>

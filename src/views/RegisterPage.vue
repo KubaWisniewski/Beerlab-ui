@@ -48,40 +48,40 @@
                 label="Wybierz plec"
               ></v-select>
               <template>
-              <v-dialog
-                ref="dialog"
-                v-model="modal"
-                :return-value.sync="date"
-                persistent
-                width="290px"
-                :close-on-content-click="false"
-                transition="scale-transition"
-              >
-                <template v-slot:activator="{ on }">
-                  <v-text-field
-                    v-model="date"
-                    label="Wybierz date urodzenia"
-                    readonly
-                    v-on="on"
-                  ></v-text-field>
-                </template>
-                <v-date-picker
-                        ref="picker"
-                        v-model="date"
-                        scrollable
-                        :max="new Date().toISOString().substr(0, 10)"
-                        min="1950-01-01"
-                        @change="save"
+                <v-dialog
+                  ref="dialog"
+                  v-model="modal"
+                  :return-value.sync="date"
+                  persistent
+                  width="290px"
+                  :close-on-content-click="false"
+                  transition="scale-transition"
                 >
-                  <v-spacer></v-spacer>
-                  <v-btn text color="primary" @click="modal = false"
-                    >Anuluj</v-btn
+                  <template v-slot:activator="{ on }">
+                    <v-text-field
+                      v-model="date"
+                      label="Wybierz date urodzenia"
+                      readonly
+                      v-on="on"
+                    ></v-text-field>
+                  </template>
+                  <v-date-picker
+                    ref="picker"
+                    v-model="date"
+                    scrollable
+                    :max="new Date().toISOString().substr(0, 10)"
+                    min="1950-01-01"
+                    @change="save"
                   >
-                  <v-btn text color="primary" @click="$refs.dialog.save(date)"
-                    >OK</v-btn
-                  >
-                </v-date-picker>
-              </v-dialog>
+                    <v-spacer></v-spacer>
+                    <v-btn text color="primary" @click="modal = false"
+                      >Anuluj</v-btn
+                    >
+                    <v-btn text color="primary" @click="$refs.dialog.save(date)"
+                      >OK</v-btn
+                    >
+                  </v-date-picker>
+                </v-dialog>
               </template>
             </v-form>
           </v-card-text>
@@ -120,13 +120,13 @@ export default {
     birthDayRules: [v => v > 2020 || "Musisz mieć ukończone 18 lat"]
   }),
   watch: {
-    modal (value) {
-      value && this.$nextTick(() => this.$refs.picker.activePicker = 'YEAR')
+    modal(value) {
+      value && this.$nextTick(() => (this.$refs.picker.activePicker = "YEAR"));
     }
   },
   methods: {
     register() {
-      const {username, email, password, setGender, date} = this;
+      const { username, email, password, setGender, date } = this;
       if (username && email && setGender && password && date) {
         this.$store.dispatch("register", {
           username,
@@ -138,8 +138,8 @@ export default {
       }
     },
     save(date) {
-      this.$refs.dialog.save(date)
-    },
+      this.$refs.dialog.save(date);
+    }
   }
 };
 </script>
