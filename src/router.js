@@ -1,5 +1,6 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
+import OrderInQueue from "./admin-panel/OrderInQueue-view-admin.vue";
 import store from "./store";
 
 Vue.use(VueRouter);
@@ -61,6 +62,13 @@ const router = new VueRouter({
     {
       path: "/admin/orders",
       component: () => import("./admin-panel/OrderPage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
+      path: "/admin/orders/current",
+      component: OrderInQueue,
       meta: {
         authorize: ["ROLE_ADMIN"]
       }

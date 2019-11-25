@@ -2,22 +2,29 @@
   <v-card>
     <v-card-title>Numer zamowienia: {{ order.id }}</v-card-title>
     <v-card-text>
+      Piwa:
       <v-row>
-        <v-col cols="5">Piwa: {{ order }}</v-col>
+        <v-row :key="index" v-for="(beer, index) in order.orderItemsDto">
+          <li>{{beer.beerDto.brand}} - {{beer.beerDto.description}} - Ilość: {{beer.quantity}}</li>
+        </v-row>
+        Wartośc zamówienia: {{order.totalPrice}}
         <v-col cols="5">
           Status:
-          <span class="orange black--text" v-if="order.status === 'INPROGRESS'"
-            >ZAMOWIENIE W TRAKCIE REALIZACJI</span
-          >
-          <span class="green black--text" v-if="order.status === 'COMPLETED'"
-            >ZAMOWIENIE ZAKOŃCZONE I OCZEKUJE NA KLIENTA</span
-          >
-          <span class="black white--text" v-if="order.status === 'CLOSED'"
-            >REALIZACJA ZAMOWIENIA ZAMKNIETA</span
-          >
-          <span class="white black--text" v-if="order.status === 'QUEUED'"
-            >ZAMOWIENIE W KOLEJCE</span
-          >
+          <span
+            class="orange black--text"
+            v-if="order.status == 'INPROGRESS'"
+          >ZAMOWIENIE W TRAKCIE REALIZACJI</span>
+          <span class="orange black--text" v-if="order.status == 'NOT_PAID'">ZAMOWIENIE NIE OPLACONE</span>
+          <span class="orange black--text" v-if="order.status == 'PAID'">ZAMOWIENIE OPLACONE</span>
+          <span
+            class="green black--text"
+            v-if="order.status == 'COMPLETED'"
+          >ZAMOWIENIE ZAKOŃCZONE I OCZEKUJE NA KLIENTA</span>
+          <span
+            class="black white--text"
+            v-if="order.status == 'CLOSED'"
+          >REALIZACJA ZAMOWIENIA ZAMKNIETA</span>
+          <span class="white black--text" v-if="order.status == 'QUEUED'">ZAMOWIENIE W KOLEJCE</span>
         </v-col>
       </v-row>
       <v-btn v-on:click="close">ZAKONCZ</v-btn>

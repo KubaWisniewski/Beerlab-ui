@@ -6,10 +6,16 @@ import vuetify from "./plugins/vuetify";
 import Notifications from "vue-notification";
 import "@babel/polyfill";
 import Vuelidate from "vuelidate";
+import axios from "axios";
+
 import Vuetify from "vuetify";
 
 Vue.config.productionTip = false;
 Vue.use(Notifications);
+var token = localStorage.getItem("token");
+if (token != null) {
+  axios.defaults.headers.common["X-Auth-Token"] = token.replace(/"/g, "");
+}
 Vue.use(Vuelidate);
 Vue.use(Vuetify);
 
