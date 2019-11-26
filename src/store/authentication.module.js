@@ -30,29 +30,33 @@ export const authentication = {
         };
         if (data.token) {
           axios.defaults.headers = {
-            "X-Auth_Token": data.token
+            "x-auth-token": data.token
           };
         }
         localStorage.setItem("token", data.token);
         localStorage.setItem("user", JSON.stringify(data.user));
         commit("loginSuccess", data);
-        router.push("/");
+        if (data.user.rolesDto.map(y => y["roleName"]).includes("ROLE_USER"))
+          router.push("/");
+        else if (
+          data.user.rolesDto.map(y => y["roleName"]).includes("ROLE_ADMIN")
+        )
+          router.push("/admin");
       });
     },
     register({ commit }, { username, email, password, setGender, date }) {
       userService
         .register(username, email, password, setGender, date)
         .then(() => {
-          router.push("/views");
+          router.push("/login");
         });
     },
     logout({ commit }) {
-      localStorage.removeItem("x-auth-token");
       userService.logout().then(() => {
         localStorage.removeItem("token");
         localStorage.removeItem("user");
         commit("logoutSuccess");
-        router.push("/views");
+        router.push("/login");
       });
     },
     fetchUserData({ commit }) {
