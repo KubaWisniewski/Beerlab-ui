@@ -1,96 +1,87 @@
 import Vue from "vue";
-/* eslint-disable no-console */
-const axios = require("axios");
+import axios from "./axiosConfig";
 
-export const userService = {
+const userService = {
   register,
   login,
-  logout
+  logout,
+  fetchUserData
 };
 
-function login(email, password) {
-  return axios
-    .post(
-      "http://localhost:8081/api/auth/signin",
-      JSON.stringify({
-        email,
-        password
-      }),
-      {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    )
-    .then(
-      response => {
-        Vue.notify({
-          group: "auth",
-          type: "success",
-          title: "OK",
-          text: "Zalogowano pomyslnie"
-        });
-        if (response.headers["x-auth-token"]) {
-          localStorage.setItem(
-            "token",
-            JSON.stringify(response.headers["x-auth-token"])
-          );
-        }
-        return response;
-      },
-      error => {
-        Vue.notify({
-          group: "auth",
-          type: "error",
-          title: "Bład",
-          text:
-            "Nie udało sie zalogować upewnij się, że podałeś prawidłowe dane."
-        });
-      }
-    );
-}
-
-function register(username, email, password, gender, dateOfBirth) {
-  return axios
-    .post(
-      "http://localhost:8081/api/auth/signup",
-      JSON.stringify({
-        username,
-        email,
-        password,
-        gender,
-        dateOfBirth
-      }),
-      {
-        headers: {
-          "Content-Type": "application/json"
-        }
-      }
-    )
-    .then(
-      response => {
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
-}
-
-function logout() {
-  return axios
-    .post("http://localhost:8081/logout", {
-      headers: {
-        "Content-Type": "application/json"
-      }
+async function login(data) {
+  return await axios
+    .post("/api/auth/signin", { email: data.email, password: data.password })
+    .then(response => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Zalogowano pomyślnie."
+      });
+      return response;
     })
-    .then(
-      response => {
-        localStorage.removeItem("user");
-        console.log(response);
-      },
-      error => {
-        console.log(error);
-      }
-    );
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie zalogować upewnij się, że podałeś prawidłowe dane."
+      });
+    });
 }
+
+async function fetchUserData() {
+  return await axios
+    .get("/api/user/me")
+    .then(response => {
+      return response.data;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie pobrać informacji o użytkowniku. "
+      });
+    });
+}
+
+async function register(username, email, password, gender, dateOfBirth) {
+  return await axios
+    .post("/api/auth/signup", {
+      username: username,
+      email: email,
+      password: password,
+      gender: gender,
+      dateOfBirth: dateOfBirth
+    })
+    .then(response => {
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie zarejestrować."
+      });
+    });
+}
+
+async function logout() {
+  return await axios
+    .post("/logout")
+    .then(response => {
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie wylogować."
+      });
+    });
+}
+
+export default userService;

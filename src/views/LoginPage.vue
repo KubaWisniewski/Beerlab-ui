@@ -1,11 +1,12 @@
 <template>
-  <v-container class="fill-height" fluid>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="8" md="4">
-        <v-card class="elevation-12">
-          <v-toolbar color="grey darken-1" dark flat>
+  <v-container fluid class="fill-height">
+    <v-row justify="center">
+      <v-col cols="12" md="6">
+        <v-card class="elevation-12 orange lighten-5">
+          <v-toolbar class="orange lighten-2">
+            <v-spacer></v-spacer>
             <v-toolbar-title>Logowanie</v-toolbar-title>
-            <div class="flex-grow-1"></div>
+            <v-spacer></v-spacer>
           </v-toolbar>
           <v-card-text>
             <v-form>
@@ -17,10 +18,8 @@
                 type="text"
                 autofocus
               ></v-text-field>
-
               <v-text-field
                 v-model="password"
-                id="password"
                 label="Hasło"
                 name="password"
                 prepend-icon="mdi-lock"
@@ -29,11 +28,10 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-          <router-link to="/register">
-          <v-btn text small color="primary">Nie posiadasz konta? Załóż teraz!</v-btn>
-          </router-link>
-            <div class="flex-grow-1"></div>
-            <v-btn color="grey darken-1" @click="login">Zaloguj</v-btn>
+            <v-btn text small to="/register"
+              >Nie posiadasz konta? Załóż teraz!</v-btn
+            ><v-spacer></v-spacer>
+            <v-btn @click="login">Zaloguj</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>
@@ -43,17 +41,15 @@
 
 <script>
 export default {
-  data() {
-    return {
-      email: "",
-      password: ""
-    };
-  },
+  data: () => ({
+    email: "",
+    password: ""
+  }),
   methods: {
     login() {
       const { email, password } = this;
       if (email && password) {
-        this.$store.dispatch("authentication/login", { email, password });
+        this.$store.dispatch("login", { email, password });
       }
     }
   }
