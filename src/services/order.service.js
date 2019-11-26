@@ -3,7 +3,8 @@ import Vue from "vue";
 const orderService = {
   fetchOrders,
   setOrderStatus,
-  fetchCurrentOrders
+  fetchCurrentOrders,
+  fetchUserOrder
 };
 
 async function fetchOrders() {
@@ -51,6 +52,12 @@ async function setOrderStatus(orderId, status) {
         text: "Zmieniono status zamowienia"
       });
     });
+}
+
+async function fetchUserOrder() {
+  return await axios.get("/api/user/order").then(response => {
+    return response;
+  });
 }
 
 export default orderService;

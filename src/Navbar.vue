@@ -15,7 +15,7 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Profile
+              Profil
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -25,7 +25,7 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Beers
+              Menu
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -35,7 +35,7 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Games
+              Quiz
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
@@ -55,7 +55,7 @@
           </v-list-item-action>
           <v-list-item-content>
             <v-list-item-title>
-              Currency
+              Kup kufle!
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>

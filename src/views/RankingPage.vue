@@ -1,9 +1,8 @@
 <template>
-  <v-container fluid class="fill-height">
+  <v-container fluid class="pa-0">
     <v-row justify="center" align="center">
-      <p style="font-size: 20px">
-        Ranking
-      </p>
+      <v-img width="100%" max-height="300px" src="@/assets/ranking.jpeg">
+      </v-img>
     </v-row>
   </v-container>
 </template>

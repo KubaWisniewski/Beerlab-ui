@@ -1,11 +1,14 @@
 <template>
   <v-container fluid class="pa-0">
     <v-row>
-      <v-card >
+      <v-card>
         <router-link to="/">
-
-        <v-img class="white--text" max-height="500px" src="@/assets/logo2.jpeg">
-        </v-img>
+          <v-img
+            class="white--text"
+            max-height="500px"
+            src="@/assets/logo2.jpeg"
+          >
+          </v-img>
         </router-link>
       </v-card>
     </v-row>

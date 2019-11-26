@@ -86,8 +86,7 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn text small to="/login"
-            >Masz już konto? Zaloguj się.</v-btn
+            <v-btn text small to="/login">Masz już konto? Zaloguj się.</v-btn
             ><v-spacer></v-spacer>
             <v-btn @click="register">Załóż konto</v-btn>
           </v-card-actions>

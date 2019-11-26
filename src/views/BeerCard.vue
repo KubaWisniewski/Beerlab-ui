@@ -1,26 +1,42 @@
 <template>
-  <v-card width="75%" class="elevation-12 orange lighten-5">
-    <v-card-title class="justify-center">{{ beer.brand }}</v-card-title>
-    <v-card-text class="text-center justify-center">
-      Opis: {{ beer.description }}
-      <v-img class="mx-auto" height="200px" width="600px" :src="beer.imgUrl" />
+  <v-card>
+    <v-card-title>{{ beer.brand }}</v-card-title>
+    <v-card-text>
+      Opis: {{ beer.description }} Ilosc: {{ beer.quantity }}
+      <v-img height="200px" width="600" :src="beer.imgUrl" />
     </v-card-text>
-    <v-card-text class="headline text-right font-weight-bold"
+
+    <v-card-actions class="justify-end">
+      <v-btn
+        @click="addToCart({ beerId: beer.id, quantity: 1 })"
+        rounded
+        color="black"
+        dark
+        >Zamów</v-btn
+      >
+    </v-card-actions>
+
+    <v-card-text class="headline text-right font-weight-bold large"
       >Cena: {{ beer.price }} <v-icon large>mdi-beer</v-icon>
     </v-card-text>
-    <v-card-actions class="justify-end">
-      <v-btn to="/cart" dark>Zamów</v-btn>
-    </v-card-actions>
   </v-card>
 </template>
 
 <script>
+import { mapActions } from "vuex";
+
 export default {
   name: "BeerCard",
+  data: () => ({}),
   props: {
     beer: {
       type: Object
     }
+  },
+  methods: {
+    ...mapActions(["fetchBeers", "addToCart"])
   }
 };
 </script>
+
+<style scoped></style>

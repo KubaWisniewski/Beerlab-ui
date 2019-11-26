@@ -21,6 +21,11 @@ export const beers = {
       beerService.deleteBeer(data).then(() => {
         dispatch("fetchBeers");
       });
+    },
+    addToCart({ dispatch }, data) {
+      beerService
+        .addToCart(data.beerId, data.quantity)
+        .then(() => dispatch("fetchBeers"));
     }
   },
   mutations: {
