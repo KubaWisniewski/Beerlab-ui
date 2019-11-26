@@ -65,7 +65,7 @@ methods: {
   commitOrder(){
       axios.post(`http://localhost:8081/api/order/` + this.order.id, {
 
-                orderStatus: "COMPLETED"
+                OrderStatus: "INPROGRESS"
 
                },
               {
