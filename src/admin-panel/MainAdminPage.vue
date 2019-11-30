@@ -1,10 +1,6 @@
 <template>
   <v-col align="center">
-    <v-card
-      to="/admin/orders"
-      class="ma-3 pt-1 elevation-5  orange lighten-5 fade"
-      width="50%"
-    >
+    <v-card to="/admin/orders" class="ma-3 pt-1 elevation-5 orange lighten-5 fade" width="50%">
       <v-list-item three-line>
         <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
         <v-list-item-content>
@@ -18,11 +14,7 @@
       </v-list-item>
     </v-card>
 
-    <v-card
-      to="/admin/menu"
-      class="ma-3 pt-1 elevation-5 orange lighten-5 fade"
-      width="50%"
-    >
+    <v-card to="/admin/menu" class="ma-3 pt-1 elevation-5 orange lighten-5 fade" width="50%">
       <v-list-item three-line>
         <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
         <v-list-item-content>
@@ -52,11 +44,7 @@
       </v-list-item>
     </v-card>
 
-    <v-card
-      to="/"
-      class="ma-3 pt-1 elevation-5  orange lighten-5 fade"
-      width="50%"
-    >
+    <v-card to="/admin/raport" class="ma-3 pt-1 elevation-5 orange lighten-5 fade" width="50%">
       <v-list-item three-line>
         <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
         <v-list-item-content>
@@ -70,11 +58,7 @@
       </v-list-item>
     </v-card>
 
-    <v-card
-      to="/"
-      class="ma-3 pt-1 elevation-5  orange lighten-5 fade"
-      width="50%"
-    >
+    <v-card to="/" class="ma-3 pt-1 elevation-5 orange lighten-5 fade" width="50%">
       <v-list-item three-line>
         <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
         <v-list-item-content>
