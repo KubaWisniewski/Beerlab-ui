@@ -72,7 +72,7 @@ import axios from "../services/axiosConfig";
 import Vue from "vue";
 import moment from "moment";
 import "moment/locale/pl";
-
+import { mapActions, mapGetters } from "vuex";
 export default {
   name: "RaportPage",
 
@@ -86,7 +86,6 @@ export default {
         { text: "Ilosc zamówień", value: "orders" },
         { text: "Akcja", value: "actions", sortable: false }
       ],
-      realizationTime: null,
       reportsDto: [],
       reportDto: {
         start: "",
@@ -98,21 +97,6 @@ export default {
     };
   },
   methods: {
-    getRealizationTime() {
-      axios
-        .get("/api/statistic/realizationOrderTime")
-        .then(response => {
-          this.realizationTime = response.data;
-        })
-        .catch(() => {
-          Vue.notify({
-            group: "auth",
-            type: "error",
-            title: "Błąd",
-            text: "Nie udało się pobrać czasu realizacji zamówienia."
-          });
-        });
-    },
     getReport() {
       axios
         .get("/api/statistic")
@@ -153,11 +137,15 @@ export default {
       axios.get("/api/statistic/" + id).then(response => {
         this.reportDto = response.data;
       });
-    }
+    },
+    ...mapActions(["getRealizationTime"])
   },
-  created() {
-    moment.locales("PL");
+  computed: {
+    ...mapGetters(["realizationTime"])
+  },
+  mounted() {
     this.getRealizationTime();
+    moment.locales("PL");
     this.getReport();
     this.getAllReports();
 
@@ -166,6 +154,7 @@ export default {
         return moment(String(value)).format("MM/DD/YYYY HH:mm:ss");
       }
     });
+
     this.interval = setInterval(() => this.getReport(), 5000);
   }
 };
