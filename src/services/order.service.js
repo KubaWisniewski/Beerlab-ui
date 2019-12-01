@@ -57,14 +57,9 @@ async function setOrderStatus(orderId, status) {
     });
 }
 
-async function deleteItemFromOrder(orderId, beerId, quantity){
+async function deleteItemFromOrder(orderId, beerId){
   return await axios
-      .delete(`/api/order/${orderId}`, { data: {
-          beerId: beerId,
-          quantity: quantity
-        }
-      })
-
+      .delete(`/api/order/${orderId}/delete/${beerId}`)
       .then(() => {
         Vue.notify( {
           group: "auth",

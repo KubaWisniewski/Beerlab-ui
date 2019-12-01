@@ -30,7 +30,7 @@
             <v-card-actions class="headline text-left font-weight-bold large">
               <v-btn
                       @click="
-                deleteItemFromOrder({ orderId: order.id, beerId: orderItem.beerDto.id, quantity: orderItem.quantity })
+                deleteItemFromOrder({ orderId: order.id, beerId: orderItem.beerDto.id })
               "
                       rounded
                       color="red"
