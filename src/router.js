@@ -81,6 +81,13 @@ const router = new VueRouter({
       }
     },
     {
+      path: "/admin/raport",
+      component: () => import("./admin-panel/RaportPage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
       path: "/admin/menu",
       component: () => import("./admin-panel/BeerEditPage.vue"),
       meta: {
