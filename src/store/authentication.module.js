@@ -5,7 +5,8 @@ import axios from "../services/axiosConfig";
 const initialState = {
   token: localStorage.getItem("token"),
   loggedIn: !!localStorage.getItem("token"),
-  user: JSON.parse(localStorage.getItem("user"))
+  user: JSON.parse(localStorage.getItem("user")),
+  workers: []
 };
 
 export const authentication = {
@@ -19,6 +20,9 @@ export const authentication = {
     },
     token: state => {
       return state.token;
+    },
+    workers: state => {
+      return state.workers;
     }
   },
   actions: {
@@ -64,9 +68,17 @@ export const authentication = {
         localStorage.setItem("user", JSON.stringify(response.data));
         commit("setUserData", response.data);
       });
+    },
+    fetchWorkers({ commit }) {
+      userService.fetchWorkers().then(response => {
+        commit("setWorkers", response.data);
+      });
     }
   },
   mutations: {
+    setWorkers(state, data) {
+      state.workers = data;
+    },
     loginSuccess(state, { token, user }) {
       state.loggedIn = true;
       state.token = token;

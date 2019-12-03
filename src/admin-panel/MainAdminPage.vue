@@ -71,7 +71,7 @@
     </v-card>
 
     <v-card
-      to="/"
+      to="/admin/create"
       class="ma-3 pt-1 elevation-5  orange lighten-5 fade"
       width="50%"
     >
@@ -82,7 +82,7 @@
             <span>SPRAWDZ UZYTKOWNIKÓW</span>
           </v-list-item-title>
           <v-list-item-subtitle>
-            <span>Sprawdz użytkowników</span>
+            <span>Stwórz konto dla pracownika</span>
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>

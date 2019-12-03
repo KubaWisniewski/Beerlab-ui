@@ -1,9 +1,10 @@
 import orderService from "../services/order.service";
-
+import userService from "../services/user.service";
 const initialState = {
   userActualOrder: {},
   orders: [],
-  currentOrders: []
+  currentOrders: [],
+  userOrders: []
 };
 
 export const orders = {
@@ -17,9 +18,17 @@ export const orders = {
     },
     userActualOrder: state => {
       return state.userActualOrder;
+    },
+    userOrders: state => {
+      return state.userOrders;
     }
   },
   actions: {
+    fetchUserOrders({ commit }) {
+      userService.fetchUserOrders().then(response => {
+        commit("setUserOrders", response.data);
+      });
+    },
     fetchAllOrders({ commit }) {
       orderService.fetchOrders().then(response => {
         commit("setOrders", response.data);
@@ -44,6 +53,9 @@ export const orders = {
     }
   },
   mutations: {
+    setUserOrders(state, data) {
+      state.userOrders = data;
+    },
     setOrders(state, data) {
       state.orders = data;
     },

@@ -5,7 +5,10 @@ const userService = {
   register,
   login,
   logout,
-  fetchUserData
+  fetchUserData,
+  registerNewWorker,
+  fetchUserOrders,
+  fetchWorkers
 };
 
 async function login(data) {
@@ -46,6 +49,22 @@ async function fetchUserData() {
     });
 }
 
+async function fetchUserOrders() {
+  return await axios
+    .get("/api/user/orders")
+    .then(response => {
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie pobrać informacji o zamówieniach użytkownika. "
+      });
+    });
+}
+
 async function register(username, email, password, gender, dateOfBirth) {
   return await axios
     .post("/api/auth/signup", {
@@ -64,6 +83,50 @@ async function register(username, email, password, gender, dateOfBirth) {
         type: "error",
         title: "Bład",
         text: "Nie udało sie zarejestrować."
+      });
+    });
+}
+
+async function registerNewWorker(username, email, password, role) {
+  return await axios
+    .post("/api/admin/create", {
+      username: username,
+      email: email,
+      password: password,
+      role: role
+    })
+    .then(response => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Utworzono nowe konto dla pracownika."
+      });
+
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie zarejestrować nowego pracownika."
+      });
+    });
+}
+
+async function fetchWorkers() {
+  return await axios
+    .get("/api/admin/workers")
+    .then(response => {
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie pobrać informacji o pracownikach. "
       });
     });
 }

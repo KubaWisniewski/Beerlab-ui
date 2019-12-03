@@ -19,7 +19,7 @@
       </v-card>
       <v-data-table
         :headers="headers"
-        :items="beers"
+        :items="userOrders"
         :items-per-page="5"
         class=" elevation-12 orange lighten-5"
       >
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
     headers: [
@@ -42,15 +42,21 @@ export default {
         text: "ID zamówienia",
         align: "left",
         sortable: false,
-        value: "id_zamowienia"
+        value: "id"
       },
-      { text: "Data" },
-      { text: "Status" },
-      { text: "Cena końcowa" }
+      { text: "Data", value: "startedTime" },
+      { text: "Status", value: "status" },
+      { text: "Cena końcowa", value: "totalPrice" }
     ]
   }),
   computed: {
-    ...mapGetters(["loggedIn", "user", "beers"])
+    ...mapGetters(["loggedIn", "user", "userOrders"])
+  },
+  methods: {
+    ...mapActions(["fetchUserOrders"])
+  },
+  created() {
+    this.fetchUserOrders();
   }
 };
 </script>

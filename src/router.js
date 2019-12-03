@@ -81,6 +81,13 @@ const router = new VueRouter({
       }
     },
     {
+      path: "/admin/create",
+      component: () => import("./admin-panel/WorkersTablePage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
       path: "/admin/menu",
       component: () => import("./admin-panel/BeerEditPage.vue"),
       meta: {
@@ -106,7 +113,7 @@ router.beforeEach((to, from, next) => {
   if (authorize) {
     let user = store.getters.user;
     if (!user) {
-      next({
+      return next({
         path: "/login",
         query: {
           redirect: to.fullPath
@@ -115,11 +122,12 @@ router.beforeEach((to, from, next) => {
     } else if (
       !authorize.some(x => user.rolesDto.map(y => y["roleName"]).includes(x))
     ) {
-      next("/");
+      return next("/"  );
     }
+   return  next();
   }
   if (to.path === "/login" && store.getters.loggedIn === true) next("/");
-  next();
+  return next();
 });
 
 export default router;
