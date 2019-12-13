@@ -4,72 +4,56 @@
       <v-img width="100%" max-height="300px" src="@/assets/koszyk.jpeg">
       </v-img>
     </v-row>
-    <v-row class=" text-center justify-center">
-      <div align-center>
-        <v-row :key="index" v-for="(orderItem, index) in order.orderItemsDto">
-          <v-card>
-            <v-card-title>{{ orderItem.beerDto.brand }}</v-card-title>
-            <v-card-text>
-              Opis: {{ orderItem.beerDto.description }}
-              <v-img
-                height="200px"
-                width="600"
-                :src="orderItem.beerDto.imgUrl"
-              />
-            </v-card-text>
-            <v-card-text
-              class="headline text-left text-left font-weight-bold large"
+      <v-row justify="center">
+      <div class="align-center">
+
+          <v-row
+                    justify="center"
+                    v-for="(orderItem, index) in order.orderItemsDto"
+                    :key="index"
+                    cols="12"
+                    sm="6"
+                    md="4"
+                    lg="3"
             >
-              Sztuk: <v-btn @click="reduceQuantity({orderId: order.id, beerId: orderItem.beerDto.id, quantity: orderItem.quantity})" class="v-counter md2">&mdash;</v-btn>
-              <input type="text" class="md3" :value="orderItem.quantity" readonly>
-              <v-btn @click="increaseAmount({beerId: orderItem.beerDto.id, quantity: 1})" class="v-counter md4">&#xff0b;</v-btn>
 
-            </v-card-text>
+              <BeerCartCard :orderItem="orderItem" :order="order"></BeerCartCard>
+          </v-row>
+          <v-card class="ma-5 justify-center">
+              <v-list-item>
+                  <v-list-item-content class="justify-center headline font-weight-bold "> Podsumowanie </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                  <v-list-item-content class="justify-center">  Suma: {{ order.totalPrice }} </v-list-item-content>
+              </v-list-item>
+              <v-list-item>
+                  <v-list-item-content class="align-center">
+                      <v-card-actions class="justify-center">
+                      <v-btn
+                              @click="confirmOrder({userId: user})"
+                              rounded
+                              color="green"
+                              dark
+                      >
+                          Potwierdz zamówienie
+                      </v-btn>
+                  </v-card-actions> </v-list-item-content>
+              </v-list-item>
+              <v-card-text class="justify-center">
 
-
-            <v-card-actions class="headline text-left font-weight-bold large">
-              <v-btn
-                      @click="
-                deleteItemFromOrder({ orderId: order.id, beerId: orderItem.beerDto.id })
-              "
-                      rounded
-                      color="red"
-                      dark
-              >Usuń z zamówienia</v-btn>
-            </v-card-actions>
-
-            <v-card-text class="headline text-right font-weight-bold large"
-              >Cena: {{ orderItem.beerDto.price }}
-              <v-icon large>mdi-beer</v-icon>
-            </v-card-text>
-
-
+              </v-card-text>
 
           </v-card>
-        </v-row>
-        <v-card>
-          <v-card-title class="align-center"> Podsumowanie </v-card-title>
-          <v-card-text class="align-content-start">
-            Suma: {{ order.totalPrice }}
-          </v-card-text>
-          <v-card-actions class="justify-end">
-            <v-btn
-              @click="
-                confirmOrder({userId: user})
-              "
-              rounded
-              color="green"
-              dark
-              >Potwierdz zamowienie</v-btn>
-          </v-card-actions>
-        </v-card>
+
+
       </div>
-    </v-row>
+      </v-row>
   </v-container>
 </template>
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import BeerCartCard from "./BeerCartCard";
 export default {
   name: "CartPage",
   data() {
@@ -90,6 +74,9 @@ export default {
   },
   created() {
     this.fetchUserActualOrder();
+  },
+  components: {
+    BeerCartCard
   }
 };
 </script>
