@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import OrderCard from "./OrderCard";
+import OrderCard from "../components/OrderCard";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "OrderInQueue",

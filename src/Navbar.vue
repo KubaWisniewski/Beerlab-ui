@@ -65,13 +65,19 @@
     <v-app-bar app class="orange lighten-1 elevation-4">
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
-        v-if="loggedIn"
+        v-if="loggedIn && !(isAdmin || isBarman)"
       ></v-app-bar-nav-icon>
       <v-btn v-else icon to="/">
         <v-icon>mdi-home</v-icon>
       </v-btn>
       <v-spacer></v-spacer>
-      <v-btn icon v-if="loggedIn" to="/cart">
+      <v-btn icon v-if="isAdmin" to="/admin">
+        <v-icon>mdi-account-star</v-icon>
+      </v-btn>
+      <v-btn icon v-if="isBarman" to="/barman">
+        <v-icon>mdi-beer</v-icon>
+      </v-btn>
+      <v-btn icon v-if="loggedIn && !(isAdmin || isBarman)" to="/cart">
         <v-icon>mdi-cart-outline</v-icon>
       </v-btn>
       <v-btn icon v-if="loggedIn">
@@ -92,7 +98,7 @@ export default {
     drawer: false
   }),
   computed: {
-    ...mapGetters(["loggedIn"])
+    ...mapGetters(["loggedIn", "isAdmin", "isBarman"])
   },
   methods: {
     ...mapActions(["logout"])

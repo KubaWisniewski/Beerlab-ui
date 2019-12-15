@@ -16,7 +16,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import BeerCard from "./BeerCard";
+import BeerCard from "@/components/BeerCard";
 export default {
   name: "BeerPage",
   data() {

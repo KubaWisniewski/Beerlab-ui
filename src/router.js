@@ -67,17 +67,17 @@ const router = new VueRouter({
       }
     },
     {
-      path: "/admin/orders",
+      path: "/orders",
       component: () => import("./admin-panel/OrderPage.vue"),
       meta: {
-        authorize: ["ROLE_ADMIN"]
+        authorize: ["ROLE_ADMIN", "ROLE_BARMAN"]
       }
     },
     {
-      path: "/admin/orders/current",
+      path: "/orders/current",
       component: () => import("./admin-panel/OrderInQueuePage.vue"),
       meta: {
-        authorize: ["ROLE_ADMIN"]
+        authorize: ["ROLE_ADMIN", "ROLE_BARMAN"]
       }
     },
     {
@@ -106,6 +106,13 @@ const router = new VueRouter({
       component: () => import("./admin-panel/MainAdminPage.vue"),
       meta: {
         authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
+      path: "/barman",
+      component: () => import("./barman-panel/MainBarmanPage.vue"),
+      meta: {
+        authorize: ["ROLE_BARMAN"]
       }
     },
     {

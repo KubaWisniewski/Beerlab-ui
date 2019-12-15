@@ -5,7 +5,17 @@ import axios from "../services/axiosConfig";
 const initialState = {
   token: localStorage.getItem("token"),
   loggedIn: !!localStorage.getItem("token"),
-  user: JSON.parse(localStorage.getItem("user")),
+  user: JSON.parse(localStorage.getItem("user")) || null,
+  isAdmin: JSON.parse(localStorage.getItem("user"))
+    ? JSON.parse(localStorage.getItem("user"))
+        .rolesDto.map(y => y["roleName"])
+        .includes("ROLE_ADMIN")
+    : false,
+  isBarman: JSON.parse(localStorage.getItem("user"))
+    ? JSON.parse(localStorage.getItem("user"))
+        .rolesDto.map(y => y["roleName"])
+        .includes("ROLE_BARMAN")
+    : false,
   workers: []
 };
 
@@ -23,6 +33,12 @@ export const authentication = {
     },
     workers: state => {
       return state.workers;
+    },
+    isAdmin: state => {
+      return state.isAdmin;
+    },
+    isBarman: state => {
+      return state.isBarman;
     }
   },
   actions: {
@@ -44,8 +60,15 @@ export const authentication = {
           router.push("/");
         else if (
           data.user.rolesDto.map(y => y["roleName"]).includes("ROLE_ADMIN")
-        )
+        ) {
+          commit("setIsAdmin", true);
           router.push("/admin");
+        } else if (
+          data.user.rolesDto.map(y => y["roleName"]).includes("ROLE_BARMAN")
+        ) {
+          commit("setIsBarman", true);
+          router.push("/barman");
+        }
       });
     },
     register({ commit }, { username, email, password, setGender, date }) {
@@ -76,6 +99,12 @@ export const authentication = {
     }
   },
   mutations: {
+    setIsAdmin(state, data) {
+      state.isAdmin = data;
+    },
+    setIsBarman(state, data) {
+      state.isBarman = data;
+    },
     setWorkers(state, data) {
       state.workers = data;
     },
@@ -89,6 +118,8 @@ export const authentication = {
     },
     logoutSuccess(state) {
       state.loggedIn = false;
+      state.isAdmin = false;
+      state.isBarman = false;
       state.token = null;
       state.user = null;
     }
