@@ -9,9 +9,9 @@
             <v-divider></v-divider>
             <v-list-item>
                 <v-list-item-content class="headline text-center justify-center font-weight-bold large" >
-                    Sztuk <v-btn @click="reduceQuantity({orderId: order.id, beerId: orderItem.beerDto.id, quantity: orderItem.quantity})" class="v-counter md2">&mdash;</v-btn>
+                    Sztuk  <v-btn @click="increaseAmount({beerId: orderItem.beerDto.id, quantity: 1})" class="v-counter md4">&#xff0b;</v-btn>
                     <input type="text" class="md3 justify-center text-center" :value="orderItem.quantity" readonly>
-                    <v-btn @click="increaseAmount({beerId: orderItem.beerDto.id, quantity: 1})" class="v-counter md4">&#xff0b;</v-btn>
+                    <v-btn @click="reduceQuantity({orderId: order.id, beerId: orderItem.beerDto.id, quantity: orderItem.quantity})" class="v-counter md2">&mdash;</v-btn>
                 </v-list-item-content>
             </v-list-item>
             <v-divider></v-divider>
