@@ -70,9 +70,18 @@
       <v-btn v-else icon to="/">
         <v-icon>mdi-home</v-icon>
       </v-btn>
+      <h1>Beerlab <v-icon large>mdi-beer</v-icon></h1>
       <v-spacer></v-spacer>
       <v-btn icon v-if="loggedIn" to="/cart">
-        <v-icon>mdi-cart-outline</v-icon>
+        <v-badge
+                color="green"
+                overlap
+        >
+          <template v-slot:badge>
+            <span v-if="order['orderItemsDto'].length > 0">{{ order.orderItemsDto.length }}</span>
+          </template>
+          <v-icon>mdi-cart-outline</v-icon>
+        </v-badge>
       </v-btn>
       <v-btn icon v-if="loggedIn">
         <v-icon @click="logout">mdi-logout</v-icon>
@@ -92,10 +101,13 @@ export default {
     drawer: false
   }),
   computed: {
-    ...mapGetters(["loggedIn"])
+    ...mapGetters( {loggedIn:"loggedIn", order: "userActualOrder", })
   },
   methods: {
-    ...mapActions(["logout"])
-  }
+    ...mapActions(["logout","fetchUserActualOrder"])
+  },
+  created() {
+    this.fetchUserActualOrder();
+  },
 };
 </script>
