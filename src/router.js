@@ -88,6 +88,13 @@ const router = new VueRouter({
       }
     },
     {
+      path: "/admin/raport",
+      component: () => import("./admin-panel/RaportPage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
       path: "/admin/menu",
       component: () => import("./admin-panel/BeerEditPage.vue"),
       meta: {
@@ -122,9 +129,9 @@ router.beforeEach((to, from, next) => {
     } else if (
       !authorize.some(x => user.rolesDto.map(y => y["roleName"]).includes(x))
     ) {
-      return next("/"  );
+      return next("/");
     }
-   return  next();
+    return next();
   }
   if (to.path === "/login" && store.getters.loggedIn === true) next("/");
   return next();

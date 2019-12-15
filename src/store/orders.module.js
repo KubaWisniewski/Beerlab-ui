@@ -1,5 +1,7 @@
 import orderService from "../services/order.service";
 import userService from "../services/user.service";
+import beerService from "../services/beer.service";
+
 const initialState = {
   userActualOrder: {},
   orders: [],
@@ -46,11 +48,40 @@ export const orders = {
         dispatch("fetchUserActualOrder");
       });
     },
+    deleteItemFromOrder({ dispatch }, data) {
+      orderService.deleteItemFromOrder(data.orderId, data.beerId, data.quantity).then(() => {
+        dispatch("fetchAllOrders");
+        dispatch("fetchCurrentOrders");
+        dispatch("fetchUserActualOrder");
+      });
+    },
+    increaseAmount({ dispatch }, data) {
+      beerService.addToCart( data.beerId, data.quantity).then(() => {
+        dispatch("fetchAllOrders");
+        dispatch("fetchCurrentOrders");
+        dispatch("fetchUserActualOrder");
+      });
+    },
+    reduceQuantity({ dispatch }, data) {
+      orderService.reduceQuantity(data.orderId, data.beerId, data.quantity).then(() => {
+        dispatch("fetchAllOrders");
+        dispatch("fetchCurrentOrders");
+        dispatch("fetchUserActualOrder");
+      });
+    },
     fetchUserActualOrder({ commit }) {
       orderService.fetchUserOrder().then(response => {
         commit("setUserActualOrder", response.data);
       });
+    },
+    confirmOrder({dispatch}){
+      orderService.confirmOrder().then(() => {
+        dispatch("fetchAllOrders");
+        dispatch("fetchCurrentOrders");
+        dispatch("fetchUserActualOrder");
+      });
     }
+
   },
   mutations: {
     setUserOrders(state, data) {

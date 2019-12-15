@@ -27,7 +27,6 @@ export default {
   },
   created() {
     this.fetchAllOrders();
-    this.interval = setInterval(() => this.fetchAllOrders(), 5000);
   },
   components: {
     OrderCard

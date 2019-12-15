@@ -30,7 +30,6 @@ export default {
   },
   created() {
     this.fetchCurrentOrders();
-    this.interval = setInterval(() => this.fetchCurrentOrders(), 5000);
   }
 };
 </script>

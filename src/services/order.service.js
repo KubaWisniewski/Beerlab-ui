@@ -4,7 +4,10 @@ const orderService = {
   fetchOrders,
   setOrderStatus,
   fetchCurrentOrders,
-  fetchUserOrder
+  fetchUserOrder,
+  deleteItemFromOrder,
+  reduceQuantity,
+  confirmOrder
 };
 
 async function fetchOrders() {
@@ -50,6 +53,73 @@ async function setOrderStatus(orderId, status) {
         type: "success",
         title: "OK",
         text: "Zmieniono status zamowienia"
+      });
+    });
+}
+
+async function deleteItemFromOrder(orderId, beerId) {
+  return await axios
+    .delete(`/api/order/${orderId}/delete/${beerId}`)
+    .then(() => {
+      Vue.notify({
+        group: "auth",
+        type: "danger",
+        title: "UWAGA",
+        text: "Usunięto pomyślnie"
+      });
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Błąd",
+        text: "Nie udało się pobrać zamówień."
+      });
+    });
+}
+
+async function reduceQuantity(orderId, beerId, quantity) {
+  return await axios
+    .post(`/api/order/reduce/${orderId}`, {
+      beerId: beerId,
+      quantity: quantity
+    })
+    .then(() => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Zmniejszono pomyślnie"
+      });
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Błąd",
+        text: "Coś poszło nie tak :/"
+      });
+    });
+}
+
+async function confirmOrder() {
+  return await axios
+    .post("/api/user/confirm")
+    .then(() => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Zamowienie zlozone pomyślnie"
+      });
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Błąd",
+        text:
+          "Nie udało się złożyć zamówienia(Jeśli nie masz wystarczająco środków, dokup je na swoim profilu)"
       });
     });
 }
