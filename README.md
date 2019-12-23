@@ -1,4 +1,5 @@
 # beerlab-ui
+[![Build Status](https://travis-ci.com/KubaWisniewski/Beerlab-ui.svg?token=HEtrHypeB3v71LPiXCx7&branch=master)](https://travis-ci.com/KubaWisniewski/Beerlab-ui)
 
 ## Project setup
 ```
