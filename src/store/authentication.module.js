@@ -88,8 +88,8 @@ export const authentication = {
     },
     fetchUserData({ commit }) {
       userService.fetchUserData().then(response => {
-        localStorage.setItem("user", JSON.stringify(response.data));
-        commit("setUserData", response.data);
+        localStorage.setItem("user", JSON.stringify(response));
+        commit("setUserData", response);
       });
     },
     fetchWorkers({ commit }) {

@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import OrderCard from "../components/OrderCard";
+import OrderCard from "../views/components/OrderCard";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "OrderViewAdmin",

@@ -67,6 +67,20 @@ const router = new VueRouter({
       }
     },
     {
+      path: "/groups",
+      component: () => import("./views/GroupPage"),
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
+    },
+    {
+      path: "/messages/:groupId",
+      component: () => import("./views/MessagePage"),
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
+    },
+    {
       path: "/orders",
       component: () => import("./admin-panel/OrderPage.vue"),
       meta: {

@@ -1,5 +1,5 @@
 <template>
-  <v-dialog v-model="dialog" max-width="600px">
+  <v-dialog v-model="dialog" max-width="600px" cols="12" sm="8" md="4">
     <template v-slot:activator="{ on }">
       <v-btn color="primary" dark class="ma-2" v-on="on">Dodaj pracownik</v-btn>
     </template>
@@ -58,11 +58,18 @@
         <small>Pola oznaczone '*' są wymagane</small>
       </v-card-text>
       <v-card-actions>
-        <v-spacer></v-spacer>
-        <v-btn color="error darken-1" @click="dialog = false">Zamknij</v-btn>
-        <v-btn color="success darken-1" @click="registerNewWorker"
-          >Załóż konto</v-btn
-        >
+        <v-col>
+          <v-row>
+            <v-btn color="error darken-1" @click="dialog = false"
+              >Zamknij</v-btn
+            >
+            <v-spacer></v-spacer>
+
+            <v-btn color="success darken-1" @click="registerNewWorker"
+              >Załóż konto</v-btn
+            >
+          </v-row>
+        </v-col>
       </v-card-actions>
     </v-card>
   </v-dialog>

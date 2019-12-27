@@ -49,39 +49,42 @@ export const orders = {
       });
     },
     deleteItemFromOrder({ dispatch }, data) {
-      orderService.deleteItemFromOrder(data.orderId, data.beerId, data.quantity).then(() => {
-        dispatch("fetchAllOrders");
-        dispatch("fetchCurrentOrders");
-        dispatch("fetchUserActualOrder");
-      });
+      orderService
+        .deleteItemFromOrder(data.orderId, data.beerId, data.quantity)
+        .then(() => {
+          dispatch("fetchAllOrders");
+          dispatch("fetchCurrentOrders");
+          dispatch("fetchUserActualOrder");
+        });
     },
     increaseAmount({ dispatch }, data) {
-      beerService.addToCart( data.beerId, data.quantity).then(() => {
+      beerService.addToCart(data.beerId, data.quantity).then(() => {
         dispatch("fetchAllOrders");
         dispatch("fetchCurrentOrders");
         dispatch("fetchUserActualOrder");
       });
     },
     reduceQuantity({ dispatch }, data) {
-      orderService.reduceQuantity(data.orderId, data.beerId, data.quantity).then(() => {
-        dispatch("fetchAllOrders");
-        dispatch("fetchCurrentOrders");
-        dispatch("fetchUserActualOrder");
-      });
+      orderService
+        .reduceQuantity(data.orderId, data.beerId, data.quantity)
+        .then(() => {
+          dispatch("fetchAllOrders");
+          dispatch("fetchCurrentOrders");
+          dispatch("fetchUserActualOrder");
+        });
     },
     fetchUserActualOrder({ commit }) {
       orderService.fetchUserOrder().then(response => {
         commit("setUserActualOrder", response.data);
       });
     },
-    confirmOrder({dispatch}){
+    confirmOrder({ dispatch }) {
       orderService.confirmOrder().then(() => {
         dispatch("fetchAllOrders");
         dispatch("fetchCurrentOrders");
         dispatch("fetchUserActualOrder");
       });
     }
-
   },
   mutations: {
     setUserOrders(state, data) {

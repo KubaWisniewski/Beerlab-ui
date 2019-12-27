@@ -20,9 +20,12 @@
       <v-data-table
         :headers="headers"
         :items="userOrders"
-        :items-per-page="5"
+        :locale="en - US"
         class=" elevation-12 orange lighten-5"
       >
+        <template v-slot:item.startedTime="props">
+          {{ props.item.startedTime | formatDate }}
+        </template>
         <template v-slot:top>
           <v-toolbar class="orange lighten-2">
             <v-toolbar-title>Historia zamówień</v-toolbar-title>
@@ -53,10 +56,11 @@ export default {
     ...mapGetters(["loggedIn", "user", "userOrders"])
   },
   methods: {
-    ...mapActions(["fetchUserOrders"])
+    ...mapActions(["fetchUserOrders", "fetchUserData"])
   },
   created() {
     this.fetchUserOrders();
+    this.fetchUserData();
   }
 };
 </script>

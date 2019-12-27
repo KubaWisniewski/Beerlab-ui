@@ -8,12 +8,18 @@ import "@babel/polyfill";
 import Vuelidate from "vuelidate";
 
 import Vuetify from "vuetify";
+import moment from "moment";
 
 Vue.config.productionTip = false;
 Vue.use(Notifications);
 Vue.use(Vuelidate);
 Vue.use(Vuetify);
 
+Vue.filter("formatDate", function(value) {
+  if (value) {
+    return moment(String(value)).format("MM/DD/YYYY HH:mm:ss");
+  }
+});
 new Vue({
   router,
   store,

@@ -73,13 +73,17 @@
                 <small>Pola oznaczone '*' są wymagane</small>
               </v-card-text>
               <v-card-actions>
-                <v-spacer></v-spacer>
-                <v-btn color="error darken-1" @click="dialog = false"
-                  >Zamknij</v-btn
-                >
-                <v-btn color="success darken-1" @click="addNewBeer"
-                  >Zapisz</v-btn
-                >
+                <v-col>
+                  <v-row>
+                    <v-btn color="error darken-1" @click="dialog = false"
+                      >Zamknij</v-btn
+                    >
+                    <v-spacer></v-spacer>
+                    <v-btn color="success darken-1" @click="addNewBeer"
+                      >Zapisz</v-btn
+                    >
+                  </v-row>
+                </v-col>
               </v-card-actions>
             </v-card>
           </v-dialog>
