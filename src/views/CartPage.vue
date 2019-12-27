@@ -47,7 +47,7 @@
           <v-card-text class="justify-center"> </v-card-text>
         </v-card>
       </div>
-    </v-row>
+      </v-row>
   </v-container>
 </template>
 
