@@ -67,15 +67,36 @@ const router = new VueRouter({
       }
     },
     {
-      path: "/admin/orders",
-      component: () => import("./admin-panel/OrderPage.vue"),
+      path: "/groups",
+      component: () => import("./views/GroupPage"),
       meta: {
-        authorize: ["ROLE_ADMIN"]
+        authorize: ["ROLE_USER"]
       }
     },
     {
-      path: "/admin/orders/current",
+      path: "/messages/:groupId",
+      component: () => import("./views/MessagePage"),
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
+    },
+    {
+      path: "/orders",
+      component: () => import("./admin-panel/OrderPage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN", "ROLE_BARMAN"]
+      }
+    },
+    {
+      path: "/orders/current",
       component: () => import("./admin-panel/OrderInQueuePage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN", "ROLE_BARMAN"]
+      }
+    },
+    {
+      path: "/admin/create",
+      component: () => import("./admin-panel/WorkersTablePage.vue"),
       meta: {
         authorize: ["ROLE_ADMIN"]
       }
@@ -102,6 +123,13 @@ const router = new VueRouter({
       }
     },
     {
+      path: "/barman",
+      component: () => import("./barman-panel/MainBarmanPage.vue"),
+      meta: {
+        authorize: ["ROLE_BARMAN"]
+      }
+    },
+    {
       path: "*",
       redirect: "/login"
     }
@@ -113,7 +141,7 @@ router.beforeEach((to, from, next) => {
   if (authorize) {
     let user = store.getters.user;
     if (!user) {
-      next({
+      return next({
         path: "/login",
         query: {
           redirect: to.fullPath
@@ -122,11 +150,12 @@ router.beforeEach((to, from, next) => {
     } else if (
       !authorize.some(x => user.rolesDto.map(y => y["roleName"]).includes(x))
     ) {
-      next("/");
+      return next("/");
     }
+    return next();
   }
   if (to.path === "/login" && store.getters.loggedIn === true) next("/");
-  next();
+  return next();
 });
 
 export default router;

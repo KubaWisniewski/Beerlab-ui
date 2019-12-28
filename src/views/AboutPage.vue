@@ -11,5 +11,3 @@ export default {
   name: "AboutPage"
 };
 </script>
-
-<style scoped></style>

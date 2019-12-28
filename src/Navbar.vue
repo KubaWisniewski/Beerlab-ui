@@ -3,7 +3,7 @@
     <v-navigation-drawer
       v-model="drawer"
       icon
-      absolute
+      app
       temporary
       v-if="loggedIn"
       class="orange lighten-4 elevation-4"
@@ -59,26 +59,45 @@
             </v-list-item-title>
           </v-list-item-content>
         </v-list-item>
+        <v-list-item to="/groups">
+          <v-list-item-action>
+            <v-icon>mdi-account-multiple</v-icon>
+          </v-list-item-action>
+          <v-list-item-content>
+            <v-list-item-title>
+              Grupy
+            </v-list-item-title>
+          </v-list-item-content>
+        </v-list-item>
       </v-list>
     </v-navigation-drawer>
     <notifications group="auth" position="bottom right"></notifications>
     <v-app-bar app class="orange lighten-1 elevation-4">
       <v-app-bar-nav-icon
         @click.stop="drawer = !drawer"
-        v-if="loggedIn"
+        v-if="loggedIn && !(isAdmin || isBarman)"
       ></v-app-bar-nav-icon>
       <v-btn v-else icon to="/">
         <v-icon>mdi-home</v-icon>
       </v-btn>
-      <h1>Beerlab <v-icon large>mdi-beer</v-icon></h1>
+      <v-spacer></v-spacer><v-icon large>mdi-beer</v-icon>
       <v-spacer></v-spacer>
-      <v-btn icon v-if="loggedIn" to="/cart">
-        <v-badge
-                color="green"
-                overlap
-        >
+      <v-btn icon v-if="isAdmin" to="/admin">
+        <v-icon>mdi-account-star</v-icon>
+      </v-btn>
+      <v-btn icon v-if="isBarman" to="/barman">
+        <v-icon>mdi-beer</v-icon>
+      </v-btn>
+      <v-btn icon v-if="loggedIn && !(isAdmin || isBarman)" to="/cart">
+        <v-badge color="green" overlap>
           <template v-slot:badge>
-            <span v-if="order['orderItemsDto'].length > 0">{{ order.orderItemsDto.length }}</span>
+            <span
+              v-if="
+                userActualOrder['orderItemsDto'] !== undefined &&
+                  userActualOrder['orderItemsDto'].length > 0
+              "
+              >{{ userActualOrder.orderItemsDto.length }}</span
+            >
           </template>
           <v-icon>mdi-cart-outline</v-icon>
         </v-badge>
@@ -101,13 +120,10 @@ export default {
     drawer: false
   }),
   computed: {
-    ...mapGetters( {loggedIn:"loggedIn", order: "userActualOrder", })
+    ...mapGetters(["loggedIn", "isAdmin", "isBarman", "userActualOrder"])
   },
   methods: {
-    ...mapActions(["logout","fetchUserActualOrder"])
-  },
-  created() {
-    this.fetchUserActualOrder();
-  },
+    ...mapActions(["logout", "fetchUserActualOrder"])
+  }
 };
 </script>
