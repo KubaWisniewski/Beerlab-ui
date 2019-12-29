@@ -88,6 +88,20 @@ const router = new VueRouter({
       }
     },
     {
+      path: "/admin/quiz",
+      component: () => import("./admin-panel/QuizAdminEditPage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
+      path: "/admin/quiz/:id",
+      component: () => import("./admin-panel/QuizQuestionAdminPage.vue"),
+      meta: {
+        authorize: ["ROLE_ADMIN"]
+      }
+    },
+    {
       path: "/admin/menu",
       component: () => import("./admin-panel/BeerEditPage.vue"),
       meta: {
