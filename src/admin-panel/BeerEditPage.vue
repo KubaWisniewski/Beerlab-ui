@@ -68,6 +68,16 @@
                         required
                       ></v-text-field>
                     </v-col>
+                    <v-col cols="12">
+                      <v-text-field
+                              label="Cena minimalna*: "
+                              type="number"
+                              step="1"
+                              v-model="beer.minimalPrice"
+                              min="0"
+                              required
+                      ></v-text-field>
+                    </v-col>
                   </v-row>
                 </v-container>
                 <small>Pola oznaczone '*' są wymagane</small>
@@ -126,6 +136,7 @@ export default {
         { text: "Cena", value: "price" },
         { text: "Ilosc", value: "quantity" },
         { text: "Zdjecie", value: "imgUrl" },
+        { text: "Cena minimalna", value: "minimalPrice" },
         { text: "Akcja", value: "actions", sortable: false }
       ],
       dialog: false,
@@ -163,7 +174,8 @@ export default {
           description: "",
           brand: "",
           price: "",
-          quantity: ""
+          quantity: "",
+          minimalPrice: ""
         };
         this.dialog = false;
         this.$notify({
