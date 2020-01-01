@@ -7,11 +7,12 @@ import Notifications from "vue-notification";
 import "@babel/polyfill";
 import Vuelidate from "vuelidate";
 import axios from "axios";
-
+import DatetimePicker from 'vuetify-datetime-picker'
 import Vuetify from "vuetify";
 
 Vue.config.productionTip = false;
 Vue.use(Notifications);
+Vue.use(DatetimePicker);
 var token = localStorage.getItem("token");
 if (token != null) {
   axios.defaults.headers.common["X-Auth-Token"] = token.replace(/"/g, "");

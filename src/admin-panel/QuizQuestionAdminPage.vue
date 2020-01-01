@@ -1,26 +1,29 @@
 <template>
   <v-container class="justify-center">
-    <div v-for="item in quiz.questionDtos" v-bind:key="item.id">
-      <v-card class="ma-2 d-flex flex-column elevation-12 orange lighten-2">
+    <div v-for="item in questions" v-bind:key="item.id">
+      <v-card
+        height="200px"
+        width="300px"
+        class="ma-2 elevation-12 orange lighten-2"
+      >
         <v-card-title class="justify-center black--text"
           ><h4>{{ item.text }}</h4></v-card-title
         >
         <v-divider></v-divider>
-        <h4 class="justify-center font-weight-bold">ODPOWIEDZI :</h4>
-        <div v-for="answer in item.answerDtoList" v-bind:key="answer.id">
-          <v-list-item>
-            <v-list-item-content class="justify-start align-start">
-              {{ answer.text }}</v-list-item-content
-            >
-          </v-list-item>
-        </div>
         <v-card-actions>
           <v-btn
             class="ma-2"
             small
+            color="red"
+            v-on:click.prevent="deleteQuestion(item.id)"
+            >Usuń</v-btn
+          >
+          <v-btn
+            class="ma-2"
+            small
             color="primary"
-            v-on:click.prevent="editQuestion(item.id)"
-            >Edytuj</v-btn
+            v-on:click.prevent="answers(item.id)"
+            >Odpowiedzi</v-btn
           >
         </v-card-actions>
       </v-card>
@@ -62,61 +65,52 @@
 
 <script>
 import axios from "../services/axiosConfig";
+
 export default {
   data() {
     return {
       id: this.$route.params.id,
-      questionId: "",
       dialog: false,
       question: {
-        text: "",
-        answers: [
-          { text: "", imgUrl: "ww", isCorrect: true },
-          { text: "JAJECZKO", imgUrl: "ww", isCorrect: "false" }
-        ]
+        text: ""
       },
-
+      questions: [],
       quiz: {
         questionDtos: {
           text: "",
-          imgUrl: "",
-          answerDtoList: {
-            text: ""
-          }
+          imgUrl: ""
         }
       }
     };
   },
   methods: {
-    getQuizById(id) {
-      axios.get("/api/quiz/" + id).then(response => {
-        this.quiz = response.data;
+    getQuestionsForQuiz(id) {
+      axios.get("/api/quiz/" + id + "/questions").then(response => {
+        this.questions = response.data;
       });
     },
-    editQuestion(id) {
-      this.questionId = id;
-      axios.get("/api/quiz/getQuestion/" + id).then(response => {
-        this.question = response.data;
-        this.dialog = true;
-      });
-    },
-    saveEditedQuestion() {
+    deleteQuestion(questionId) {
       axios
-        .post("/api/quiz/updateQuestion/" + this.questionId, this.question)
+        .delete("/api/quiz/" + this.id + "/deleteQuestion/" + questionId)
         .then(() => {
-          this.getQuizById(this.id);
+          this.getQuestionsForQuiz(this.id);
         });
     },
+
     createQuestion() {
       axios
-        .post("/api/quiz/createQuestion/" + this.id, this.question)
+        .post("/api/quiz/" + this.id + "/addQuestion/", this.question)
         .then(() => {
-          this.getQuizById(this.id);
+          this.getQuestionsForQuiz(this.id);
+          this.dialog = false;
         });
+    },
+    answers(questionId) {
+      this.$router.push({ path: `/admin/quiz/answer/${questionId}` });
     }
   },
   created() {
-    this.getQuizById(this.id);
+    this.getQuestionsForQuiz(this.id);
   }
 };
 </script>
