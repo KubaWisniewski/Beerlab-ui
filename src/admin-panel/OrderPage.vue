@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import OrderCard from "./OrderCard";
+import OrderCard from "../views/components/OrderCard";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "OrderViewAdmin",
@@ -27,7 +27,6 @@ export default {
   },
   created() {
     this.fetchAllOrders();
-    this.interval = setInterval(() => this.fetchAllOrders(), 5000);
   },
   components: {
     OrderCard

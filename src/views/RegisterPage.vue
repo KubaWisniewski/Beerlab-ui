@@ -1,7 +1,7 @@
 <template>
   <v-container fluid class="fill-height">
     <v-row justify="center">
-      <v-col cols="12" md="6">
+      <v-col cols="12" sm="9" lg="5">
         <v-card class="elevation-12 orange lighten-5">
           <v-toolbar class="orange lighten-2">
             <v-spacer></v-spacer>
@@ -69,6 +69,7 @@
                     ref="picker"
                     v-model="date"
                     scrollable
+                    :locale="PL"
                     :max="new Date().toISOString().substr(0, 10)"
                     min="1950-01-01"
                     @change="save"
@@ -86,9 +87,14 @@
             </v-form>
           </v-card-text>
           <v-card-actions>
-            <v-btn text small to="/login">Masz już konto? Zaloguj się.</v-btn
-            ><v-spacer></v-spacer>
-            <v-btn @click="register">Załóż konto</v-btn>
+            <v-col>
+              <v-row>
+                <v-btn text small to="/login"
+                  >Masz już konto? Zaloguj się.</v-btn
+                ><v-spacer></v-spacer>
+                <v-btn @click="register">Załóż konto</v-btn>
+              </v-row>
+            </v-col>
           </v-card-actions>
         </v-card>
       </v-col>

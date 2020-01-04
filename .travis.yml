@@ -4,12 +4,12 @@ node_js:
 
 branches:
   only:
-  - master 
+    - master
 
 cache: npm
 
 before_script:
-        - npm install
+  - npm install
 
 script:
-        - npm run build
+  - npm run build

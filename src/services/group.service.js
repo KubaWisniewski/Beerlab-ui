@@ -1,15 +1,14 @@
 import axios from "./axiosConfig";
 import Vue from "vue";
-
-const quizService = {
-  fetchQuizes,
-  joinQuiz,
-  voteOnAnswer,
-  getUsersScore
+const groupService = {
+  createGroup,
+  fetchGroups,
+  addUserToGroup,
+  deleteUserFromGroup
 };
-async function fetchQuizes() {
+async function fetchGroups() {
   return await axios
-    .get("/api/quiz/user")
+    .get("/api/group")
     .then(response => {
       return response;
     })
@@ -18,13 +17,16 @@ async function fetchQuizes() {
         group: "auth",
         type: "error",
         title: "Błąd",
-        text: "Nie udało się pobrać quizów."
+        text: "Nie udało się pobrać grup."
       });
     });
 }
-async function joinQuiz(quizId) {
+async function createGroup(name, description) {
   return await axios
-    .post("/api/quiz/joinQuiz/" + quizId)
+    .post("/api/group", {
+      name: name,
+      description: description
+    })
     .then(response => {
       return response;
     })
@@ -33,13 +35,17 @@ async function joinQuiz(quizId) {
         group: "auth",
         type: "error",
         title: "Błąd",
-        text: "Nie udało się dołączyć do quizu."
+        text: "Nie udało się stworzyć grupy."
       });
     });
 }
-async function voteOnAnswer(answerId) {
+
+async function addUserToGroup(email, groupId) {
   return await axios
-    .post("/api/quiz/voteOnAnswer/" + answerId)
+    .post("/api/group/addUser", {
+      email: email,
+      groupId: groupId
+    })
     .then(response => {
       return response;
     })
@@ -48,13 +54,17 @@ async function voteOnAnswer(answerId) {
         group: "auth",
         type: "error",
         title: "Błąd",
-        text: "Nie udało się zapisać odpowiedzi do quizu."
+        text: "Nie udało się dodać użytkownika do grupy."
       });
     });
 }
-async function getUsersScore() {
+
+async function deleteUserFromGroup(email, groupId) {
   return await axios
-    .get("/api/quiz/ranking")
+    .post("/api/group/deleteUser", {
+      email: email,
+      groupId: groupId
+    })
     .then(response => {
       return response;
     })
@@ -63,8 +73,8 @@ async function getUsersScore() {
         group: "auth",
         type: "error",
         title: "Błąd",
-        text: "Nie udało się pobrać wyników."
+        text: "Nie udało się usunąć użytkownika z grupy."
       });
     });
 }
-export default quizService;
+export default groupService;

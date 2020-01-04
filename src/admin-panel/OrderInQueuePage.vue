@@ -12,7 +12,7 @@
 </template>
 
 <script>
-import OrderCard from "./OrderCard";
+import OrderCard from "../views/components/OrderCard";
 import { mapActions, mapGetters } from "vuex";
 export default {
   name: "OrderInQueue",
@@ -30,7 +30,6 @@ export default {
   },
   created() {
     this.fetchCurrentOrders();
-    this.interval = setInterval(() => this.fetchCurrentOrders(), 5000);
   }
 };
 </script>
