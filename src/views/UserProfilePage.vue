@@ -23,8 +23,8 @@
         :locale="en - US"
         class=" elevation-12 orange lighten-5"
       >
-        <template v-slot:item.startedTime="props">
-          {{ props.item.startedTime | formatDate }}
+        <template v-slot:item.completeTime="props">
+          {{ props.item.completeTime | formatDate }}
         </template>
         <template v-slot:top>
           <v-toolbar class="orange lighten-2">
@@ -47,7 +47,7 @@ export default {
         sortable: false,
         value: "id"
       },
-      { text: "Data", value: "startedTime" },
+      { text: "Data", value: "completeTime" },
       { text: "Status", value: "status" },
       { text: "Cena końcowa", value: "totalPrice" }
     ]

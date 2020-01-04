@@ -32,6 +32,13 @@ const router = new VueRouter({
       component: () => import("./views/ContactPage.vue")
     },
     {
+      path: "/games/:quizId",
+      component: () => import("./views/Quiz.vue"),
+      meta: {
+        authorize: ["ROLE_USER"]
+      }
+    },
+    {
       path: "/profile",
       component: () => import("./views/UserProfilePage"),
       meta: {

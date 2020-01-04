@@ -6,6 +6,8 @@ import { orders } from "./store/orders.module.js";
 import { report } from "./store/report.module.js";
 import { groups } from "./store/group.module.js";
 import { messages } from "./store/message.module";
+import { quizes } from "./store/quizes.module.js";
+
 Vue.use(Vuex);
 
 export default new Vuex.Store({
@@ -15,6 +17,7 @@ export default new Vuex.Store({
     orders,
     report,
     groups,
-    messages
+    messages,
+    quizes
   }
 });
