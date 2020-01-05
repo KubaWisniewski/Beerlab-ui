@@ -4,31 +4,28 @@
       <v-img width="100%" max-height="300px" src="@/assets/menu.png"> </v-img>
     </v-row>
     <v-data-iterator
-            :items="beers"
-            row wrap
-            :items-per-page.sync="beersPerPage"
-            :footer-props="{ beersPerPageOptions }"
-            justify="center"
-            content-tag="v-layout"
-            class="pa-5"
-
-
+      :items="beers"
+      row
+      wrap
+      :items-per-page.sync="beersPerPage"
+      :footer-props="{ beersPerPageOptions }"
+      justify="center"
+      content-tag="v-layout"
+      class="pa-5"
     >
       <template v-slot:default="props">
         <v-row>
           <v-col
-              justify="center"
-              v-for="beer in beers"
-              :key="beer.brand"
-              cols="12"
-              sm="6"
-              md="4"
-              lg="3"
+            justify="center"
+            v-for="beer in beers"
+            :key="beer.brand"
+            cols="12"
+            sm="6"
+            md="4"
+            lg="3"
           >
-
-           <BeerCard :beer="beer"></BeerCard>
-
-         </v-col>
+            <BeerCard :beer="beer"></BeerCard>
+          </v-col>
         </v-row>
       </template>
     </v-data-iterator>
@@ -37,7 +34,7 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
-import BeerCard from "./BeerCard";
+import BeerCard from "./components/BeerCard";
 export default {
   name: "BeerPage",
   data() {
@@ -53,7 +50,7 @@ export default {
     ...mapGetters(["beers"])
   },
 
-  created() {
+  mounted() {
     this.fetchBeers();
   },
   components: {

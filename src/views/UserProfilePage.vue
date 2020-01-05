@@ -19,10 +19,13 @@
       </v-card>
       <v-data-table
         :headers="headers"
-        :items="beers"
-        :items-per-page="5"
+        :items="userOrders"
+        :locale="en - US"
         class=" elevation-12 orange lighten-5"
       >
+        <template v-slot:item.completeTime="props">
+          {{ props.item.completeTime | formatDate }}
+        </template>
         <template v-slot:top>
           <v-toolbar class="orange lighten-2">
             <v-toolbar-title>Historia zamówień</v-toolbar-title>
@@ -34,7 +37,7 @@
 </template>
 
 <script>
-import { mapGetters } from "vuex";
+import { mapActions, mapGetters } from "vuex";
 export default {
   data: () => ({
     headers: [
@@ -42,15 +45,22 @@ export default {
         text: "ID zamówienia",
         align: "left",
         sortable: false,
-        value: "id_zamowienia"
+        value: "id"
       },
-      { text: "Data" },
-      { text: "Status" },
-      { text: "Cena końcowa" }
+      { text: "Data", value: "completeTime" },
+      { text: "Status", value: "status" },
+      { text: "Cena końcowa", value: "totalPrice" }
     ]
   }),
   computed: {
-    ...mapGetters(["loggedIn", "user", "beers"])
+    ...mapGetters(["loggedIn", "user", "userOrders"])
+  },
+  methods: {
+    ...mapActions(["fetchUserOrders", "fetchUserData"])
+  },
+  created() {
+    this.fetchUserOrders();
+    this.fetchUserData();
   }
 };
 </script>

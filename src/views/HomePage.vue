@@ -5,7 +5,7 @@
         <router-link to="/">
           <v-img
             class="white--text"
-            max-height="200px"
+            max-height="500px"
             src="@/assets/logo2.jpeg"
           >
           </v-img>
