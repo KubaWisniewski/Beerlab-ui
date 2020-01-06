@@ -9,7 +9,7 @@
       <v-toolbar class="orange lighten-2">
         <v-toolbar-title>Stwórz nową grupę</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="dialog = false">
+        <v-btn icon @click="onClickButton(event)">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
@@ -47,7 +47,7 @@
           <v-row>
             <v-spacer></v-spacer>
             <v-btn color="success darken-1" class="ma-2" @click="createNewGroup"
-              >Stwótrz grupę</v-btn
+              >Stwórz grupę</v-btn
             >
           </v-row>
         </v-col>
@@ -71,6 +71,10 @@ export default {
       if (name && description) {
         groupService.createGroup(name, description);
       }
+    },
+    onClickButton(event) {
+      this.dialog = false;
+      this.$emit("clicked");
     }
   }
 };

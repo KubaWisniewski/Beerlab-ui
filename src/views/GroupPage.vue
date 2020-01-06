@@ -1,7 +1,7 @@
 <template>
   <v-row justify="center">
     <v-col align="center" cols="12" sm="12" md="8" lg="6 ">
-      <CreateNewGroupDialog></CreateNewGroupDialog>
+      <CreateNewGroupDialog @clicked="onCloseDialog"></CreateNewGroupDialog>
       <v-card
         v-for="(group, index) in groups"
         :key="index"
@@ -34,7 +34,10 @@ export default {
     ...mapGetters(["groups"])
   },
   methods: {
-    ...mapActions(["fetchGroups"])
+    ...mapActions(["fetchGroups"]),
+    onCloseDialog() {
+      this.fetchGroups();
+    }
   },
   created() {
     this.fetchGroups();
