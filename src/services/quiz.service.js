@@ -1,5 +1,6 @@
 import axios from "./axiosConfig";
 import Vue from "vue";
+
 const quizService = {
   fetchQuizes,
   joinQuiz,
