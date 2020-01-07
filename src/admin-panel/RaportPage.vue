@@ -75,11 +75,6 @@
        <template>
          <v-simple-table>
            <template v-slot:default>
-<!--             <thead>-->
-<!--             <tr>-->
-<!--               <th class="text-left">Nazwa</th>-->
-<!--             </tr>-->
-<!--             </thead>-->
              <tbody>
              <tr v-for="item in reportDto.mostPopularBeers" :key="item">
                <td>{{ item }}</td>
