@@ -27,6 +27,14 @@
           >
         </v-row>
       </v-card>
+      <v-spacer></v-spacer>
+
+<v-card class="ma-5">
+      <v-toolbar class="grey lighten-2 black--text mb-4">
+        <v-spacer></v-spacer>
+        <v-toolbar-title>Historia raportów</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
 
       <v-card-actions class="justify-center"></v-card-actions>
       <v-data-table
@@ -51,6 +59,38 @@
           >
         </template>
       </v-data-table>
+</v-card>
+
+     <v-card class="ma-5">
+
+      <v-toolbar class="grey lighten-2 black--text mb-4">
+        <v-spacer></v-spacer>
+        <v-toolbar-title>Najbardziej popularne piwa</v-toolbar-title>
+        <v-spacer></v-spacer>
+      </v-toolbar>
+
+      <v-divider></v-divider>
+
+
+       <template>
+         <v-simple-table>
+           <template v-slot:default>
+<!--             <thead>-->
+<!--             <tr>-->
+<!--               <th class="text-left">Nazwa</th>-->
+<!--             </tr>-->
+<!--             </thead>-->
+             <tbody>
+             <tr v-for="item in reportDto.mostPopularBeers" :key="item">
+               <td>{{ item }}</td>
+             </tr>
+             </tbody>
+           </template>
+         </v-simple-table>
+       </template>
+
+     </v-card>
+
       <v-card class="mx-auto text-center" color="green" dark max-width="800">
         <v-card-text>
           <v-sheet color="rgba(0, 0, 0, .12)">
@@ -100,6 +140,7 @@ export default {
         { text: "Do", value: "end" },
         { text: "Ilosc uzytkownikow", value: "users" },
         { text: "Ilosc zamówień", value: "orders" },
+        { text: "Potencjalny przychód", value: "potentialIncome"},
         { text: "Akcja", value: "actions", sortable: false }
       ],
       reportsDto: [],
@@ -108,7 +149,9 @@ export default {
         end: "",
         users: "",
         orders: "",
-        avgBeerPrice: []
+        potentialIncome: "",
+        avgBeerPrice: [],
+        mostPopularBeers: [],
       }
     };
   },
