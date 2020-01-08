@@ -82,7 +82,7 @@
                     </v-col>
                     <v-col cols="12">
                       <v-switch
-                        v-model="quiz.active"
+                        v-model="quiz.isActive"
                         class="mx-2"
                         label="Aktywny*"
                       ></v-switch>
@@ -169,7 +169,7 @@
                     </v-col>
                     <v-col cols="12">
                       <v-switch
-                        v-model="quiz.active"
+                        v-model="quiz.isActive"
                         class="mx-2"
                         label="Aktywny*"
                       ></v-switch>
@@ -193,9 +193,9 @@
           <!-- -->
         </v-toolbar>
       </template>
-      <template v-slot:item.active="{ item }"
-        ><div v-if="item.active == true">AKTYWNY</div>
-        <div v-if="item.active == false">NIE AKTYWNY</div>
+      <template v-slot:item.isActive="{ item }"
+        ><div v-if="item.isActive == true">AKTYWNY</div>
+        <div v-if="item.isActive == false">NIE AKTYWNY</div>
       </template>
       <template v-slot:item.startDate="{ item }">{{
         item.startDate | formatDate
@@ -253,7 +253,7 @@ export default {
         { text: "Opis", value: "description" },
         { text: "Data rozpoczęcia", value: "startDate" },
         { text: "Data zakończenia", value: "endDate" },
-        { text: "Aktywny", value: "active" },
+        { text: "Aktywny", value: "isActive" },
         { text: "Zdjecie", value: "imgUrl" },
         { text: "Akcja", value: "actions", sortable: false }
       ],
@@ -276,9 +276,7 @@ export default {
   },
   methods: {
     addNewQuiz() {
-      //let formData = new FormData();
-      //formData.append("file", this.file);
-      // formData.append("quiz", JSON.stringify(this.quiz));
+
       axios.post("/api/quiz", this.quiz).then(() => {
         this.getAllQuizzes();
         this.file = null;
@@ -288,7 +286,7 @@ export default {
           description: "",
           startDate: "",
           endDate: "",
-          isActive: ""
+          isisActive: ""
         };
         this.dialog = false;
         this.$notify({

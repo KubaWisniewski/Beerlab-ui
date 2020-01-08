@@ -24,7 +24,28 @@
         class=" elevation-12 orange lighten-5"
       >
         <template v-slot:item.completeTime="props">
-          {{ props.item.completeTime | formatDate }}
+          <div v-if="props.item.completeTime == null">
+            Zamówienie nie zostało jeszcze zakończone.
+          </div>
+          <div v-else>{{ props.item.completeTime | formatDate }}</div>
+        </template>
+        <template v-slot:item.startedTime="props">
+          {{ props.item.startedTime | formatDate }}
+        </template>
+        <template v-slot:item.status="props">
+          <div v-if="props.item.status == 'QUEUED'">
+            OCZEKUJE NA REALIZACJE
+          </div>
+          <div v-if="props.item.status == 'COMPLETED'">
+            ZAMÓWIENIE ZAKOŃCZONE
+          </div>
+          <div v-if="props.item.status == 'NOT_PAID'">
+            ZAMÓWIENIE NIEOPŁACONE
+          </div>
+        </template>
+        <template v-slot:item.totalPrice="props">
+          {{ props.item.totalPrice }}
+          <v-icon small>mdi-beer</v-icon>
         </template>
         <template v-slot:top>
           <v-toolbar class="orange lighten-2">
@@ -42,12 +63,13 @@ export default {
   data: () => ({
     headers: [
       {
-        text: "ID zamówienia",
+        text: "Numer zamówienia",
         align: "left",
         sortable: false,
         value: "id"
       },
-      { text: "Data", value: "completeTime" },
+      { text: "Data rozpoczęcia", value: "startedTime" },
+      { text: "Data zakończenia", value: "completeTime" },
       { text: "Status", value: "status" },
       { text: "Cena końcowa", value: "totalPrice" }
     ]
