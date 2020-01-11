@@ -9,10 +9,10 @@
         <v-card-title class="justify-center black--text"
           ><h4>{{ item.text }}</h4></v-card-title
         >
-        <div v-if="item.correct == true">
+        <div v-if="item.correct === true">
           Odpowiedź prawidłowa.
         </div>
-        <div v-if="item.correct == false">
+        <div v-if="item.correct === false">
           Odpowiedź błędna.
         </div>
         <v-divider></v-divider>

@@ -6,10 +6,16 @@
       width="50%"
     >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+        >
+          <v-icon large> mdi-clipboard-check</v-icon>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>SPRAWDZ ZAMOWIENIA</span>
+            <span>Sprawdź zamówienia</span>
           </v-list-item-title>
           <v-list-item-subtitle>
             <span>Edytuj statusy zamowien</span>
@@ -24,12 +30,20 @@
       width="50%"
     >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+        >
+          <v-icon large> mdi-clipboard-arrow-left</v-icon>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>OCZEKUJACE ZAMOWIENIA</span>
+            <span>Oczekujące zamowienia</span>
           </v-list-item-title>
-          <v-list-item-subtitle></v-list-item-subtitle>
+          <v-list-item-subtitle
+            >Zamówienia czekające na obsługę</v-list-item-subtitle
+          >
         </v-list-item-content>
       </v-list-item>
     </v-card>

@@ -20,7 +20,6 @@
       <v-data-table
         :headers="headers"
         :items="userOrders"
-        :locale="en - US"
         class=" elevation-12 orange lighten-5"
       >
         <template v-slot:item.completeTime="props">
@@ -33,13 +32,13 @@
           {{ props.item.startedTime | formatDate }}
         </template>
         <template v-slot:item.status="props">
-          <div v-if="props.item.status == 'QUEUED'">
+          <div v-if="props.item.status === 'QUEUED'">
             OCZEKUJE NA REALIZACJE
           </div>
-          <div v-if="props.item.status == 'COMPLETED'">
+          <div v-if="props.item.status === 'COMPLETED'">
             ZAMÓWIENIE ZAKOŃCZONE
           </div>
-          <div v-if="props.item.status == 'NOT_PAID'">
+          <div v-if="props.item.status === 'NOT_PAID'">
             ZAMÓWIENIE NIEOPŁACONE
           </div>
         </template>

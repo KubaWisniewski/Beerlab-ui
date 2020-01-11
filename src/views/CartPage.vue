@@ -4,7 +4,19 @@
       <v-img width="100%" max-height="300px" src="@/assets/koszyk.jpeg">
       </v-img>
     </v-row>
-    <v-row justify="center">
+    <v-row
+      justify="center"
+      v-if="
+        order.orderItemsDto === undefined || order.orderItemsDto.length === 0
+      "
+    >
+      <v-card class="text-center ma-4 elevation-12" color="orange lighten-2">
+        <v-card-title>
+          Aktualnie nie masz nic w zamówieniu!
+        </v-card-title>
+      </v-card>
+    </v-row>
+    <v-row v-else justify="center">
       <div class="align-center">
         <v-row
           justify="center"
@@ -44,7 +56,6 @@
               </v-card-actions>
             </v-list-item-content>
           </v-list-item>
-          <v-card-text class="justify-center"> </v-card-text>
         </v-card>
       </div>
     </v-row>

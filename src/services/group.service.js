@@ -28,6 +28,12 @@ async function createGroup(name, description) {
       description: description
     })
     .then(response => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Grupa została stworzona."
+      });
       return response;
     })
     .catch(() => {
@@ -47,6 +53,12 @@ async function addUserToGroup(email, groupId) {
       groupId: groupId
     })
     .then(response => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Użytkonik został dodany do grupy pomyślnie."
+      });
       return response;
     })
     .catch(() => {
@@ -66,6 +78,12 @@ async function deleteUserFromGroup(email, groupId) {
       groupId: groupId
     })
     .then(response => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Użytkonik został usunięty z grupy pomyślnie."
+      });
       return response;
     })
     .catch(() => {

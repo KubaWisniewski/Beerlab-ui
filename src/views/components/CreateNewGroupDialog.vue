@@ -2,14 +2,14 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-btn color="primary" dark class="ma-2" v-on="on"
-        >Stwórz nową grupę</v-btn
-      >
+        >Stwórz nową grupę
+      </v-btn>
     </template>
     <v-card class="elevation-12 orange lighten-5">
       <v-toolbar class="orange lighten-2">
         <v-toolbar-title>Stwórz nową grupę</v-toolbar-title>
         <v-spacer></v-spacer>
-        <v-btn icon @click="onClickButton(event)">
+        <v-btn icon @click="dialog = false">
           <v-icon>mdi-close</v-icon>
         </v-btn>
       </v-toolbar>
@@ -25,7 +25,6 @@
                   prepend-icon="mdi-account"
                   type="text"
                   required
-                  autofocus
                 ></v-text-field>
                 <v-textarea
                   class="pa-2"
@@ -47,8 +46,8 @@
           <v-row>
             <v-spacer></v-spacer>
             <v-btn color="success darken-1" class="ma-2" @click="createNewGroup"
-              >Stwórz grupę</v-btn
-            >
+              >Stwórz grupę
+            </v-btn>
           </v-row>
         </v-col>
       </v-card-actions>
@@ -57,7 +56,7 @@
 </template>
 
 <script>
-import groupService from "../../services/group.service";
+import { mapActions } from "vuex";
 
 export default {
   data: () => ({
@@ -66,15 +65,10 @@ export default {
     description: ""
   }),
   methods: {
+    ...mapActions(["createGroup"]),
     createNewGroup() {
-      const { name, description } = this;
-      if (name && description) {
-        groupService.createGroup(name, description);
-      }
-    },
-    onClickButton(event) {
+      this.createGroup({ name: this.name, description: this.description });
       this.dialog = false;
-      this.$emit("clicked");
     }
   }
 };

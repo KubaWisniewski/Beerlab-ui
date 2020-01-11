@@ -6,13 +6,19 @@
       width="50%"
     >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+        >
+          <v-icon large> mdi-clipboard-check</v-icon>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>SPRAWDZ ZAMOWIENIA</span>
+            <span>Sprawdź zamówienia</span>
           </v-list-item-title>
           <v-list-item-subtitle>
-            <span>Edytuj statusy zamowien</span>
+            <span>Edytuj statusy zamówień</span>
           </v-list-item-subtitle>
         </v-list-item-content>
       </v-list-item>
@@ -24,10 +30,16 @@
       width="50%"
     >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+        >
+          <v-icon large> mdi-beer</v-icon>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>EDYTUJ MENU</span>
+            <span>Edytuj menu</span>
           </v-list-item-title>
           <v-list-item-subtitle>
             <span>Dodawaj oraz usuwaj pozycje</span>
@@ -42,12 +54,20 @@
       width="50%"
     >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+        >
+          <v-icon large> mdi-clipboard-arrow-left</v-icon>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>OCZEKUJACE ZAMOWIENIA</span>
+            <span>Oczekujące zamówienia</span>
           </v-list-item-title>
-          <v-list-item-subtitle></v-list-item-subtitle>
+          <v-list-item-subtitle
+            >Zamówienia czekające na obsługę</v-list-item-subtitle
+          >
         </v-list-item-content>
       </v-list-item>
     </v-card>
@@ -58,10 +78,16 @@
       width="50%"
     >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+        >
+          <v-icon large> mdi-chart-areaspline</v-icon>
+        </v-list-item-avatar>
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>RAPORT</span>
+            <span>Raporty</span>
           </v-list-item-title>
           <v-list-item-subtitle>
             <span>Sprawdź wygenerowany bilans</span>
@@ -70,12 +96,22 @@
       </v-list-item>
     </v-card>
 
-      <v-card to="/admin/quiz" class="ma-3 pt-1 elevation-5 orange lighten-5 fade" width="50%">
+    <v-card
+      to="/admin/quiz"
+      class="ma-3 pt-1 elevation-5 orange lighten-5 fade"
+      width="50%"
+    >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+        >
+          <v-icon large> mdi-google-controller</v-icon></v-list-item-avatar
+        >
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>ZARZADZAJ QUIZAMI</span>
+            <span>Zarządaj quizami</span>
           </v-list-item-title>
           <v-list-item-subtitle>
             <span>Dodawaj i edytuj quizy</span>
@@ -90,10 +126,15 @@
       width="50%"
     >
       <v-list-item three-line>
-        <v-list-item-avatar size="80" color="orange"></v-list-item-avatar>
+        <v-list-item-avatar
+          size="80"
+          color="orange lighten-2"
+          class="elevation-10"
+          ><v-icon large>mdi-account-multiple</v-icon></v-list-item-avatar
+        >
         <v-list-item-content>
           <v-list-item-title class="headline mb-1">
-            <span>SPRAWDZ UZYTKOWNIKÓW</span>
+            <span>Sprawdź użytkowników i pracowników</span>
           </v-list-item-title>
           <v-list-item-subtitle>
             <span>Stwórz konto dla pracownika</span>

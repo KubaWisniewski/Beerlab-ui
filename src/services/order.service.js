@@ -7,12 +7,29 @@ const orderService = {
   fetchUserOrder,
   deleteItemFromOrder,
   reduceQuantity,
-  confirmOrder
+  confirmOrder,
+  fetchCompletedOrders
 };
 
 async function fetchOrders() {
   return await axios
     .get("/api/order")
+    .then(response => {
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Błąd",
+        text: "Nie udało się pobrać zamówień."
+      });
+    });
+}
+
+async function fetchCompletedOrders() {
+  return await axios
+    .get("/api/user/completedOrders")
     .then(response => {
       return response;
     })

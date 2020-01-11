@@ -36,13 +36,9 @@
           </v-card-actions>
         </v-list-item-content>
       </v-list-item>
-      <v-list-item>
-        <v-list-item-content
-          class="headline justify-center font-weight-bold large d-inline"
-        >
-          Cena: {{ beer.price }} <v-icon large>mdi-beer</v-icon>
-        </v-list-item-content>
-        <v-list-item-content class="justify-center"> </v-list-item-content>
+      <v-list-item class="headline font-weight-bold ">
+        Cena: {{ beer.price }}
+        <v-icon>mdi-beer</v-icon>
       </v-list-item>
     </v-list>
   </v-card>

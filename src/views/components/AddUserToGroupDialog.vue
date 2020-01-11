@@ -2,12 +2,12 @@
   <v-dialog v-model="dialog" max-width="600px">
     <template v-slot:activator="{ on }">
       <v-btn color="primary" dark class="ma-2" v-on="on"
-        >Dodaj użytkownika do grupy
+        >Dodaj lub usuń użytkownika
       </v-btn>
     </template>
     <v-card class="elevation-12 orange lighten-5">
       <v-toolbar class="orange lighten-2">
-        <v-toolbar-title>Dodaj użytkonika do grupy</v-toolbar-title>
+        <v-toolbar-title>Dodaj lub usuń użytkownika</v-toolbar-title>
         <v-spacer></v-spacer>
         <v-btn icon @click="dialog = false">
           <v-icon>mdi-close</v-icon>
@@ -54,18 +54,19 @@ import groupService from "../../services/group.service";
 export default {
   data: () => ({
     dialog: false,
-    email: "",
-    props: {
-      groupId: {
-        type: Number
-      }
-    }
+    email: ""
   }),
+  props: {
+    groupId: {
+      type: Number
+    }
+  },
   methods: {
     addUserToGroup() {
       const { email, groupId } = this;
       if (email && groupId) {
         groupService.addUserToGroup(email, groupId);
+        this.dialog = false;
       }
     },
 
@@ -73,6 +74,7 @@ export default {
       const { email, groupId } = this;
       if (email && groupId) {
         groupService.deleteUserFromGroup(email, groupId);
+        this.dialog = "false";
       }
     }
   }
