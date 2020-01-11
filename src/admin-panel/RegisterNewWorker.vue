@@ -1,7 +1,9 @@
 <template>
   <v-dialog v-model="dialog" max-width="600px" cols="12" sm="8" md="4">
     <template v-slot:activator="{ on }">
-      <v-btn color="primary" dark class="ma-2" v-on="on">Dodaj pracownik</v-btn>
+      <v-btn color="primary" dark class="ma-2" v-on="on"
+        >Dodaj pracownika</v-btn
+      >
     </template>
     <v-card class="elevation-12 orange lighten-5">
       <v-toolbar class="orange lighten-2">
@@ -103,6 +105,7 @@ export default {
       const { username, email, password, role } = this;
       if (username && email && role && password) {
         userService.registerNewWorker(username, email, password, role);
+        this.dialog = false;
       }
     }
   }

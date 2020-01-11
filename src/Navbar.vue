@@ -89,7 +89,7 @@
         <v-icon>mdi-beer</v-icon>
       </v-btn>
       <v-btn icon v-if="loggedIn && !(isAdmin || isBarman)" to="/cart">
-        <v-badge color="green" overlap>
+        <v-badge color="black" overlap>
           <template v-slot:badge>
             <span
               v-if="
@@ -102,6 +102,9 @@
           <v-icon>mdi-cart-outline</v-icon>
         </v-badge>
       </v-btn>
+      <OrderNotification
+        v-if="loggedIn && !(isAdmin || isBarman)"
+      ></OrderNotification>
       <v-btn icon v-if="loggedIn">
         <v-icon @click="logout">mdi-logout</v-icon>
       </v-btn>
@@ -114,6 +117,7 @@
 
 <script>
 import { mapGetters, mapActions } from "vuex";
+import OrderNotification from "./views/OrderNotification";
 
 export default {
   data: () => ({
@@ -124,6 +128,7 @@ export default {
   },
   methods: {
     ...mapActions(["logout", "fetchUserActualOrder"])
-  }
+  },
+  components: { OrderNotification }
 };
 </script>

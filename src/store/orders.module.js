@@ -6,7 +6,8 @@ const initialState = {
   userActualOrder: {},
   orders: [],
   currentOrders: [],
-  userOrders: []
+  userOrders: [],
+  userCompletedOrders: []
 };
 
 export const orders = {
@@ -23,12 +24,20 @@ export const orders = {
     },
     userOrders: state => {
       return state.userOrders;
+    },
+    userCompletedOrders: state => {
+      return state.userCompletedOrders;
     }
   },
   actions: {
     fetchUserOrders({ commit }) {
       userService.fetchUserOrders().then(response => {
         commit("setUserOrders", response.data);
+      });
+    },
+    fetchUserCompletedOrders({ commit }) {
+      orderService.fetchCompletedOrders().then(response => {
+        commit("setUserCompletedOrders", response.data);
       });
     },
     fetchAllOrders({ commit }) {
@@ -98,6 +107,9 @@ export const orders = {
     },
     setUserActualOrder(state, data) {
       state.userActualOrder = data;
+    },
+    setUserCompletedOrders(state, data) {
+      state.userCompletedOrders = data;
     }
   }
 };

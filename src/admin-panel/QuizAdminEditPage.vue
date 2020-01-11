@@ -194,8 +194,8 @@
         </v-toolbar>
       </template>
       <template v-slot:item.isActive="{ item }"
-        ><div v-if="item.isActive == true">AKTYWNY</div>
-        <div v-if="item.isActive == false">NIE AKTYWNY</div>
+        ><div v-if="item.isActive === true">AKTYWNY</div>
+        <div v-if="item.isActive === false">NIE AKTYWNY</div>
       </template>
       <template v-slot:item.startDate="{ item }">{{
         item.startDate | formatDate
@@ -276,7 +276,6 @@ export default {
   },
   methods: {
     addNewQuiz() {
-
       axios.post("/api/quiz", this.quiz).then(() => {
         this.getAllQuizzes();
         this.file = null;

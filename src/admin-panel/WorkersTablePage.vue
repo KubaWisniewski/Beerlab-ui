@@ -8,7 +8,7 @@
     >
       <template v-slot:top>
         <v-toolbar class=" orange lighten-3">
-          <v-toolbar-title>Pracownicy</v-toolbar-title>
+          <v-toolbar-title>Lista pracowników</v-toolbar-title>
           <v-divider class="pa-5" inset vertical></v-divider>
           <RegisterNewWorker></RegisterNewWorker>
         </v-toolbar>

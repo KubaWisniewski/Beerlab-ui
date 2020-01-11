@@ -16,6 +16,11 @@ export const groups = {
       groupService.fetchGroups().then(response => {
         commit("setGroups", response.data);
       });
+    },
+    createGroup({ dispatch }, data) {
+      groupService.createGroup(data.name, data.description).then(response => {
+        dispatch("fetchGroups", response.data);
+      });
     }
   },
   mutations: {

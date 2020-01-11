@@ -88,11 +88,6 @@
         >ZAKONCZ</v-btn
       >
       <v-btn
-        class="blue lighten-2"
-        v-on:click="setOrderStatus({ orderId: order.id, status: 'QUEUED' })"
-        >DODAJ DO KOLEJKI</v-btn
-      >
-      <v-btn
         class="green lighten-2 "
         v-on:click="setOrderStatus({ orderId: order.id, status: 'COMPLETED' })"
         >ZREALIZUJ</v-btn

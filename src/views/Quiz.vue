@@ -74,14 +74,12 @@ export default {
   methods: {
     ...mapActions(["joinQuiz"]),
     next() {
-      // check if the answer is correct
       if (this.stepAnswer == null) return;
       const question = this.quiz.questionDtoList[this.step - 1];
       const answer = question.answerDtoList[this.stepAnswer];
       quizService.voteOnAnswer(answer.id);
       if (answer.correct) this.score += 1;
       else {
-        // add mistake to the mistakes array
         this.mistakes.push({
           question: question.text,
           rightAnswer: question.answerDtoList.find(answer => answer.correct)
@@ -89,7 +87,6 @@ export default {
           chosenAnswer: answer.text
         });
       }
-      // check if the quiz is done
       if (this.step < this.quiz.questionDtoList.length) {
         this.step++;
         this.stepAnswer = null;
