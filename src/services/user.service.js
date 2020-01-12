@@ -8,7 +8,9 @@ const userService = {
   fetchUserData,
   registerNewWorker,
   fetchUserOrders,
-  fetchWorkers
+  fetchWorkers,
+  setUsername,
+  setPassword
 };
 
 async function login(data) {
@@ -29,6 +31,50 @@ async function login(data) {
         type: "error",
         title: "Bład",
         text: "Nie udało sie zalogować upewnij się, że podałeś prawidłowe dane."
+      });
+    });
+}
+
+async function setUsername(username) {
+  return await axios
+    .post("/api/user/setUsername", username)
+    .then(response => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Zmieniono nazwę użytkownika."
+      });
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie zmienić nazwy użytkonika."
+      });
+    });
+}
+
+async function setPassword(password) {
+  return await axios
+    .post("/api/user/setPassword", password)
+    .then(response => {
+      Vue.notify({
+        group: "auth",
+        type: "success",
+        title: "OK",
+        text: "Zmieniono hasło."
+      });
+      return response;
+    })
+    .catch(() => {
+      Vue.notify({
+        group: "auth",
+        type: "error",
+        title: "Bład",
+        text: "Nie udało sie zmienić hasła."
       });
     });
 }

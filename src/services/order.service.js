@@ -119,9 +119,9 @@ async function reduceQuantity(orderId, beerId, quantity) {
     });
 }
 
-async function confirmOrder() {
+async function confirmOrder(method) {
   return await axios
-    .post("/api/user/confirm")
+    .post("/api/user/confirm/" + method)
     .then(() => {
       Vue.notify({
         group: "auth",

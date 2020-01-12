@@ -87,8 +87,8 @@ export const orders = {
         commit("setUserActualOrder", response.data);
       });
     },
-    confirmOrder({ dispatch }) {
-      orderService.confirmOrder().then(() => {
+    confirmOrder({ dispatch }, method) {
+      orderService.confirmOrder(method).then(() => {
         dispatch("fetchAllOrders");
         dispatch("fetchCurrentOrders");
         dispatch("fetchUserActualOrder");

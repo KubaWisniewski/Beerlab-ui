@@ -16,6 +16,12 @@
           <h4 class="mx-auto">Witaj: {{ user.username }}</h4>
           Stan konta : {{ user.balance }} Kufli.
         </v-card-text>
+        <v-card-actions
+          ><v-spacer></v-spacer>
+          <SetUsernameDialog></SetUsernameDialog>
+          <SetPasswordDialog></SetPasswordDialog>
+          <v-spacer></v-spacer>
+        </v-card-actions>
       </v-card>
       <v-data-table
         :headers="headers"
@@ -58,6 +64,8 @@
 
 <script>
 import { mapActions, mapGetters } from "vuex";
+import SetUsernameDialog from "./components/SetUsernameDialog";
+import SetPasswordDialog from "./components/SetPasswordDialog";
 export default {
   data: () => ({
     headers: [
@@ -82,6 +90,10 @@ export default {
   created() {
     this.fetchUserOrders();
     this.fetchUserData();
+  },
+  components: {
+    SetUsernameDialog,
+    SetPasswordDialog
   }
 };
 </script>

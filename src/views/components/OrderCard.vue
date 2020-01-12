@@ -48,10 +48,12 @@
       </v-toolbar>
       <v-toolbar
         class="orange lighten-2 black--text ma-3"
-        v-if="order.status === 'PAID'"
+        v-if="order.status === 'CASH_PAID'"
       >
         <v-spacer></v-spacer>
-        <v-toolbar-title>ZAMOWIENIE OPLACONE</v-toolbar-title>
+        <v-toolbar-title
+          >ZAMOWIENIE CZEKA NA PLATNOSC PRZY BARZE</v-toolbar-title
+        >
         <v-spacer></v-spacer>
       </v-toolbar>
       <v-toolbar
@@ -81,21 +83,32 @@
         <v-spacer></v-spacer>
       </v-toolbar>
     </v-card-text>
-    <v-card-actions class="justify-center">
+    <v-card-actions
+      class="justify-center"
+      v-if="order.status !== 'CLOSED' && order.status !== 'NOT_PAID'"
+    >
       <v-btn
         class="grey lighten-2"
         v-on:click="setOrderStatus({ orderId: order.id, status: 'CLOSED' })"
         >ZAKONCZ</v-btn
       >
       <v-btn
+        v-if="order.status !== 'CASH_PAID'"
         class="green lighten-2 "
         v-on:click="setOrderStatus({ orderId: order.id, status: 'COMPLETED' })"
         >ZREALIZUJ</v-btn
       >
       <v-btn
+        v-if="order.status !== 'CASH_PAID'"
         class="yellow lighten-2"
         v-on:click="setOrderStatus({ orderId: order.id, status: 'INPROGRESS' })"
         >DODAJ DO REALIZACJI</v-btn
+      >
+      <v-btn
+        v-if="order.status === 'CASH_PAID'"
+        class="blue lighten-2"
+        v-on:click="setOrderStatus({ orderId: order.id, status: 'QUEUED' })"
+        >DODAJ DO KOLEJKI</v-btn
       >
     </v-card-actions>
   </v-card>

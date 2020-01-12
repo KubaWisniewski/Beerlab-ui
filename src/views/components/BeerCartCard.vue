@@ -1,10 +1,10 @@
 <template>
-  <v-card class="elevation-12 orange lighten-2">
+  <v-card class=" orange lighten-2">
     <v-card-title class="justify-center black--text"
       ><h4>{{ orderItem.beerDto.brand }}</h4></v-card-title
     >
     <v-divider></v-divider>
-    <v-list dense class="elevation-12 orange lighten-5">
+    <v-list dense class=" orange lighten-5">
       <v-list-item>
         <v-list-item-content class="align-center">
           <v-img height="200px" width="600" :src="orderItem.beerDto.imgUrl" />
@@ -23,12 +23,7 @@
             class="v-counter md4"
             >&#xff0b;</v-btn
           >
-          <input
-            type="text"
-            class="md3 justify-center text-center"
-            :value="orderItem.quantity"
-            readonly
-          />
+          {{ orderItem.quantity }}
           <v-btn
             @click="
               reduceQuantity({
