@@ -2,6 +2,8 @@
 import userService from "../services/user.service.js";
 import router from "../router.js";
 import axios from "../services/axiosConfig";
+import orderService from "../services/order.service";
+
 const initialState = {
   token: localStorage.getItem("token"),
   loggedIn: !!localStorage.getItem("token"),
@@ -69,6 +71,16 @@ export const authentication = {
           commit("setIsBarman", true);
           router.push("/barman");
         }
+      });
+    },
+    setUsername({ dispatch }, username) {
+      userService.setUsername(username).then(() => {
+        dispatch("fetchUserData");
+      });
+    },
+    setPassword({ dispatch }, password) {
+      userService.setPassword(password).then(() => {
+        dispatch("fetchUserData");
       });
     },
     register({ commit }, { username, email, password, setGender, date }) {

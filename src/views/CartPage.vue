@@ -29,7 +29,7 @@
         >
           <BeerCartCard :orderItem="orderItem" :order="order"></BeerCartCard>
         </v-row>
-        <v-card class="ma-5 justify-center">
+        <v-card class="ma-5 justify-center orange lighten-2 elevation-12">
           <v-list-item>
             <v-list-item-content
               class="justify-center headline font-weight-bold "
@@ -45,13 +45,11 @@
           <v-list-item>
             <v-list-item-content class="align-center">
               <v-card-actions class="justify-center">
-                <v-btn
-                  @click="confirmOrder({ userId: user })"
-                  rounded
-                  color="green"
-                  dark
-                >
-                  Potwierdz zamówienie
+                <v-btn @click="confirmOrder(1)" rounded color="green" dark>
+                  Zapłać kuflami
+                </v-btn>
+                <v-btn @click="confirmOrder(2)" rounded color="green" dark>
+                  Zapłać przy barze
                 </v-btn>
               </v-card-actions>
             </v-list-item-content>
