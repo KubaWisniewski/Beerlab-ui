@@ -20,7 +20,12 @@
 
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn dark :to="'/games/' + quiz.id">Weź udział!</v-btn>
+            <div v-if="!quiz.isActive">
+              Ten quiz startuje {{ quiz.startDate | formatDate }}
+            </div>
+            <div v-else>
+              <v-btn dark :to="'/games/' + quiz.id">Weź udział!</v-btn>
+            </div>
             <v-spacer></v-spacer>
           </v-card-actions>
         </v-card>
@@ -30,6 +35,9 @@
 </template>
 <script>
 import { mapActions, mapGetters } from "vuex";
+import moment from "moment";
+import Vue from "vue";
+import "moment/locale/pl";
 
 export default {
   name: "GamesPage",
@@ -43,6 +51,12 @@ export default {
     ...mapActions(["fetchQuizes"])
   },
   mounted() {
+    moment.locales("PL");
+     Vue.filter("formatDate", function(value) {
+      if (value) {
+        return moment(String(value)).format("DD/MM/YYYY HH:mm:ss");
+      }
+    });
     this.fetchQuizes();
   }
 };
