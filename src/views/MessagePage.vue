@@ -65,10 +65,18 @@ export default {
     ...mapGetters(["messages"])
   },
   methods: {
-    ...mapActions(["fetchMessages", "sendMessage"])
+    ...mapActions(["fetchMessages", "sendMessage"]),
+    pollData() {
+      this.polling = setInterval(() => this.fetchMessages(this.$route.params.groupId), 3000);
+    }
   },
   mounted() {
     this.fetchMessages(this.$route.params.groupId);
+    this.pollData();
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
+    
   },
   components: {
     AddUserToGroupDialog

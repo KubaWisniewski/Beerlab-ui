@@ -20,13 +20,19 @@ export default {
     return {};
   },
   methods: {
-    ...mapActions(["fetchAllOrders"])
+    ...mapActions(["fetchAllOrders"]),
+    pollData() {
+      this.polling = setInterval(() => this.fetchAllOrders(), 3000);
+    }
   },
   computed: {
     ...mapGetters(["orders"])
   },
   created() {
     this.fetchAllOrders();
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   components: {
     OrderCard

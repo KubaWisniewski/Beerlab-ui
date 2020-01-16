@@ -37,10 +37,17 @@ export default {
     ...mapActions(["fetchGroups"]),
     onCloseDialog() {
       this.fetchGroups();
+    },
+    pollData() {
+      this.polling = setInterval(() => this.fetchGroups(), 3000);
     }
   },
   created() {
     this.fetchGroups();
+    this.pollData();
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   components: { CreateNewGroupDialog }
 };

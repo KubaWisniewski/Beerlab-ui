@@ -11,7 +11,6 @@
       :footer-props="{ beersPerPageOptions }"
       justify="center"
       content-tag="v-layout"
-      class="pa-5"
     >
       <template v-slot:default="props">
         <v-row>
@@ -44,7 +43,10 @@ export default {
     };
   },
   methods: {
-    ...mapActions(["fetchBeers"])
+    ...mapActions(["fetchBeers"]),
+    pollData() {
+      this.polling = setInterval(() => this.fetchBeers(), 3000);
+    }
   },
   computed: {
     ...mapGetters(["beers"])
@@ -52,6 +54,10 @@ export default {
 
   mounted() {
     this.fetchBeers();
+    this.pollData();
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   components: {
     BeerCard

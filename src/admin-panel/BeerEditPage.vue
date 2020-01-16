@@ -119,6 +119,7 @@
         <v-img
           class="white--text"
           max-height="100  px"
+           contain="true"
           aspect-ratio="1"
           :src="item.imgUrl"
         />
