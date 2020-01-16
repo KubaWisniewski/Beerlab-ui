@@ -21,7 +21,7 @@
           <v-card-actions>
             <v-spacer></v-spacer>
             <div v-if="!quiz.isActive">
-              Ten quiz startuje {{ quiz.startDate | formatDate }}
+              Ten quiz nie jest aktywny.
             </div>
             <div v-else>
               <v-btn dark :to="'/games/' + quiz.id">Weź udział!</v-btn>
