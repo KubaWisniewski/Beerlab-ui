@@ -3,6 +3,41 @@
     <v-row justify="center" align="center">
       <v-img width="100%" max-height="300px" src="@/assets/kontakt.png">
       </v-img>
+      <v-card class="elevation-12 orange lighten-5">
+        <v-card
+          justify="center"
+          align="center"
+          class="elevation-12 orange lighten-3"
+        >
+          <h1>Godziny otwarcia:</h1>
+          <v-simple-table class="elevation-12 orange lighten-4">
+            <tbody>
+              <tr>
+                <td class="text-center">Poniedziałek - Czwartek</td>
+                <td class="text-center">18:00 - 00:00</td>
+              </tr>
+              <tr>
+                <td class="text-center">Piątek</td>
+                <td class="text-center">16:00 - 04:00</td>
+              </tr>
+              <tr>
+                <td class="text-center">Sobota</td>
+                <td class="text-center">15:00 - 02:00</td>
+              </tr>
+              <tr>
+                <td class="text-center">Niedziela</td>
+                <td class="text-center">Zamknięte</td>
+              </tr>
+            </tbody>
+          </v-simple-table>
+          <v-card class="elevation-12 orange lighten-3">
+            <h3>Adres: ul. Brzegi 55, 80-045 Gdańsk</h3>
+            <h4>Telefon 956 980 808</h4>
+          </v-card>
+        </v-card>
+        <iframe
+          src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2326.4398868171165!2d18.63247049723349!3d54.33153284270461!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46fd73eb4c52b003%3A0x2d26b2439c65b0ee!2sPolsko-Japo%C5%84ska%20Akademia%20Technik%20Komputerowych!5e0!3m2!1spl!2spl!4v1579273514332!5m2!1spl!2spl" width="800" height="600" frameborder="0" style="border:0;" allowfullscreen=""></iframe>
+      </v-card>
     </v-row>
   </v-container>
 </template>
