@@ -5,18 +5,14 @@
     </v-row>
     <v-data-iterator
       :items="beers"
-      row
-      wrap
       :items-per-page.sync="beersPerPage"
       :footer-props="{ beersPerPageOptions }"
-      justify="center"
-      content-tag="v-layout"
     >
       <template v-slot:default="props">
         <v-row>
           <v-col
             justify="center"
-            v-for="beer in beers"
+            v-for="beer in props.items"
             :key="beer.brand"
             cols="12"
             sm="6"
@@ -39,7 +35,7 @@ export default {
   data() {
     return {
       beersPerPageOptions: [4, 8, 12],
-      beersPerPage: 4
+      beersPerPage: 12
     };
   },
   methods: {
