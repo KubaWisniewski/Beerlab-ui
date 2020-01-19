@@ -67,7 +67,10 @@ export default {
   methods: {
     ...mapActions(["fetchMessages", "sendMessage"]),
     pollData() {
-      this.polling = setInterval(() => this.fetchMessages(this.$route.params.groupId), 3000);
+      this.polling = setInterval(
+        () => this.fetchMessages(this.$route.params.groupId),
+        3000
+      );
     }
   },
   mounted() {
@@ -76,7 +79,6 @@ export default {
   },
   beforeDestroy() {
     clearInterval(this.polling);
-    
   },
   components: {
     AddUserToGroupDialog

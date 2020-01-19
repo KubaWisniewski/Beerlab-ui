@@ -7,7 +7,12 @@
     <v-list dense class="col orange lighten-5">
       <v-list-item>
         <v-list-item-content class="align-center">
-          <v-img  max-height="300px" max-width="300px" contain=true :src="orderItem.beerDto.imgUrl" />
+          <v-img
+            max-height="300px"
+            max-width="300px"
+            contain="true"
+            :src="orderItem.beerDto.imgUrl"
+          />
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>

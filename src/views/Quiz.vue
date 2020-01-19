@@ -20,7 +20,11 @@
               </div>
             </v-card-text>
             <v-card-text>
-              <div v-if="(this.score / this.quiz.questionDtoList.length) * 100 == 100">
+              <div
+                v-if="
+                  (this.score / this.quiz.questionDtoList.length) * 100 == 100
+                "
+              >
                 <h3>Wygrałeś nagrodę !</h3>
                 Pokaż tą wiadomość przy barze aby odebrać nagrodę.
               </div>
