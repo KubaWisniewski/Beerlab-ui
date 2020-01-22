@@ -4,7 +4,7 @@
       :key="index"
       v-for="(order, index) in orders"
       justify="center"
-      class="mb-4"
+      class="sm-4"
     >
       <OrderCard :order="order"></OrderCard>
     </v-row>

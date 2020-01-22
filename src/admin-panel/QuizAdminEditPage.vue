@@ -3,8 +3,8 @@
     <v-data-table
       :headers="headers"
       :items="quizzes"
-      :items-per-page="5"
-      class="elevation-12 orange lighten-5 mt-4 mb-4"
+      :items-per-page="1"
+      class="elevation-12 orange lighten-5 "
     >
       <template v-slot:top>
         <v-toolbar class=" orange lighten-3">
@@ -41,14 +41,7 @@
                         required
                       ></v-text-field>
                     </v-col>
-                    <v-col cols="12">
-                      <v-file-input
-                        v-model="file"
-                        type="file"
-                        label="Wybierz zdjęcie..."
-                        @change="onFileChange"
-                      ></v-file-input>
-                    </v-col>
+                    
                     <v-col cols="12">
                       <div>
                         Wybierz date rozpoczecia quizu:
@@ -205,35 +198,26 @@
       }}</template>
       <template v-slot:item.actions="{ item }">
         <v-btn
-          class="ma-2"
+    
           small
           color="primary"
           v-on:click.prevent="editQuiz(item.id)"
           >Edytuj</v-btn
         >
         <v-btn
-          class="ma-2"
           small
           color="primary"
           v-on:click.prevent="changeStatus(item.id)"
           >Zmień status</v-btn
         >
         <v-btn
-          class="ma-2"
           small
           color="primary"
           v-on:click.prevent="getQuestion(item.id)"
           >Pytania</v-btn
         >
       </template>
-      <template v-slot:item.imgUrl="{ item }">
-        <v-img
-          class="white--text"
-          max-height="100  px"
-          aspect-ratio="1"
-          :src="item.imgUrl"
-        />
-      </template>
+    
     </v-data-table>
   </v-container>
 </template>
@@ -251,11 +235,8 @@ export default {
         { text: "Id", value: "id" },
         { text: "Nazwa", value: "name" },
         { text: "Opis", value: "description" },
-        { text: "Data rozpoczęcia", value: "startDate" },
-        { text: "Data zakończenia", value: "endDate" },
         { text: "Aktywny", value: "isActive" },
-        { text: "Zdjecie", value: "imgUrl" },
-        { text: "Akcja", value: "actions", sortable: false }
+        { text: "", value: "actions", sortable: false }
       ],
       modalStart: false,
       modalEnd: false,

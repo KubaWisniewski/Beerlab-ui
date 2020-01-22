@@ -163,7 +163,7 @@ const router = new VueRouter({
     }
   ]
 });
-
+/*
 router.beforeEach((to, from, next) => {
   const { authorize } = to.meta;
   if (authorize) {
@@ -185,5 +185,6 @@ router.beforeEach((to, from, next) => {
   if (to.path === "/login" && store.getters.loggedIn === true) next("/");
   return next();
 });
+*/
 
 export default router;

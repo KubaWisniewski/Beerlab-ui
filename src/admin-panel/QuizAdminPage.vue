@@ -4,7 +4,7 @@
       :key="index"
       v-for="(quiz, index) in quizzes"
       justify="center"
-      class="mb-4"
+      class="sm-4"
     >
       <QuizAdminCard :quiz="quiz"></QuizAdminCard>
     </v-row>

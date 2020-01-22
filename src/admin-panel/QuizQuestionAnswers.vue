@@ -2,9 +2,8 @@
   <v-container class="justify-center">
     <div v-for="item in answers" v-bind:key="item.id">
       <v-card
-        height="300"
-        max-width="300"
-        class="ma-2 d-flex flex-column elevation-12 orange lighten-2"
+
+        class=" d-flex flex-column elevation-12 orange lighten-2"
       >
         <v-card-title class="justify-center black--text"
           ><h4>{{ item.text }}</h4></v-card-title

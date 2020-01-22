@@ -1,10 +1,8 @@
+
 import axios from "axios";
 const axiosInstance = axios.create({
-  baseURL: "http://localhost:8081",
-  headers: {
-    "X-Auth-Token": localStorage.getItem("token"),
-    "Content-Type": "application/json"
-  }
+  baseURL: "http://192.168.1.108:8081"
+ 
 });
 
 export default axiosInstance;
