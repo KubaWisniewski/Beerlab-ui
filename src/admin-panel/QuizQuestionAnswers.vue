@@ -2,7 +2,7 @@
   <v-container class="justify-center">
     <div v-for="item in answers" v-bind:key="item.id">
       <v-card
-        height="300"
+        height="150"
         max-width="300"
         class="ma-2 d-flex flex-column elevation-12 orange lighten-2"
       >

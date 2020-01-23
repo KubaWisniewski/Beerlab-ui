@@ -70,12 +70,12 @@
                     </v-col>
                     <v-col cols="12">
                       <v-text-field
-                              label="Cena minimalna*: "
-                              type="number"
-                              step="1"
-                              v-model="beer.minimalPrice"
-                              min="0"
-                              required
+                        label="Cena minimalna*: "
+                        type="number"
+                        step="1"
+                        v-model="beer.minimalPrice"
+                        min="0"
+                        required
                       ></v-text-field>
                     </v-col>
                   </v-row>
@@ -119,6 +119,7 @@
         <v-img
           class="white--text"
           max-height="100  px"
+          contain="true"
           aspect-ratio="1"
           :src="item.imgUrl"
         />

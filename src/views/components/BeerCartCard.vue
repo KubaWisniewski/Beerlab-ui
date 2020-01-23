@@ -4,10 +4,15 @@
       ><h4>{{ orderItem.beerDto.brand }}</h4></v-card-title
     >
     <v-divider></v-divider>
-    <v-list dense class=" orange lighten-5">
+    <v-list dense class="col orange lighten-5">
       <v-list-item>
         <v-list-item-content class="align-center">
-          <v-img height="200px" width="600" :src="orderItem.beerDto.imgUrl" />
+          <v-img
+            max-height="300px"
+            max-width="300px"
+            contain="true"
+            :src="orderItem.beerDto.imgUrl"
+          />
         </v-list-item-content>
       </v-list-item>
       <v-divider></v-divider>

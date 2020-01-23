@@ -41,7 +41,13 @@
           <div v-if="props.item.status === 'QUEUED'">
             OCZEKUJE NA REALIZACJE
           </div>
+          <div v-if="props.item.status === 'INPROGRESS'">
+            W TRAKCIE REALIZACJI
+          </div>
           <div v-if="props.item.status === 'COMPLETED'">
+            ZAMÓWIENIE ZREALIZWOANE
+          </div>
+          <div v-if="props.item.status === 'CLOSED'">
             ZAMÓWIENIE ZAKOŃCZONE
           </div>
           <div v-if="props.item.status === 'NOT_PAID'">

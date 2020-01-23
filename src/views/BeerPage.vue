@@ -5,19 +5,14 @@
     </v-row>
     <v-data-iterator
       :items="beers"
-      row
-      wrap
       :items-per-page.sync="beersPerPage"
       :footer-props="{ beersPerPageOptions }"
-      justify="center"
-      content-tag="v-layout"
-      class="pa-5"
     >
       <template v-slot:default="props">
         <v-row>
           <v-col
             justify="center"
-            v-for="beer in beers"
+            v-for="beer in props.items"
             :key="beer.brand"
             cols="12"
             sm="6"
@@ -40,11 +35,14 @@ export default {
   data() {
     return {
       beersPerPageOptions: [4, 8, 12],
-      beersPerPage: 4
+      beersPerPage: 12
     };
   },
   methods: {
-    ...mapActions(["fetchBeers"])
+    ...mapActions(["fetchBeers"]),
+    pollData() {
+      this.polling = setInterval(() => this.fetchBeers(), 3000);
+    }
   },
   computed: {
     ...mapGetters(["beers"])
@@ -52,6 +50,10 @@ export default {
 
   mounted() {
     this.fetchBeers();
+    this.pollData();
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   components: {
     BeerCard
