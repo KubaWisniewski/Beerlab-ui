@@ -10,7 +10,7 @@
         </v-card-title>
       </v-card>
     </v-row>
-    <v-row v-else>
+    <v-row v-else justify="center">
       <v-col cols="12" sm="4" v-for="(quiz, index) in quizes" :key="index">
         <v-card class="ma-2 elevation-12 orange lighten-5">
           <v-card-title primary-title>
