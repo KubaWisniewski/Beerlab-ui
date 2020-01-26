@@ -10,7 +10,7 @@
           <v-img
             max-height="300px"
             max-width="300px"
-            contain="true"
+            contain
             :src="orderItem.beerDto.imgUrl"
           />
         </v-list-item-content>
@@ -57,13 +57,8 @@
               color="red"
               >Usuń z zamówienia</v-btn
             >
-          </v-card-actions>
-        </v-list-item-content>
-
-        <v-list-item-content
-          class="headline justify-end font-weight-bold large d-inline"
-        >
           Cena: {{ orderItem.beerDto.price }} <v-icon large>mdi-beer</v-icon>
+          </v-card-actions>
         </v-list-item-content>
       </v-list-item>
     </v-list>

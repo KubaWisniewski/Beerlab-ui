@@ -26,10 +26,17 @@ export default {
     ...mapGetters(["currentOrders"])
   },
   methods: {
-    ...mapActions(["fetchCurrentOrders"])
+    ...mapActions(["fetchCurrentOrders"]),
+    pollData() {
+      this.polling = setInterval(() => this.fetchCurrentOrders(), 3000);
+    }
+  },
+  beforeDestroy() {
+    clearInterval(this.polling);
   },
   created() {
     this.fetchCurrentOrders();
+    this.pollData();
   }
 };
 </script>

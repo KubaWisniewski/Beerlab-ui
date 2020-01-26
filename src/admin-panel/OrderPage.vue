@@ -30,6 +30,7 @@ export default {
   },
   created() {
     this.fetchAllOrders();
+    this.pollData();
   },
   beforeDestroy() {
     clearInterval(this.polling);

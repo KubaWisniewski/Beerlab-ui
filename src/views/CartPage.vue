@@ -38,8 +38,9 @@
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
-            <v-list-item-content class="justify-center">
-              Suma: {{ order.totalPrice }}
+            <v-list-item-content class="justify-center text-center">
+              <h3>Suma: {{ order.totalPrice }} <v-icon large>mdi-beer</v-icon></h3>
+
             </v-list-item-content>
           </v-list-item>
           <v-list-item>
